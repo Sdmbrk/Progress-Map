@@ -233,7 +233,7 @@ textarea{width:100%;min-height:110px;border:1px solid var(--line);background:var
 .share h3{margin:0;font-size:14px}
 .share input{flex:1;min-width:0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:7px 9px;font-family:var(--font-mono);font-size:12px}
 .robadge{position:fixed;left:12px;bottom:12px;z-index:60;background:#14172b;color:#fff;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-body.ro #newProj,body.ro #restoreBtn,body.ro [data-setup],body.ro #smDanger,body.ro #smEdit,body.ro #vEdit,body.ro #editBtn,body.ro #addBtn,body.ro #newAct,body.ro #loadJson,body.ro #resetBtn,body.ro #paintWrap{display:none!important}
+body.ro #vtPanel,body.ro #newProj,body.ro #restoreBtn,body.ro [data-setup],body.ro #smDanger,body.ro #smEdit,body.ro #vEdit,body.ro #editBtn,body.ro #addBtn,body.ro #newAct,body.ro #loadJson,body.ro #resetBtn,body.ro #paintWrap{display:none!important}
 @media print{.robadge{display:none}}
 .modal{position:fixed;inset:0;z-index:50;background:rgba(10,14,35,.55);display:flex;align-items:center;justify-content:center;padding:16px}
 .modal-box{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,.35);width:min(440px,100%);max-height:calc(100vh - 32px);overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
@@ -253,6 +253,39 @@ body.ro #newProj,body.ro #restoreBtn,body.ro [data-setup],body.ro #smDanger,body
 .pcard .pact{display:flex;gap:6px;flex-wrap:wrap}
 .pcard.new{align-items:center;justify-content:center;min-height:220px;border-style:dashed;font-size:16px;font-weight:600;color:var(--blue)}
 .pcard.new .plus{font-size:44px;line-height:1}
+.vtp{padding:12px 14px;display:flex;flex-direction:column;gap:9px}
+.vtp h3{margin:0;font-size:18px}
+.vtr{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--surface)}
+.vtr input[type=color],.vtadd input[type=color]{width:34px;height:30px;padding:0;border:1px solid var(--line);border-radius:5px;background:var(--surface);cursor:pointer}
+.vtr input[type=text],.vtadd input[type=text]{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:6px 9px;font-size:14px;min-width:0}
+.vtr input[type=text]{width:190px}.vtadd input[type=text]{width:210px;max-width:100%}
+.vtr .note{margin-left:auto}
+.matsheet .mbody{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1px solid var(--line)}
+.matsheet .mcol{display:flex;flex-direction:column;min-width:0;min-height:0}
+.matsheet .mcol+.mcol{border-left:1px solid var(--line)}
+.mhead{min-height:5.4cqw;align-content:center;display:flex;align-items:center;justify-content:space-between;gap:.6cqw;padding:.7cqw 1cqw .2cqw;flex-wrap:wrap}
+.mhead h4{margin:0;font-family:var(--font-display);font-weight:600;font-size:clamp(11px,1.45cqw,19px);letter-spacing:.09em;text-transform:uppercase}
+.mtools{display:flex;gap:.4cqw;flex-wrap:wrap;align-items:center}
+.mtools button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:5px;padding:.25cqw .7cqw;font-size:clamp(9px,1cqw,13px);display:inline-flex;gap:.4cqw;align-items:center;cursor:pointer;line-height:1.2}
+.mtools button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
+.mtools .msw{width:.9em;height:.9em;border:1px solid var(--ink);border-radius:2px;display:inline-block}
+.matsheet .scroll{flex:1;min-height:0}
+.mleg{display:flex;flex-wrap:wrap;gap:.3cqw 1.2cqw;padding:.5cqw 1cqw .8cqw;font-size:clamp(9px,1.05cqw,13px);color:var(--ink);border-top:1px solid var(--line)}
+.mleg .key{gap:.5cqw}
+body.ro .mtools{display:none!important}
+.sw10{display:inline-flex;gap:5px;flex-wrap:wrap;flex-basis:100%;align-items:center}
+.sw10 button{width:20px;height:20px;border-radius:5px;border:1px solid rgba(0,0,0,.3);padding:0;cursor:pointer;box-sizing:border-box}
+.sw10 button.on{outline:2px solid var(--ink);outline-offset:1px}
+.cp-grid label{flex-wrap:wrap}
+.vtpre{gap:6px}
+.pop-vt{display:flex;flex-direction:column;gap:5px;margin:2px 0 6px}
+.pop-vt .vh{font-size:12.5px;color:var(--muted)}
+.pvt{display:flex;align-items:center;gap:7px;font-size:13px}
+.pvt i{width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.35);flex:none}
+.pvt span{flex:1;min-width:0;overflow-wrap:anywhere}
+.pvt input{width:64px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:5px;padding:3px 6px;font-family:var(--font-mono)}
+.vseg{stroke:none;pointer-events:none}
+.oln{fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linejoin:miter;pointer-events:none}
 .pop-nm{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:6px 9px;font-size:14px;width:100%;box-sizing:border-box;margin-bottom:6px}
 .fld{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--muted)}
 .fld input[type=text]{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:7px 9px;font-size:14px}
@@ -358,6 +391,13 @@ svg.mini .frame{stroke-width:14}
         <label class="fld">Consultant<input type="text" id="suConsultant" maxlength="80"></label>
         <label class="fld">Main contractor<input type="text" id="suContractor" maxlength="80"></label>
       </section>
+    <section class="card panel vtp" id="vtPanel">
+      <h3>Villa types</h3>
+      <div class="note">The villa types available in this project. Each has its own colour. In Edit villas, click a block and enter how many villas of each type it holds: a block with one type is coloured in it, a block with two or more types is split into their colours.</div>
+      <div id="vtList"></div>
+      <div class="row vtadd"><input type="text" id="vtName" maxlength="30" placeholder="Villa type, e.g. 3BR" aria-label="New villa type name" autocomplete="off"><input type="color" id="vtColor" value="#2f7de1" aria-label="Colour for the new villa type"><button type="button" class="btn primary" id="vtAdd">Add type</button></div>
+      <div class="note" id="vtMsg" aria-live="polite"></div>
+    </section>
       <section class="card panel" id="suMapPanel">
         <h2>Site map</h2>
         <div class="note">Upload the site layout as an image (PNG, JPG) or a PDF (first page is used). It becomes the background; then draw each TH or block on top of it.</div>
@@ -390,6 +430,7 @@ svg.mini .frame{stroke-width:14}
     <div class="seg" role="group" aria-label="Map view">
       <button type="button" id="vMaps" aria-pressed="true">Activity maps</button>
       <button type="button" id="vReport" aria-pressed="false">Summary report</button>
+      <button type="button" id="vMat" aria-pressed="false">Material orders</button>
       <button type="button" id="vEdit" aria-pressed="false">Edit villas</button>
     </div>
     <select id="actSel" class="sel" aria-label="Jump to activity map" hidden></select>
@@ -468,6 +509,7 @@ svg.mini .frame{stroke-width:14}
   <input id="popNm" type="text" maxlength="40" autocomplete="off" spellcheck="false" class="pop-nm">
   <label for="popVil">Number of villas</label>
   <div class="pop-row"><button type="button" class="mini" id="popMinus" aria-label="One less">−</button><input id="popVil" type="number" min="0" step="1" inputmode="numeric"><button type="button" class="mini" id="popPlus" aria-label="One more">+</button></div>
+  <div class="pop-vt" id="popVt"></div>
   <div class="pop-sib" id="popSib"></div>
   <div class="row"><button type="button" class="btn primary" id="popNext">Save &amp; next block</button><button type="button" class="btn" id="popDone">Done</button></div>
 </div>
@@ -524,6 +566,14 @@ function ids(list){var out=[];list.forEach(function(x){BLOCKS.forEach(function(b
 function minus(list){return ALLR.filter(function(r){return list.indexOf(r)<0;});}
 function mk(done,part){var o={};ids(done).forEach(function(i){o[i]=2;});(part?ids(part):[]).forEach(function(i){o[i]=1;});return o;}
 /* sample statuses read from the 5 drawings: 2 done, 1 partial, 0 not started */
+var NEW_ACTS=[['a16','Wiring'],['a17','Armour Cable Pulling'],['a18','Switchgear'],['a19','DB Dressing'],['a20','12U Dressing'],['a21','Light Installation'],['a22','Sanitaryware Installation'],['a23','Solar Water Heater Installation'],['a24','AC Machine Installation'],['a25','Isolator Installation'],['a26','Booster Pump Installation']];
+function addActs(p){
+  if(!p||!p.acts)return false;
+  var fx=false;p.acts.forEach(function(a){if(a.id==='a25'&&a.name==='Isolatore Installation'){a.name='Isolator Installation';fx=true;}});
+  if(p.acts26)return fx;
+  NEW_ACTS.forEach(function(x){if(!p.acts.some(function(a){return a.id===x[0];}))p.acts.push({id:x[0],name:x[1],on:true,st:{}});});
+  p.acts26=1;return true;
+}
 function sampleActs(){
   return [
     {id:'a1',name:'Underground works',on:true,st:mk(minus(['R01','R02','R03','R04','R31','R30']))},
@@ -541,7 +591,7 @@ function sampleActs(){
     {id:'a13',name:'Floor Piping Works - EL',on:true,st:{}},
     {id:'a14',name:'Roof Combo Clearance',on:true,st:{}},
     {id:'a15',name:'External Works',on:true,st:{}}
-  ];
+  ].concat(NEW_ACTS.map(function(x){return {id:x[0],name:x[1],on:true,st:{}};}));
 }
 /* villa counts per block, editable. Shared out by plan area inside four groups whose totals follow from the
    reported figures (266, 392, 420 of 530): R04 = 28, R01/R02/R03/R30/R31 = 110, rest of the underground-done
@@ -604,7 +654,13 @@ function initStore(){
     writeProj({id:'taormina-02',builtin:false,name:'Taormina Village - 02',meta:{desc:'Taormina Village-2, Townhouses Community',owner:TAO_META.owner,consultant:TAO_META.consultant,contractor:TAO_META.contractor},vb:[0,0,2640,1930],imgOp:0.45,blocks:sb,acts:blankActs(),villas:sv,updated:0,fresh:true});
     STORE.order.push('taormina-02');lsSet('tmseed-taormina-02','1');writeIdx();
   }
+  if(STORE.order.indexOf('reportage-hills')<0&&!lsGet('tmseed-reportage-hills')){
+    var hb=SEED_RH.map(function(x){return {id:x.id,name:x.name,poly:x.poly};}),hv={};SEED_RH.forEach(function(x){hv[x.id]=x.v;});
+    writeProj({id:'reportage-hills',builtin:false,name:'Reportage Hills',meta:{desc:'Reportage Hills, Townhouses Community',owner:'Reportage Prime Properties',consultant:'',contractor:TAO_META.contractor},vb:[0, 0, 2640, 3035],imgOp:0.45,blocks:hb,acts:blankActs(),villas:hv,updated:0,fresh:true});
+    STORE.order.push('reportage-hills');lsSet('tmseed-reportage-hills','1');writeIdx();
+  }
 }
+var SEED_RH=[{"id":"H1","name":"RH-01","poly":[[950.6,2633.4],[882.8,2675.8],[1068.2,2978.8],[1135.1,2936.5]],"v":12},{"id":"H2","name":"RH-02","poly":[[738.8,2283.3],[671.1,2326.6],[855.5,2628.7],[923.3,2587.3]],"v":12},{"id":"H3","name":"RH-03","poly":[[525.2,1934.1],[458.4,1975.5],[643.8,2278.6],[710.6,2236.2],[531.8,1940.7]],"v":12},{"id":"H4","name":"RH-04","poly":[[313.4,1584.0],[246.6,1626.4],[431.1,1928.5],[498.8,1887.1]],"v":12},{"id":"H5","name":"RH-05","poly":[[124.2,1270.6],[56.5,1312.0],[219.3,1578.4],[287.1,1536.9]],"v":10},{"id":"H6","name":"RH-06","poly":[[398.1,929.9],[131.8,1090.8],[173.2,1160.5],[439.5,998.6]],"v":10},{"id":"H7","name":"RH-07","poly":[[710.6,739.8],[445.2,900.7],[486.6,970.4],[752.9,808.5]],"v":10},{"id":"H8","name":"RH-08","poly":[[1024.0,549.6],[757.6,711.5],[800.0,780.2],[1066.4,618.4]],"v":10},{"id":"H9","name":"RH-09","poly":[[1337.4,359.5],[1071.1,521.4],[1112.5,590.1],[1378.8,428.2]],"v":10},{"id":"H10","name":"RH-10","poly":[[1842.8,68.7],[1747.8,110.1],[1522.8,246.6],[1520.9,250.4],[1558.6,319.1],[1881.4,143.1],[1881.4,138.4]],"v":12},{"id":"H11","name":"RH-11","poly":[[1934.1,56.5],[1916.2,134.6],[2060.2,169.4],[2089.4,94.1]],"v":5},{"id":"H12","name":"RH-12","poly":[[2349.2,1401.4],[2175.1,1441.9],[2340.7,2147.8],[2513.9,2107.3]],"v":24},{"id":"H13","name":"RH-13","poly":[[2542.1,2208.9],[2275.8,2369.9],[2317.2,2438.6],[2583.5,2278.6]],"v":10},{"id":"H14","name":"RH-14","poly":[[2227.8,2398.1],[1961.4,2559.1],[2002.8,2627.8],[2270.1,2466.8]],"v":10},{"id":"H15","name":"RH-15","poly":[[1914.4,2587.3],[1648.0,2748.2],[1689.4,2816.9],[1956.7,2656.0]],"v":10},{"id":"H16","name":"RH-16","poly":[[1238.6,2681.4],[1241.4,2686.1],[1421.2,2755.8],[1456.0,2667.3],[1460.7,2665.4],[1523.8,2690.8],[1553.9,2615.5],[1303.5,2517.6]],"v":9},{"id":"H17","name":"RH-17","poly":[[1011.8,2402.8],[984.5,2469.6],[989.2,2479.1],[1114.4,2530.8],[1079.5,2622.1],[1195.3,2667.3],[1261.2,2500.7]],"v":9},{"id":"H18","name":"RH-18","poly":[[780.2,2012.2],[752.0,2080.9],[752.0,2087.5],[882.8,2140.2],[848.0,2231.5],[1097.4,2330.4],[1163.3,2163.8]],"v":14},{"id":"H19","name":"RH-19","poly":[[1206.6,2179.8],[1139.8,2346.4],[1389.2,2445.2],[1455.1,2278.6]],"v":9},{"id":"H20","name":"RH-20","poly":[[1432.5,2460.2],[1709.2,2570.4],[1746.8,2479.1],[1824.9,2510.1],[1855.1,2435.8],[1498.4,2294.6]],"v":13},{"id":"H21","name":"RH-21","poly":[[2176.9,2165.6],[2141.2,2255.1],[2207.1,2280.5],[2222.1,2269.2],[2243.8,2213.6],[2240.0,2191.1]],"v":3},{"id":"H22","name":"RH-22","poly":[[2064.9,1689.4],[1828.7,2288.0],[1994.4,2354.8],[2181.6,1880.5],[2178.8,1872.9],[2092.2,1838.1],[2132.7,1729.9],[2127.1,1713.9]],"v":21},{"id":"H23","name":"RH-23","poly":[[1747.8,1734.6],[1569.9,2185.4],[1571.8,2189.2],[1735.5,2253.2],[1914.4,1800.5]],"v":16},{"id":"H24","name":"RH-24","poly":[[1488.9,1632.9],[1310.1,2085.6],[1476.7,2151.5],[1654.6,1699.8]],"v":16},{"id":"H25","name":"RH-25","poly":[[1943.5,1240.5],[1936.9,1250.8],[1763.8,1692.2],[1928.5,1758.1],[1936.9,1743.1],[2108.2,1306.4]],"v":16},{"id":"H26","name":"RH-26","poly":[[1684.7,1138.8],[1681.9,1139.8],[1504.9,1589.6],[1505.9,1592.5],[1669.6,1656.5],[1673.4,1652.7],[1848.5,1206.6],[1847.5,1202.8]],"v":16},{"id":"H27","name":"RH-27","poly":[[1872.9,887.5],[1808.9,1050.4],[1810.8,1054.1],[2192.9,1202.8],[2221.2,1128.5],[2089.4,1075.8],[2123.3,983.5],[1877.6,886.6]],"v":14},{"id":"H28","name":"RH-28","poly":[[1582.1,770.8],[1516.2,937.4],[1765.6,1036.2],[1831.5,869.6]],"v":9},{"id":"H29","name":"RH-29","poly":[[1790.1,553.4],[1724.2,720.0],[1973.6,818.8],[2002.8,743.5],[1871.1,690.8],[1905.9,599.5]],"v":9},{"id":"H30","name":"RH-30","poly":[[1459.8,532.7],[1432.5,601.4],[1433.4,607.1],[1680.0,704.0],[1746.8,538.4],[1565.2,464.9],[1527.5,555.3],[1465.4,531.8]],"v":9},{"id":"H31","name":"RH-31","poly":[[1145.4,706.8],[1118.1,775.5],[1118.1,782.1],[1472.9,921.4],[1538.8,756.7],[1530.4,750.1],[1264.0,645.6],[1226.4,736.0]],"v":13},{"id":"H32","name":"RH-32","poly":[[1260.2,972.2],[1082.4,1423.1],[1087.1,1427.8],[1248.0,1490.8],[1425.9,1040.0],[1424.0,1036.2]],"v":16},{"id":"H33","name":"RH-33","poly":[[1067.3,1467.3],[1052.2,1499.3],[887.5,1919.1],[1052.2,1984.9],[1056.0,1982.1],[1232.0,1534.1],[1228.2,1530.4]],"v":16},{"id":"H34","name":"RH-34","poly":[[808.5,1365.6],[802.8,1373.2],[628.7,1816.5],[793.4,1883.3],[810.4,1846.6],[973.2,1431.5]],"v":16},{"id":"H35","name":"RH-35","poly":[[1001.4,870.6],[822.6,1323.3],[989.2,1389.2],[1167.1,937.4]],"v":16},{"id":"H36","name":"RH-36","poly":[[789.6,922.4],[785.9,925.2],[748.2,1019.3],[659.8,985.4],[656.0,987.3],[559.1,1232.9],[563.8,1237.6],[647.5,1269.6],[649.4,1280.9],[719.1,1308.2],[723.8,1305.4],[862.1,953.4],[857.4,948.7]],"v":13},{"id":"H37","name":"RH-37","poly":[[539.3,1285.6],[440.5,1535.1],[531.8,1572.7],[497.9,1660.2],[572.2,1689.4],[702.1,1359.1],[611.8,1322.4],[612.7,1313.9]],"v":12},{"id":"H38","name":"RH-38","poly":[[400.0,1153.9],[396.2,1156.7],[315.3,1362.8],[387.8,1392.9],[391.5,1390.1],[472.5,1184.0]],"v":8}];
 var SEED_T2=[{"id":"S1","name":"TH-R01","poly":[[1981.8,417.3],[1831.5,1011.7],[1936.9,1042.4],[2089.5,447.2]],"v":39},{"id":"S2","name":"TH-R02","poly":[[1825.5,1049.1],[1655.7,1724.4],[1761.9,1754.3],[1933.2,1080.5]],"v":44},{"id":"S3","name":"TH-R03","poly":[[1167.5,1697.4],[1151.8,1810.4],[1645.3,1885.1],[1661.7,1773.7]],"v":32},{"id":"S4","name":"TH-R04","poly":[[650.7,1616.7],[633.5,1729.6],[1127.8,1805.9],[1145.0,1693.0]],"v":33},{"id":"S5","name":"TH-R05","poly":[[631.3,1212.9],[516.9,1222.6],[551.3,1606.2],[665.0,1596.5]],"v":25},{"id":"S6","name":"TH-R06","poly":[[589.4,748.5],[475.8,759.0],[514.6,1199.4],[629.1,1189.7]],"v":29},{"id":"S7","name":"TH-R07","poly":[[598.4,554.8],[507.2,664.8],[593.2,738.1],[685.1,627.4]],"v":9},{"id":"S8","name":"TH-R08","poly":[[1096.4,313.3],[647.0,515.2],[692.6,619.9],[1142.0,416.5]],"v":32},{"id":"S9","name":"TH-R09","poly":[[1572.0,95.0],[1116.6,301.4],[1162.2,405.3],[1617.6,198.9]],"v":32},{"id":"S10","name":"TH-R10","poly":[[1688.7,44.9],[1652.8,152.5],[1853.9,220.6],[1889.8,112.2]],"v":14},{"id":"S11","name":"TH-R11","poly":[[1909.2,117.4],[1874.8,225.8],[2129.8,310.3],[2164.2,202.6]],"v":17},{"id":"S12","name":"TH-R12","poly":[[1770.9,352.9],[1619.1,944.4],[1726.0,976.6],[1876.3,382.9]],"v":39},{"id":"S13","name":"TH-R13","poly":[[1655.7,324.5],[1504.7,916.8],[1610.1,948.2],[1761.9,354.4]],"v":38},{"id":"S14","name":"TH-R14","poly":[[1616.1,978.8],[1461.3,1583.8],[1567.5,1615.2],[1721.6,1010.2]],"v":39},{"id":"S15","name":"TH-R15","poly":[[1501.0,950.4],[1346.9,1556.1],[1452.4,1586.8],[1607.1,982.6]],"v":39},{"id":"S16","name":"TH-R16","poly":[[1229.5,1108.2],[1123.3,1537.4],[1234.0,1564.3],[1339.4,1134.4]],"v":29},{"id":"S17","name":"TH-R17","poly":[[1114.4,1079.8],[1008.9,1509.8],[1120.3,1535.9],[1225.0,1106.0]],"v":29},{"id":"S18","name":"TH-R18","poly":[[1357.4,599.7],[1235.5,1080.5],[1340.9,1111.9],[1465.1,630.4]],"v":31},{"id":"S19","name":"TH-R19","poly":[[1245.2,572.0],[1121.1,1051.4],[1228.8,1084.3],[1350.7,602.7]],"v":31},{"id":"S20","name":"TH-R20","poly":[[1006.7,601.2],[870.6,1138.9],[977.5,1169.5],[1114.4,631.9]],"v":35},{"id":"S21","name":"TH-R21 B1","poly":[[814.5,766.5],[700.8,776.9],[735.2,1169.5],[848.9,1159.0]],"v":26},{"id":"S22","name":"TH-R21 B2","poly":[[849.7,1162.8],[736.0,1172.5],[764.4,1489.6],[878.1,1479.8]],"v":21}];
 function save(){if(!PROJ||!CAN)return;PROJ.acts=S.acts;PROJ.villas=S.villas;PROJ.updated=Date.now();delete PROJ.fresh;writeProj(PROJ);}
 var FOOTK=[['desc','Project'],['owner','Owner'],['consultant','Consultant'],['contractor','Main contractor']];
@@ -616,7 +672,7 @@ function showView(v){
 }
 function openProject(id){
   var p=readProj(id);if(!p)return;
-  PROJ=p;if(!PROJ.meta)PROJ.meta={};
+  PROJ=p;if(!PROJ.meta)PROJ.meta={};ensureVTsave(p);
   if(p.builtin){setGeometry(TAO_BLOCKS,false);VB=[350,365,2640,1930];IMG=null;IMGOP=0.45;}
   else{setGeometry((p.blocks||[]).map(finalizeBlock),true);VB=p.vb||[0,0,2640,1900];IMG=readImg(id);IMGOP=p.imgOp==null?0.45:p.imgOp;}
   S.acts=p.acts;S.villas=p.villas;applyNames();
@@ -687,11 +743,35 @@ function grid(b,n){
   var rows=Math.ceil(n/cols);cols=Math.ceil(n/rows);
   return {cols:cols,rows:rows,l1:l1,l2:l2};
 }
+/* villa types: PROJ.vtypes = [{id,name,color}], PROJ.vmix = {blockId:{typeId:count}} */
+function vtP(){return (!$('setupView').hidden&&SU&&SU.p)?SU.p:PROJ;}
+function vtList(){var p=vtP();return (p&&p.vtypes)||[];}
+function vtMix(bid){var p=vtP();return (p&&p.vmix&&p.vmix[bid])||{};}
+function vtSave(){if(!$('setupView').hidden&&SU&&SU.p)suSave();else save();}
+function vtRefresh(){if($('setupView').hidden){renderMap();renderLegend();if(S.pop)renderPopVt(S.pop);}}
+function vtSegs(bid){
+  var m=vtMix(bid),segs=[],tn=0;
+  vtList().forEach(function(t){var n=parseInt(m[t.id],10)||0;if(n>0){segs.push({t:t,n:n});tn+=n;}});
+  return {segs:segs,tot:tn};
+}
+function vtTotals(){
+  var o={},p=vtP(),vm=(p&&p.vmix)||{};vtList().forEach(function(t){o[t.id]=0;});
+  Object.keys(vm).forEach(function(k){vtList().forEach(function(t){o[t.id]+=parseInt(vm[k][t.id],10)||0;});});
+  return o;
+}
+function vtQuads(b,sg){
+  var u=0,out=[];
+  sg.segs.forEach(function(x,i){
+    var u1=u+x.n/sg.tot,a=i===0?-6:u,z=(i===sg.segs.length-1&&u1>0.999)?7:u1;
+    out.push({t:x.t,q:[b.pt(a,-6),b.pt(z,-6),b.pt(z,7),b.pt(a,7)]});u=u1;
+  });
+  return out;
+}
 function drawMap(svg,mode,a){
   var h=[],i,list=inc(),mini=svg.classList.contains('mini');
   h.push('<defs>');
   S.acts.forEach(function(x,k){h.push('<pattern id="hp'+k+'" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="22" height="22" fill="var(--surface)"/><rect width="11" height="22" fill="'+col(x)+'"/></pattern>');});
-  if(mode==='all')BLOCKS.forEach(function(b){h.push('<clipPath id="cp-'+b.id+'"><polygon points="'+poly(b.poly)+'"/></clipPath>');});
+  if(mode==='all'||mode==='edit')BLOCKS.forEach(function(b){h.push('<clipPath id="cp-'+b.id+'"><polygon points="'+poly(b.poly)+'"/></clipPath>');});
   h.push('</defs>');
   if(IMG)h.push('<image href="'+IMG+'" x="'+VB[0]+'" y="'+VB[1]+'" width="'+VB[2]+'" height="'+VB[3]+'" preserveAspectRatio="none" opacity="'+IMGOP+'" pointer-events="none"/>');
   BLOCKS.forEach(function(b){
@@ -719,6 +799,14 @@ function drawMap(svg,mode,a){
         h.push('</g>');
       }
     }
+    if(mode==='edit'){
+      var sg=vtSegs(b.id);
+      if(sg.segs.length){
+        h.push('<g clip-path="url(#cp-'+b.id+')">');
+        vtQuads(b,sg).forEach(function(o){h.push('<polygon class="vseg" style="fill:'+o.t.color+';fill-opacity:.78" points="'+poly(o.q)+'"/>');});
+        h.push('</g><polygon class="oln" points="'+poly(b.poly)+'"/>');
+      }
+    }
     if(S.sel===b.id)h.push('<polygon class="frame" points="'+poly(b.poly)+'"/>');
     h.push('</g>');
   });
@@ -726,14 +814,15 @@ function drawMap(svg,mode,a){
     BLOCKS.forEach(function(b){
       var fs=Math.min(30,0.88*b.len/(b.name.length*0.6)),nm=fs*0.8,cm=Math.min(fs*1.7,b.wid*0.4),n=S.villas[b.id]||0;
       var tr='translate('+b.lc[0]+' '+b.lc[1]+') rotate('+b.ang+')';
-      h.push('<text class="lbl" style="font-size:'+nm.toFixed(1)+'px;stroke-width:'+(nm*0.3).toFixed(1)+'px" transform="'+tr+' translate(0 '+(-cm*0.62).toFixed(1)+')">'+esc(b.name)+'</text>');
-      h.push('<text class="lbl" style="font-size:'+cm.toFixed(1)+'px;stroke-width:'+(cm*0.25).toFixed(1)+'px;font-weight:600;fill:var(--red)" transform="'+tr+' translate(0 '+(nm*0.5).toFixed(1)+')">'+n+'</text>');
+      nm=Math.min(cm,0.9*b.len/(b.name.length*0.62));
+      h.push('<text class="lbl" style="font-size:'+nm.toFixed(1)+'px;stroke-width:'+(nm*0.25).toFixed(1)+'px;font-weight:700" transform="'+tr+' translate(0 '+(-cm*0.62).toFixed(1)+')">'+esc(b.name)+'</text>');
+      h.push('<text class="lbl" style="font-size:'+cm.toFixed(1)+'px;stroke-width:'+(cm*0.25).toFixed(1)+'px;font-weight:700;fill:var(--red)" transform="'+tr+' translate(0 '+(cm*0.55).toFixed(1)+')">'+n+'</text>');
     });
   }else if(S.labels||mini){
     BLOCKS.forEach(function(b){
       var fs=Math.min(30,0.88*b.len/(b.name.length*0.6));
       var wt=(mode==='one'&&a&&stOf(a,b.id)===2&&LUMDARK(a));
-      h.push('<text class="lbl'+(wt?' lbl-w':'')+'" style="font-size:'+fs.toFixed(1)+'px;stroke-width:'+(fs*0.3).toFixed(1)+'px" transform="translate('+b.lc[0]+' '+b.lc[1]+') rotate('+b.ang+')">'+esc(b.name)+'</text>');
+      h.push('<text class="lbl'+(wt?' lbl-w':'')+'" style="font-size:'+fs.toFixed(1)+'px;stroke-width:'+(fs*0.3).toFixed(1)+'px;font-weight:700" transform="translate('+b.lc[0]+' '+b.lc[1]+') rotate('+b.ang+')">'+esc(b.name)+'</text>');
     });
   }
   svg.innerHTML=h.join('');
@@ -746,6 +835,7 @@ function sheetList(){
   return [{mode:S.mode,act:null,idx:-1}];
 }
 function buildSheets(){
+  if(S.mode==='mat'){buildMatSheets();return;}
   var list=sheetList(),n=S.acts.length,h='';
   list.forEach(function(sp){
     var id=sp.act?sp.act.id:'';
@@ -802,6 +892,7 @@ function fillReport(el){
 }
 function renderMap(){
   eachSheet(function(el,mode,a){
+    if(mode==='mat'){fillMat(el);return;}
     if(mode==='report'){
       fillReport(el);
       Array.prototype.forEach.call(el.querySelectorAll('svg.mini'),function(sv){
@@ -830,7 +921,7 @@ function headText(mode,a,page){
   }
   return {sub:sub,prog:prog};
 }
-function renderHead(){eachSheet(function(el,mode,a){var t=headText(mode,a,parseInt(el.getAttribute('data-page'),10)||0);var sb=el.querySelector('.sh-sub');sb.textContent=t.sub;if(mode==='one'&&a&&S.icons)sb.insertAdjacentHTML('afterbegin',icoSvg(a));el.querySelector('.sh-prog').textContent=t.prog;});}
+function renderHead(){eachSheet(function(el,mode,a){if(mode==='mat')return;var t=headText(mode,a,parseInt(el.getAttribute('data-page'),10)||0);var sb=el.querySelector('.sh-sub');sb.textContent=t.sub;if(mode==='one'&&a&&S.icons)sb.insertAdjacentHTML('afterbegin',icoSvg(a));el.querySelector('.sh-prog').textContent=t.prog;});}
 function chip(a,i,tv){
   var d=doneVillas(a),p=partVillas(a);
   return '<button type="button" class="chip'+(a.on?'':' off')+'" data-pick="'+a.id+'" title="Show only '+esc(a.name)+'">'+(S.icons?icoSvg(a):'<i class="dot" style="background:'+col(a)+'"></i>')+'<span class="t">'+(i+1)+'. '+esc(a.name)+'</span><b>'+pct(d,tv)+'%</b>'+
@@ -847,7 +938,9 @@ function legendFor(mode,a){
   if(mode==='report'){
     h='';hint='Summary report: page 1 lists every activity, the next pages show four maps each. Use "PDF: summary report" to save it.';
   }else if(mode==='edit'){
-    h='<div class="keys"><span class="key"><b>Total: '+tv+' villas</b></span></div><div class="rowlist">'+rowTotals().map(function(r){return '<button type="button" data-row="'+r.row+'"><span>'+rowLabel(r.row)+'</span><b>'+r.n+'</b></button>';}).join('')+'</div>';
+    var vtl=vtList(),vtt=vtTotals(),vth='';
+    if(vtl.length)vth='<div class="keys">'+vtl.map(function(t){return '<span class="key"><i class="sw" style="background:'+t.color+'"></i>'+esc(t.name)+' \u00b7 '+vtt[t.id]+'</span>';}).join('')+'</div>';
+    h='<div class="keys"><span class="key"><b>Total: '+tv+' villas</b></span></div>'+vth+'<div class="rowlist">'+rowTotals().map(function(r){return '<button type="button" data-row="'+r.row+'"><span>'+rowLabel(r.row)+'</span><b>'+r.n+'</b></button>';}).join('')+'</div>';
     hint='Click any block on the map, or a TH in the list, and type its number of villas.';
   }else if(mode==='one'){
     var d=a?doneVillas(a):0,p=a?partVillas(a):0;
@@ -862,8 +955,113 @@ function legendFor(mode,a){
 }
 function renderLegend(){
   var hint='';
-  eachSheet(function(el,mode,a){var r=legendFor(mode,a),lg=el.querySelector('.legend');if(lg)lg.innerHTML=r.h;if(r.hint)hint=r.hint;});
+  eachSheet(function(el,mode,a){if(mode==='mat'){hint='Pick a status above a map, then click blocks to colour them. Click a block that already has that status to clear it.';return;}var r=legendFor(mode,a),lg=el.querySelector('.legend');if(lg)lg.innerHTML=r.h;if(r.hint)hint=r.hint;});
   $('hint').textContent=hint;$('hint').hidden=!hint;
+}
+
+/* ---------- material orders: IPT map + material status map for each work ---------- */
+var MATK={
+  ipt:{title:'IPT status',labs:['Not marked','Pending','Raised','Approved']},
+  mat:{title:'Material status',labs:['Not marked','Pending to order','Ongoing order','Ordered']}
+};
+var MATC=['#ffffff','#e0574b','#f2b134','#3fa564'];
+S.mb={ipt:monIdx(),mat:3};
+var MON=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var MONC=['#0c8599','#d33f6a','#607d8b','#e8c02b','#7b4fd1','#f57c00','#e0574b','#19b5d6','#8cb82e','#8a5a2b','#2f7de1','#c2379d'];
+function monIdx(d){d=d||new Date();return d.getFullYear()*12+d.getMonth();}
+function matLab(k,v){
+  if(!v)return 'Not marked';
+  if(k==='ipt'&&v===1)return 'Done';
+  if(k==='ipt'){var y=Math.floor(v/12),n=MON[v%12];return n+(y!==new Date().getFullYear()?' '+y:'');}
+  return MATK[k].labs[v];
+}
+function matCol(k,v){return !v?MATC[0]:(k==='ipt'?(v===1?'#2e9d4f':MONC[v%12]):MATC[v]);}
+function matBrushes(k){if(k!=='ipt')return [1,2,3];var m=monIdx();return [1,m,m+1,m+2];}
+var RISER=[['a9-ws','Riser Works - WS (PPR)'],['a9-dr','Riser Works - DR (UPVC)'],['a9-hd','Riser Works - HVAC Ducts'],['a9-hc','Riser Works - HVAC Copper pipes']];
+function matKey(k,w){return (k==='ipt'&&String(w).indexOf('a9-')===0)?'a9':w;}
+function matWorks(){
+  var out=[],hasA1=S.acts.some(function(x){return x.id==='a1';}),a2=S.acts.filter(function(x){return x.id==='a2';})[0];
+  S.acts.forEach(function(a){
+    if(a.id==='a2'&&hasA1)return;
+    var nm=a.name;
+    if(a.id==='a1'&&a2){var c=function(t){return String(t).replace(/\s*works?\s*$/i,'').trim();};nm=c(a.name)+' & '+c(a2.name)+' works';}
+    if(a.id==='a9'){RISER.forEach(function(r){out.push({id:r[0],name:r[1]});});return;}
+    out.push({id:a.id,name:nm});
+  });
+  return out;
+}
+function mget(k,w,b){w=matKey(k,w);var m=PROJ&&PROJ.mat,v=(m&&m[k]&&m[k][w]&&m[k][w][b])||0;if(k==='ipt'&&v<1000&&v!==1)return 0;return v;}
+function mset(k,w,b,v){
+  w=matKey(k,w);
+  if(!PROJ.mat)PROJ.mat={ipt:{},mat:{}};
+  if(!PROJ.mat[k])PROJ.mat[k]={};
+  var o=PROJ.mat[k][w]||(PROJ.mat[k][w]={});
+  if(v)o[b]=v;else delete o[b];
+}
+function matVals(c){return Object.keys(c).map(Number).filter(function(v){return v>0;}).sort(function(a,b){return a-b;});}
+function matCounts(k,w){
+  var c={0:0};matBrushes(k).forEach(function(v){c[v]=0;});BLOCKS.forEach(function(b){var v=mget(k,w,b.id);c[v]=(c[v]||0)+1;});return c;
+}
+function buildMatSheets(){
+  var ws=matWorks(),h='',n=ws.length;
+  ws.forEach(function(w,i){
+    var cols='';
+    ['ipt','mat'].forEach(function(k){
+      var br=S.mb[k],chips='';
+      matBrushes(k).forEach(function(v){chips+='<button type="button" data-mb="'+k+'|'+v+'" aria-pressed="'+(br===v)+'"><i class="msw" style="background:'+matCol(k,v)+'"></i>'+esc(matLab(k,v))+'</button>';});
+      chips+='<button type="button" data-mb="'+k+'|0" aria-pressed="'+(br===0)+'"><i class="msw"></i>Clear</button>';
+      chips+='<button type="button" data-mfill="'+k+'" title="Apply the selected status to every block">All blocks</button>';
+      cols+='<div class="mcol" data-k="'+k+'"><div class="mhead"><h4>'+esc(MATK[k].title)+'</h4><div class="mtools">'+chips+'</div></div>'+
+        '<div class="scroll"><svg class="matsvg mapsvg" viewBox="'+VB.join(' ')+'" role="img" aria-label="'+esc(w.name)+' '+esc(MATK[k].title)+'"></svg></div><div class="mleg"></div></div>';
+    });
+    h+='<section class="card sheet matsheet" id="sheet-mat-'+w.id+'" data-mode="mat" data-act="'+w.id+'" aria-label="Material orders: '+esc(w.name)+'">'+
+      '<div class="sh-head"><div class="sh-title">'+esc(PROJ.name)+'</div><div class="sh-sub">'+(i+1)+'. '+esc(w.name)+'</div><div class="sh-prog"></div></div>'+
+      '<div class="mbody">'+cols+'</div>'+
+      '<div class="sfoot">'+footHtml()+'<span>'+esc(ASOF)+'  |  <b>Page '+(i+1)+' of '+n+'</b></span></div></section>';
+  });
+  $('sheets').innerHTML=h||'<div class="card" style="padding:18px">No works yet.</div>';
+}
+function drawMatSvg(svg,k,w){
+  var h=[];
+  if(IMG)h.push('<image href="'+IMG+'" x="'+VB[0]+'" y="'+VB[1]+'" width="'+VB[2]+'" height="'+VB[3]+'" preserveAspectRatio="none" opacity="'+IMGOP+'" pointer-events="none"/>');
+  BLOCKS.forEach(function(b){
+    var v=mget(k,w,b.id);
+    h.push('<polygon class="blk" data-b="'+b.id+'" style="fill:'+matCol(k,v)+';fill-opacity:'+(v?0.9:1)+'" points="'+poly(b.poly)+'"/>');
+  });
+  BLOCKS.forEach(function(b){
+    var fs=Math.min(30,0.88*b.len/(b.name.length*0.6));
+    h.push('<text class="lbl" style="font-size:'+fs.toFixed(1)+'px;stroke-width:'+(fs*0.3).toFixed(1)+'px;font-weight:700" transform="translate('+b.lc[0]+' '+b.lc[1]+') rotate('+b.ang+')">'+esc(b.name)+'</text>');
+  });
+  svg.innerHTML=h.join('');
+}
+function fillMat(el){
+  var w=el.getAttribute('data-act'),nb=BLOCKS.length,sp=[];
+  Array.prototype.forEach.call(el.querySelectorAll('.mcol'),function(col){
+    var k=col.getAttribute('data-k');
+    drawMatSvg(col.querySelector('svg'),k,w);
+    var c=matCounts(k,w),lg='';
+    matVals(c).forEach(function(v){lg+='<span class="key"><i class="sw" style="background:'+matCol(k,v)+'"></i>'+esc(matLab(k,v))+' · '+c[v]+'</span>';});
+    lg+='<span class="key"><i class="sw"></i>Not marked · '+c[0]+'</span>';
+    col.querySelector('.mleg').innerHTML=lg;
+    Array.prototype.forEach.call(col.querySelectorAll('[data-mb]'),function(b){b.setAttribute('aria-pressed',String(S.mb[k]===parseInt(b.getAttribute('data-mb').split('|')[1],10)));});
+    sp[k==='ipt'?0:1]=c;sp[k==='ipt'?2:3]=nb-c[0];
+  });
+  el.querySelector('.sh-prog').textContent='IPT done '+sp[0][1]+' / '+nb+' blocks · Materials ordered '+sp[1][3]+' / '+nb+' blocks';
+}
+function matClick(e){
+  var t=e.target.closest('[data-mb]');
+  if(t){var p=t.getAttribute('data-mb').split('|');S.mb[p[0]]=parseInt(p[1],10);renderMap();return;}
+  t=e.target.closest('[data-mfill]');
+  if(t){
+    if(!CAN)return;
+    var k=t.getAttribute('data-mfill'),w=t.closest('.matsheet').getAttribute('data-act');
+    BLOCKS.forEach(function(b){mset(k,w,b.id,S.mb[k]);});
+    save();refreshData();return;
+  }
+  var bl=e.target.closest('svg [data-b]');if(!bl||!CAN)return;
+  var col=bl.closest('.mcol'),kk=col.getAttribute('data-k'),ww=bl.closest('.matsheet').getAttribute('data-act'),bid=bl.getAttribute('data-b');
+  mset(kk,ww,bid,mget(kk,ww,bid)===S.mb[kk]?0:S.mb[kk]);
+  save();refreshData();
 }
 /* ---------- side panels ---------- */
 function renderKpis(){
@@ -936,7 +1134,8 @@ function renderBlock(){
 function renderToolbar(){
   $('vMaps').setAttribute('aria-pressed',S.mode==='maps');
   $('vReport').setAttribute('aria-pressed',S.mode==='report');
-  $('zoomWrap').hidden=S.mode==='report';
+  $('vMat').setAttribute('aria-pressed',S.mode==='mat');
+  $('zoomWrap').hidden=S.mode==='report'||S.mode==='mat';
   $('vEdit').setAttribute('aria-pressed',S.mode==='edit');
   var sel=$('actSel');sel.hidden=S.mode!=='maps';
   if(S.mode==='maps'){
@@ -951,6 +1150,7 @@ function refreshData(){renderHead();renderMap();renderLegend();renderKpis();rend
 /* ---------- events ---------- */
 function setMode(m){S.mode=m;if(m==='maps')curAct();renderAll();}
 function goToMap(id){
+  if(S.mode==='mat'){var wk=(id==='a2'&&S.acts.some(function(x){return x.id==='a1';}))?'a1':id,me=document.getElementById('sheet-mat-'+wk)||document.getElementById('sheet-mat-'+wk+'-ws');if(me)me.scrollIntoView({behavior:'smooth',block:'start'});return;}
   S.cur=id;if(id==='all'&&!S.showAll){S.showAll=true;S.mode='x';}
   if(S.mode!=='maps'){S.mode='maps';renderAll();}else{renderActs();var sl=$('actSel');if(sl)sl.value=id;}
   var el=document.getElementById('sheet-'+id);
@@ -959,6 +1159,7 @@ function goToMap(id){
 $('vEdit').onclick=function(){if(CAN)setMode('edit');};
 $('vMaps').onclick=function(){setMode('maps');};
 $('vReport').onclick=function(){setMode('report');};
+$('vMat').onclick=function(){setMode('mat');};
 $('actSel').onchange=function(){goToMap(this.value);};
 
 
@@ -990,6 +1191,7 @@ function buildCustomPal(){
     var nm=S.acts[i]?S.acts[i].name:'(colour '+(i+1)+')';
     return '<label><input type="color" data-ci="'+i+'" value="'+c+'" aria-label="Colour for '+esc(nm)+'"><em>'+(i+1)+'. '+esc(nm)+'</em></label>';
   }).join('');
+  swDeco($('cpGrid'));
 }
 function initPal(){
   var h='';Object.keys(PALS).forEach(function(k){h+='<option value="'+k+'">'+PALS[k].n+'</option>';});
@@ -1021,6 +1223,7 @@ function sheetAct(el){var sv=el.closest('svg'),id=sv&&sv.getAttribute('data-act'
 sheets.addEventListener('click',function(e){
   var r=e.target.closest('[data-row]');
   if(r){var first=ORDER.filter(function(b){return b.row===r.getAttribute('data-row');})[0];if(first)openEditor(first.id);return;}
+  if(S.mode==='mat'){matClick(e);return;}
   var pk=e.target.closest('[data-pick]');
   if(pk){goToMap(pk.getAttribute('data-pick'));return;}
   var t=e.target.closest('svg [data-b]');if(!t)return;
@@ -1036,6 +1239,9 @@ sheets.addEventListener('click',function(e){
 sheets.addEventListener('pointermove',function(e){
   var t=e.target.closest('svg [data-b]');
   if(!t){tip.hidden=true;return;}
+  if(S.mode==='mat'){var mc=t.closest('.mcol'),mk=mc&&mc.getAttribute('data-k'),mw=t.closest('.matsheet').getAttribute('data-act'),mb=BYID[t.getAttribute('data-b')];
+    tip.style.whiteSpace='pre-line';tip.textContent=mb.name+' \u00b7 '+(S.villas[mb.id]||0)+' villas\n'+MATK[mk].title+': '+matLab(mk,mget(mk,mw,mb.id));tip.hidden=false;
+    tip.style.left=Math.min(e.clientX+14,window.innerWidth-tip.offsetWidth-8)+'px';tip.style.top=Math.min(e.clientY+14,window.innerHeight-tip.offsetHeight-8)+'px';return;}
   var b=BYID[t.getAttribute('data-b')],aid=t.getAttribute('data-a'),txt=b.name+' · '+(S.villas[b.id]||0)+' villas';
   if(aid){var a=S.acts.filter(function(x){return x.id===aid;})[0];if(a)txt=b.name+'\n'+a.name+': '+STN[stOf(a,b.id)];}
   else if(S.mode==='maps'||S.mode==='report'){var c=sheetAct(t);if(c)txt=b.name+'\n'+c.name+': '+STN[stOf(c,b.id)];}
@@ -1150,6 +1356,125 @@ function renderSib(){
   sibs.forEach(function(x){tot+=S.villas[x.id]||0;h+='<button type="button" class="mini" data-pop="'+x.id+'" aria-pressed="'+(x.id===b.id)+'">'+esc(x.label)+' · '+(S.villas[x.id]||0)+'</button>';});
   box.innerHTML=h+'<span>= '+tot+'</span>';
 }
+
+var VT_PRE=[['3BR','#2f7de1'],['4BR','#2e9d5b'],['5BR','#e8742a'],['3BR-LUX','#7b4fd1'],['5BR-LUX','#d33f6a'],['4BR-STANDALONE','#b8902a']];
+var SW10=['#e53935','#f57c00','#fbc02d','#43a047','#00897b','#1e88e5','#5e35b1','#d81b60','#6d4c41','#546e7a'];
+function swMark(box){
+  var i=box&&box.querySelector('input[type=color]'),st=box&&box.querySelector('.sw10');if(!i||!st)return;
+  [].forEach.call(st.children,function(b){b.classList.toggle('on',b.getAttribute('data-sw').toLowerCase()===String(i.value).toLowerCase());});
+}
+function swDeco(root){
+  [].forEach.call((root||document).querySelectorAll('input[type=color]'),function(i){
+    var box=i.closest('.vtr,.vtadd,label')||i.parentNode;if(box.querySelector('.sw10'))return;
+    var st=document.createElement('span');st.className='sw10';
+    st.innerHTML=SW10.map(function(c){return '<button type="button" style="background:'+c+'" data-sw="'+c+'" title="'+c+'" aria-label="Colour '+c+'"></button>';}).join('');
+    box.appendChild(st);swMark(box);
+  });
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest&&e.target.closest('[data-sw]');if(!b)return;
+  e.preventDefault();e.stopPropagation();
+  var box=b.parentNode.parentNode,i=box.querySelector('input[type=color]');if(!i)return;
+  i.value=b.getAttribute('data-sw');i.dispatchEvent(new Event('input',{bubbles:true}));swMark(box);
+},true);
+document.addEventListener('input',function(e){if(e.target.type==='color')swMark(e.target.closest('.vtr,.vtadd,label')||e.target.parentNode);});
+var VT_COLS=['#2f7de1','#2e9d5b','#e8742a','#7b4fd1','#d33f6a','#b8902a','#0c8599','#8a5a2b','#5f7388','#c23b2b'];
+var vtDel=null;
+function vtEnsure(){var p=vtP();if(!p.vtypes)p.vtypes=[];if(!p.vmix)p.vmix={};}
+var VT_DEF={'reportage-hills':['3BR','4BR','5BR'],'taormina':['3BR','4BR','5BR','4BR-LUX','5BR-LUX','4BR-STANDALONE'],'taormina-02':['3BR-LUX','4BR-LUX','4BR']};
+var VT_NC={'3BR':'#2f7de1','4BR':'#2e9d5b','5BR':'#e8742a','4BR-LUX':'#7b4fd1','5BR-LUX':'#d33f6a','4BR-STANDALONE':'#b8902a','3BR-LUX':'#0c8599'};
+var RH_MIX={"H1":{"3BR":16},"H2":{"3BR":16},"H3":{"3BR":16},"H4":{"3BR":16},"H5":{"3BR":14},"H6":{"3BR":14},"H7":{"3BR":14},"H8":{"3BR":14},"H9":{"3BR":14},"H10":{"5BR":8},"H11":{"5BR":4},"H12":{"5BR":44},"H13":{"3BR":14},"H14":{"3BR":14},"H15":{"3BR":14},"H16":{"4BR":14},"H17":{"4BR":12},"H18":{"3BR":28},"H19":{"3BR":24},"H20":{"3BR":28},"H21":{"4BR":4},"H22":{"5BR":36},"H23":{"3BR":44},"H24":{"3BR":44},"H25":{"3BR":44},"H26":{"3BR":44},"H27":{"3BR":28},"H28":{"3BR":24},"H29":{"4BR":12},"H30":{"4BR":14},"H31":{"3BR":28},"H32":{"3BR":44},"H33":{"3BR":44},"H34":{"3BR":44},"H35":{"3BR":44},"H36":{"3BR":28},"H37":{"3BR":28},"H38":{"4BR":10}};
+var T2_MIX={"S1":{"4BR-LUX":14},"S2":{"4BR-LUX":16},"S12":{"4BR":20},"S13":{"4BR":20},"S14":{"3BR-LUX":15},"S15":{"3BR-LUX":15},"S3":{"4BR":16},"S4":{"4BR":16},"S16":{"4BR":14},"S17":{"4BR":14},"S18":{"4BR":16},"S19":{"4BR":16},"S20":{"4BR":18},"S21":{"4BR":11},"S22":{"4BR":11},"S5":{"4BR":12},"S6":{"4BR":14},"S7":{"4BR":4},"S8":{"4BR":16},"S9":{"4BR":16},"S10":{"4BR":6},"S11":{"4BR":8}};
+function rhApply(p){
+  var MX,names,flag;
+  if(p&&p.id==='reportage-hills'){MX=RH_MIX;names=['3BR','4BR','5BR'];flag='rhmix1';}
+  else if(p&&p.id==='taormina-02'){MX=T2_MIX;names=['4BR','4BR-LUX','3BR-LUX'];flag='t2mix1';}
+  else return false;
+  if(p[flag])return false;
+  var L=[],ids={};
+  names.forEach(function(n){
+    var ex=(p.vtypes||[]).filter(function(t){return t.name.toLowerCase()===n.toLowerCase();})[0];
+    var t=ex||{id:'d'+n.toLowerCase(),name:n,color:VT_NC[n]};ids[n]=t.id;L.push(t);
+  });
+  p.vtypes=L;p.vmix={};if(!p.villas)p.villas={};
+  Object.keys(MX).forEach(function(b){var o={},sum=0;Object.keys(MX[b]).forEach(function(n){o[ids[n]]=MX[b][n];sum+=MX[b][n];});p.vmix[b]=o;p.villas[b]=sum;});
+  p[flag]=1;return true;
+}
+function ensureVT(p){var ac=addActs(p),vv=ensureVT0(p);return ac||vv;}
+function ensureVT0(p){
+  if(rhApply(p))return true;
+  if(!p||p.vtypes!==undefined||!VT_DEF[p.id])return false;
+  p.vtypes=VT_DEF[p.id].map(function(n){return {id:'d'+n.toLowerCase().replace(/[^a-z0-9]/g,''),name:n,color:VT_NC[n]||'#2f7de1'};});
+  if(!p.vmix)p.vmix={};
+  return true;
+}
+function ensureVTsave(p){if(ensureVT(p)&&CAN){p.updated=Date.now();delete p.fresh;writeProj(p);}}
+function renderVt(){
+  var p=$('vtPanel');if(!p)return;
+  var show=!$('setupView').hidden&&CAN&&vtP();if(!show)return;
+  var L=vtList(),tt=vtTotals(),h='';
+  L.forEach(function(t){
+    h+='<div class="vtr" data-vt="'+esc(t.id)+'"><input type="color" data-vc value="'+esc(t.color)+'" aria-label="Colour of '+esc(t.name)+'"><input type="text" data-vn maxlength="30" value="'+esc(t.name)+'" aria-label="Villa type name"><span class="note">'+tt[t.id]+' villas</span><button type="button" class="mini" data-vd="'+esc(t.id)+'">'+(vtDel===t.id?'Click again to remove':'Remove')+'</button></div>';
+  });
+  if(!L.length)h='<div class="note">No villa types yet. Type a name below and press Add type.</div>';
+  $('vtList').innerHTML=h;
+  $('vtColor').value=VT_COLS[L.length%VT_COLS.length];
+  swDeco($('vtPanel'));
+}
+function vtAdd(name,color){
+  if(!CAN)return;
+  name=String(name).replace(/\s+/g,' ').trim().slice(0,30);
+  if(!name){$('vtMsg').textContent='Type a name for the villa type first.';return;}
+  vtEnsure();
+  if(vtP().vtypes.some(function(t){return t.name.toLowerCase()===name.toLowerCase();})){$('vtMsg').textContent='"'+name+'" is already in the list.';return;}
+  vtP().vtypes.push({id:'v'+Date.now().toString(36)+Math.floor(Math.random()*99),name:name,color:color});
+  $('vtMsg').textContent='';$('vtName').value='';
+  vtSave();renderVt();vtRefresh();
+}
+$('vtAdd').onclick=function(){vtAdd($('vtName').value,$('vtColor').value);};
+$('vtName').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();vtAdd(this.value,$('vtColor').value);}});
+$('vtList').addEventListener('input',function(e){
+  var row=e.target.closest('[data-vt]');if(!row||!CAN||!e.target.hasAttribute('data-vc'))return;
+  var t=vtList().filter(function(x){return x.id===row.getAttribute('data-vt');})[0];if(!t)return;
+  t.color=e.target.value;vtSave();vtRefresh();
+});
+$('vtList').addEventListener('change',function(e){
+  var row=e.target.closest('[data-vt]');if(!row||!CAN||!e.target.hasAttribute('data-vn'))return;
+  var t=vtList().filter(function(x){return x.id===row.getAttribute('data-vt');})[0];if(!t)return;
+  var v=e.target.value.replace(/\s+/g,' ').trim().slice(0,30);
+  if(v&&!vtList().some(function(x){return x!==t&&x.name.toLowerCase()===v.toLowerCase();}))t.name=v;
+  vtSave();renderVt();vtRefresh();
+});
+$('vtList').addEventListener('click',function(e){
+  var b=e.target.closest('[data-vd]');if(!b||!CAN)return;
+  var id=b.getAttribute('data-vd');
+  if(vtDel!==id){vtDel=id;renderVt();return;}
+  vtDel=null;var tp=vtP();tp.vtypes=vtList().filter(function(t){return t.id!==id;});
+  Object.keys(tp.vmix||{}).forEach(function(k){delete tp.vmix[k][id];if(!Object.keys(tp.vmix[k]).length)delete tp.vmix[k];});
+  vtSave();renderVt();vtRefresh();
+});
+function renderPopVt(bid){
+  var box=$('popVt'),L=vtList();
+  if(!box)return;
+  if(!L.length){box.innerHTML='<div class="vh">Add villa types in this project\'s Edit details to split this block by type.</div>';return;}
+  var m=vtMix(bid),sum=0;
+  var h='<div class="vh">Villas of each type in this block</div>';
+  L.forEach(function(t){var n=parseInt(m[t.id],10)||0;sum+=n;h+='<label class="pvt"><i style="background:'+esc(t.color)+'"></i><span>'+esc(t.name)+'</span><input type="number" min="0" step="1" inputmode="numeric" data-pvt="'+esc(t.id)+'" value="'+(n||'')+'" placeholder="0"></label>';});
+  box.innerHTML=h;
+}
+function applyMix(bid,tid,val){
+  if(!CAN||!BYID[bid])return;
+  vtEnsure();
+  var n=Math.max(0,Math.round(parseFloat(val)||0)),m=PROJ.vmix[bid]||(PROJ.vmix[bid]={}),sum=0;
+  if(n)m[tid]=n;else delete m[tid];
+  Object.keys(m).forEach(function(k){sum+=m[k];});
+  if(!sum)delete PROJ.vmix[bid];
+  else S.villas[bid]=sum;
+  save();
+  $('popVil').value=S.villas[bid]||0;
+  renderHead();renderMap();renderLegend();renderKpis();renderActs();renderBlock();renderSib();
+}
+$('popVt').addEventListener('input',function(e){var t=e.target;if(t.hasAttribute&&t.hasAttribute('data-pvt')&&S.pop)applyMix(S.pop,t.getAttribute('data-pvt'),t.value);});
 function applyNames(){
   var nm=(PROJ&&PROJ.names)||{};
   BLOCKS.forEach(function(b){if(PROJ&&PROJ.builtin){if(b.n0===undefined)b.n0=b.name;b.name=nm[b.id]||b.n0;}});
@@ -1171,7 +1496,7 @@ function openEditor(bid){
   $('pop').hidden=false;
   $('popName').textContent=b.name;$('popNm').value=b.name;
   var inp=$('popVil');inp.value=S.villas[bid]||0;
-  renderSib();positionPop();
+  renderPopVt(bid);renderSib();positionPop();
   try{inp.focus();inp.select();}catch(e){}
 }
 
@@ -1329,19 +1654,71 @@ function pdfMap(doc,kind,act,P,s,labels,k){
         else hatch(doc,qq,rgb,1.0*k,0.3*k);
       }
     }
+    if(kind==='edit'){
+      var sgp=vtSegs(b.id);
+      if(sgp.segs.length)vtQuads(b,sgp).forEach(function(o){
+        var q=clipPoly(b.poly,o.q);if(q.length<3)return;
+        var cc=mixW(hx(o.t.color),0.78);doc.setFillColor(cc[0],cc[1],cc[2]);polyPath(doc,q.map(P),'F');
+      });
+    }
     doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3*k);polyPath(doc,pts,'S');
   });
   if(labels)BLOCKS.forEach(function(b){
     var c=P(b.lc),fsU=Math.min(30,0.88*b.len/(b.name.length*0.6));
     if(kind==='edit'){
       var nmMM=fsU*s*0.8,cmMM=Math.min(nmMM*1.9,b.wid*s*0.42),a=b.ang*Math.PI/180,vx=-Math.sin(a),vy=Math.cos(a);
-      putLabel(doc,b.name,c[0]-vx*cmMM*0.62,c[1]-vy*cmMM*0.62,b.ang,Math.max(3.4,nmMM/0.3528),false,INK);
-      putLabel(doc,String(S.villas[b.id]||0),c[0]+vx*nmMM*0.5,c[1]+vy*nmMM*0.5,b.ang,Math.max(5,cmMM/0.3528),true,RED);
+      var cpt=Math.max(5,cmMM/0.3528),npt=Math.min(cpt,Math.max(3.6,0.9*b.len*s/(b.name.length*0.62*0.3528)));
+      putLabel(doc,b.name,c[0]-vx*cmMM*0.62,c[1]-vy*cmMM*0.62,b.ang,npt,true,INK);
+      putLabel(doc,String(S.villas[b.id]||0),c[0]+vx*cmMM*0.55,c[1]+vy*cmMM*0.55,b.ang,cpt,true,RED);
     }else{
       var fl=fills[b.id]||[255,255,255],dark=kind==='one'&&(0.299*fl[0]+0.587*fl[1]+0.114*fl[2])<150;
-      putLabel(doc,b.name,c[0],c[1],b.ang,Math.max(k<1?2.6:3.8,fsU*s/0.3528),false,dark?[255,255,255]:INK,dark);
+      putLabel(doc,b.name,c[0],c[1],b.ang,Math.max(k<1?2.6:3.8,fsU*s/0.3528),true,dark?[255,255,255]:INK,dark);
     }
   });
+}
+
+function pdfMatMap(doc,P,s,k,w){
+  var INK=[20,23,43];
+  try{doc.setLineJoin('round');}catch(e){}
+  if(IMG&&P){var ip=P([VB[0],VB[1]]);try{doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:IMGOP}));doc.addImage(IMG,'JPEG',ip[0],ip[1],VB[2]*s,VB[3]*s,'mapbg');doc.restoreGraphicsState();}catch(e){}}
+  BLOCKS.forEach(function(b){
+    var v=mget(k,w,b.id),c=hx(matCol(k,v));
+    doc.setFillColor(c[0],c[1],c[2]);polyPath(doc,b.poly.map(P),'F');
+    doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3);polyPath(doc,b.poly.map(P),'S');
+  });
+  BLOCKS.forEach(function(b){
+    var c=P(b.lc),fsU=Math.min(30,0.88*b.len/(b.name.length*0.6));
+    putLabel(doc,b.name,c[0],c[1],b.ang,Math.max(3,fsU*s/0.3528),true,INK);
+  });
+}
+function drawMatPage(doc,spec,pn,pc){
+  var W=297,H=210,INK=[20,23,43],MUT=[93,100,130],RED=[194,59,43],LINE=[205,210,228],w=spec.work;
+  doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.35);doc.rect(7,7,W-14,H-14);
+  var subU=(spec.num+'. '+w.name).toUpperCase(),nm=String(PROJ.name).toUpperCase();
+  T(doc,nm,W/2,19.8,25,'title',INK,'center',0.45);
+  var sw0=Tw(doc,subU,15.5,'sub')+0.5*subU.length,half=Math.max(41.5,sw0/2+3);
+  doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3);doc.line(W/2-half,23,W/2+half,23);
+  T(doc,subU,W/2,29.2,15.5,'sub',INK,'center',0.5);
+  var nb=BLOCKS.length,ci=matCounts('ipt',w.id),cm=matCounts('mat',w.id);
+  T(doc,'IPT done '+ci[1]+' / '+nb+' blocks  ·  Materials ordered '+cm[3]+' / '+nb+' blocks',W/2,35.8,11.5,'med',RED,'center');
+  doc.setLineWidth(0.25);doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.line(7,39.4,W-7,39.4);
+  doc.setDrawColor(INK[0],INK[1],INK[2]);doc.line(7,191,W-7,191);
+  doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.line(W/2,39.4,W/2,191);
+  [['ipt',9,W/2-1.5],['mat',W/2+1.5,W-9]].forEach(function(pn2){
+    var k=pn2[0],x0=pn2[1],x1=pn2[2],pw=x1-x0,my=50,mh=122,s=Math.min(pw/VB[2],mh/VB[3]),ox=x0+(pw-VB[2]*s)/2,oy=my+(mh-VB[3]*s)/2;
+    function P(p){return [ox+(p[0]-VB[0])*s,oy+(p[1]-VB[1])*s];}
+    T(doc,MATK[k].title.toUpperCase(),(x0+x1)/2,46,10.5,'sub',INK,'center',0.4);
+    pdfMatMap(doc,P,s,k,w.id);
+    var c=k==='ipt'?ci:cm,xx=x0,yy=178;
+    matVals(c).concat([0]).forEach(function(v){
+      var lab=matLab(k,v)+' · '+c[v],ww=Tw(doc,lab,7.6,'reg')+9;
+      if(xx+ww>x1+0.5){xx=x0;yy+=5.6;}
+      var rgb=hx(matCol(k,v));doc.setFillColor(rgb[0],rgb[1],rgb[2]);doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.2);rrect(doc,xx,yy-2.9,6,3.8,0.5,'FD');
+      T(doc,lab,xx+8,yy,7.6,'reg',INK);xx+=ww+3;
+    });
+  });
+  var d0=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  footerP(doc,191,['desc','owner','consultant','contractor'],'Status as of '+d0,'Page '+pn+' of '+pc,W);
 }
 function Tw(doc,t,pt,fam){
   if(doc.__fx)doc.setFont(FAM[fam][0],'normal');else doc.setFont('helvetica',FAM[fam][1]);
@@ -1422,6 +1799,12 @@ function drawPage(doc,spec,pn,pc){
     keyRow('white',[0,0,0],'Not started · '+(tv-dd-pp)+' villas');
   }else if(kind==='edit'){
     txt('Total: '+tv+' villas',lx,y+3,8,true,INK);y+=6.5;
+    var vtl=vtList(),vtt=vtTotals();
+    if(vtl.length){
+      var vst=vtl.length>7?3.9:4.7;
+      vtl.forEach(function(t){swatchP(doc,lx,y,hx(t.color),'solid',5,3.2);txt(t.name+' \u00b7 '+vtt[t.id],lx+7,y+2.5,7,false,INK);y+=vst;});
+      y+=1.8;
+    }
     var rt=rowTotals(),half2=Math.ceil(rt.length/2);
     rt.forEach(function(r,k){
       var cx=lx+(k<half2?0:lw/2+0.8),cy=y+(k%half2)*5.2,w2=lw/2-0.8;
@@ -1561,7 +1944,7 @@ function drawReportPage(doc,pg,N){
 }
 function buildPdf(pages){
   var J=window.jspdf.jsPDF,portrait=pages[0]&&pages[0].kind==='report',doc=new J({orientation:portrait?'portrait':'landscape',unit:'mm',format:'a4',compress:true});pdfFontsInit(doc);
-  pages.forEach(function(pg,i){if(i>0)doc.addPage();if(pg.kind==='report')drawReportPage(doc,pg,pages.length);else drawPage(doc,pg,i+1,pages.length);});
+  pages.forEach(function(pg,i){if(i>0)doc.addPage();if(pg.kind==='report')drawReportPage(doc,pg,pages.length);else if(pg.kind==='mat')drawMatPage(doc,pg,i+1,pages.length);else drawPage(doc,pg,i+1,pages.length);});
   try{doc.setProperties({title:PROJ.name+' progress maps'});}catch(e){}
   return doc;
 }
@@ -1576,7 +1959,12 @@ function exportPdf(scope){
   if(!DL){pdfMsg('Saving files is not available in this view.');return;}
   if(!(window.jspdf&&window.jspdf.jsPDF)){pdfMsg('The PDF tool could not load. Check your connection and reload.');return;}
   var pages,name;
-  if(scope==='report'||(scope==='this'&&S.mode==='report')){
+  if(S.mode==='mat'&&scope!=='report'){
+    var mw=matWorks(),cw=mw.filter(function(x){return x.id===(S.cur==='a2'?'a1':(S.cur==='a9'?'a9-ws':S.cur));})[0]||mw[0];
+    if(!mw.length){pdfMsg('Add a work first.');return;}
+    if(scope==='this'){pages=[{kind:'mat',work:cw,num:mw.indexOf(cw)+1}];name=pdfName(cw.name+' Material Order Map');}
+    else{pages=mw.map(function(x,i){return {kind:'mat',work:x,num:i+1};});name=pdfName('Material Order Map');}
+  }else if(scope==='report'||(scope==='this'&&S.mode==='report')){
     pages=[];for(var k=0;k<reportPages();k++)pages.push({kind:'report',page:k});
     name=pdfName('Progress Summary Map');
   }else if(scope==='this'){
@@ -1625,7 +2013,7 @@ function renderHome(){
       '<div class="pm">'+st.ths+' TH · '+st.blocks.length+' blocks · '+st.tv+' villas · '+st.n+' activities</div>'+
       '<div class="pbar" aria-hidden="true"><i style="width:'+st.pc+'%"></i></div>'+
       '<div class="pm"><b>'+st.pc+'%</b> average progress'+(p.updated?' · updated '+new Date(p.updated).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):'')+'</div>'+
-      '<div class="pact"><button type="button" class="mini" data-setup="'+esc(id)+'">'+(p.builtin?'Edit details':'Edit details & map')+'</button>'+'<button type="button" class="mini" data-psettings="'+esc(id)+'">Settings</button>'+'</div></div>';
+      '<div class="pact"><button type="button" class="mini" data-setup="'+esc(id)+'">'+'Edit details & map'+'</button>'+'<button type="button" class="mini" data-psettings="'+esc(id)+'">Settings</button>'+'</div></div>';
   });
   h+='<button type="button" class="pcard new" id="newProj"><span class="plus">+</span>New project</button>';
   $('pgrid').innerHTML=h;
@@ -1758,14 +2146,14 @@ function suMsg(t){$('suMsg').textContent=t||'';}
 function openSetup(id){
   var p=readProj(id);if(!p)return;
   SU={p:p,img:p.builtin?null:readImg(id),tool:'rect',pts:[],drag:null,sel:null,zoom:1};
-  if(!p.meta)p.meta={};
+  if(!p.meta)p.meta={};ensureVTsave(p);
   $('suName').value=p.name;$('suDesc').value=p.meta.desc||'';$('suOwner').value=p.meta.owner||'';$('suConsultant').value=p.meta.consultant||'';$('suContractor').value=p.meta.contractor||'';
   $('suTitle').textContent=p.name;
   $('suOp').value=Math.round((p.imgOp==null?0.45:p.imgOp)*100);
   var b=!!p.builtin;
   $('suTools').hidden=b;$('suMapPanel').hidden=b;$('suBlocksPanel').hidden=b;
   suMsg('');
-  showView('setup');suTool('rect');suDraw();suRows();
+  showView('setup');renderVt();suTool('rect');suDraw();suRows();
   $('suName').focus();
 }
 ['suName','suDesc','suOwner','suConsultant','suContractor'].forEach(function(id){
@@ -1995,7 +2383,7 @@ async function onRemote(snap){
   if(nord.join()!==STORE.order.join()){STORE.order=nord;changed.push('*');}
   if(changed.length)writeIdx();
   /* untouched sample projects that someone has since deleted from the shared copy */
-  if(first&&ids.length){STORE.order.slice().forEach(function(id){var lp=readProj(id);if(lp&&lp.fresh&&!remote[id]){try{localStorage.removeItem('tmp-'+id);localStorage.removeItem('tmi-'+id);}catch(e){}STORE.order=STORE.order.filter(function(x){return x!==id;});changed.push(id);}});}
+  if(first&&ids.length&&!CAN){STORE.order.slice().forEach(function(id){var lp=readProj(id);if(lp&&lp.fresh&&!remote[id]){try{localStorage.removeItem('tmp-'+id);localStorage.removeItem('tmi-'+id);}catch(e){}STORE.order=STORE.order.filter(function(x){return x!==id;});changed.push(id);}});}
   /* projects that only exist here: share them (edit access only) */
   if(first&&CAN)STORE.order.forEach(function(id){if(!remote[id])syncPush(id);});
   SYNC.first=false;
@@ -2010,7 +2398,7 @@ function liveRefresh(id){
   if(!p){PROJ=null;renderHome();showView('home');homeMsg('This project was removed by someone else.');return;}
   var same=JSON.stringify([p.blocks,p.vb,p.imgOp,p.builtin])===JSON.stringify([PROJ.blocks,PROJ.vb,PROJ.imgOp,PROJ.builtin]);
   if(!same){var m=S.mode,c=S.cur;openProject(id);S.mode=m;S.cur=c;renderAll();return;}
-  PROJ=p;if(!PROJ.meta)PROJ.meta={};
+  PROJ=p;if(!PROJ.meta)PROJ.meta={};ensureVTsave(p);
   if(!p.builtin)IMG=readImg(id);
   S.acts=p.acts;S.villas=p.villas;applyNames();
   BLOCKS.forEach(function(b){if(typeof S.villas[b.id]!=='number')S.villas[b.id]=0;});
