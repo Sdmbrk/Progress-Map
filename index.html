@@ -260,6 +260,15 @@ body.ro #vtPanel,body.ro #newProj,body.ro #restoreBtn,body.ro [data-setup],body.
 .vtr input[type=text],.vtadd input[type=text]{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:6px 9px;font-size:14px;min-width:0}
 .vtr input[type=text]{width:190px}.vtadd input[type=text]{width:210px;max-width:100%}
 .vtr .note{margin-left:auto}
+.custwrap{display:flex;flex-direction:column;gap:8px}
+.custsheet.one .mbody{grid-template-columns:minmax(0,1fr)}
+.cedit summary{padding:10px 14px;cursor:pointer;font-weight:600}
+.cedit .cpan{display:flex;flex-direction:column;gap:7px;border-top:1px solid var(--line);padding-top:9px}
+.cedit .cf{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.cedit .cf input{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:6px 9px;font-size:14px;min-width:0;width:min(420px,100%)}
+.cedit .crow{display:flex;gap:8px;flex-wrap:wrap}
+.cedit .cdanger{color:var(--red)}
+.cnew{margin-bottom:8px}
 .matsheet .mbody{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1px solid var(--line)}
 .matsheet .mcol{display:flex;flex-direction:column;min-width:0;min-height:0}
 .matsheet .mcol+.mcol{border-left:1px solid var(--line)}
@@ -270,9 +279,19 @@ body.ro #vtPanel,body.ro #newProj,body.ro #restoreBtn,body.ro [data-setup],body.
 .mtools button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
 .mtools .msw{width:.9em;height:.9em;border:1px solid var(--ink);border-radius:2px;display:inline-block}
 .matsheet .scroll{flex:1;min-height:0}
-.mleg{display:flex;flex-wrap:wrap;gap:.3cqw 1.2cqw;padding:.5cqw 1cqw .8cqw;font-size:clamp(9px,1.05cqw,13px);color:var(--ink);border-top:1px solid var(--line)}
+.mleg{display:flex;flex-wrap:nowrap;align-items:center;justify-content:center;gap:0 .9cqw;height:2.6cqw;box-sizing:border-box;padding:0 .6cqw;white-space:nowrap;overflow:hidden;font-size:clamp(6px,.82cqw,10px);color:var(--ink);border-top:1px solid var(--line);flex:none}
+.mleg .sw{width:1.4cqw;height:.9cqw;min-width:8px;min-height:5px}
 .mleg .key{gap:.5cqw}
 body.ro .mtools{display:none!important}
+.sp-r{display:flex;flex-direction:column;gap:3px;margin-bottom:7px}
+.sp-r>span:first-child{font-size:12.5px;font-weight:600}
+.sp-3{display:flex;gap:4px;flex-wrap:wrap}
+.sp-3 button{padding:4px 8px;font-size:12px}
+.wtlist{display:flex;flex-direction:column;gap:4px}
+.wtr{display:grid;grid-template-columns:minmax(0,1fr) 78px 56px 52px;gap:8px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:var(--surface);font-size:13.5px}
+.wtr input{width:100%;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:5px 7px;font-size:14px;text-align:right}
+.wtr .sh,.wtr .pc2{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.wtr.h{border:0;background:transparent;color:var(--muted);font-size:12px;padding-top:0;padding-bottom:0}
 .sw10{display:inline-flex;gap:5px;flex-wrap:wrap;flex-basis:100%;align-items:center}
 .sw10 button{width:20px;height:20px;border-radius:5px;border:1px solid rgba(0,0,0,.3);padding:0;cursor:pointer;box-sizing:border-box}
 .sw10 button.on{outline:2px solid var(--ink);outline-offset:1px}
@@ -313,6 +332,25 @@ svg.mini .frame{stroke-width:14}
     <label class="chk"><input type="checkbox" id="gdTrim"> After saving, move older backups to the Drive trash and keep the latest 5</label>
     <div class="note" id="gdMsg" aria-live="polite"></div>
     <div class="gdlist" id="gdList"></div>
+  </div>
+</div>
+<div class="modal" id="themeModal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="thTitle">
+    <div class="pop-h"><b id="thTitle">Theme</b><button type="button" class="mini" id="thClose" aria-label="Close">&#10005;</button></div>
+    <label class="chk">Map colours <select id="palSel" class="sel" aria-label="Map colour theme"></select></label>
+    <div class="note">Pick a ready-made colour set, or choose Custom to change the colour of any activity.</div>
+    <div class="custompal" id="customPal" hidden>
+      <div class="cp-h">Custom map colours <span>Pick a colour for each activity</span> <button type="button" class="mini" id="cpReset">Start from current theme</button></div>
+      <div class="cp-grid" id="cpGrid"></div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="wtModal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="wtTitle" style="width:min(520px,100%)">
+    <div class="pop-h"><b id="wtTitle">Activity weightage</b><button type="button" class="mini" id="wtClose" aria-label="Close">&#10005;</button></div>
+    <div class="note">Give each activity a weight. The overall project progress is the sum of each activity's progress multiplied by its share of the total weight. Weights are relative, so they do not have to add up to 100.</div>
+    <div class="row"><button type="button" class="mini" id="wtEqual">Equal weights</button><span class="note" id="wtTot" aria-live="polite"></span></div>
+    <div class="wtlist" id="wtList"></div>
   </div>
 </div>
 <div class="modal" id="setModal" hidden>
@@ -431,6 +469,7 @@ svg.mini .frame{stroke-width:14}
       <button type="button" id="vMaps" aria-pressed="true">Activity maps</button>
       <button type="button" id="vReport" aria-pressed="false">Summary report</button>
       <button type="button" id="vMat" aria-pressed="false">Material orders</button>
+      <button type="button" id="vCust" aria-pressed="false">Custom maps</button>
       <button type="button" id="vEdit" aria-pressed="false">Edit villas</button>
     </div>
     <select id="actSel" class="sel" aria-label="Jump to activity map" hidden></select>
@@ -438,7 +477,7 @@ svg.mini .frame{stroke-width:14}
       <label class="chk" id="paintWrap" hidden><input type="checkbox" id="paint"> Quick cycle on tap</label>
       <label class="chk"><input type="checkbox" id="labels" checked> Block labels</label>
       <label class="chk"><input type="checkbox" id="icons"> Activity icons</label>
-      <label class="chk">Map colours <select id="palSel" class="sel" aria-label="Map colour theme"></select></label>
+      <button type="button" class="mini" id="themeBtn" aria-haspopup="dialog">Theme</button>
       <label class="chk" id="numWrap"><input type="checkbox" id="numbers"> Cell numbers</label>
       <span class="seg" id="pdfWrap" role="group" aria-label="Save as PDF" hidden>
         <button type="button" id="pdfThis">PDF: this view</button>
@@ -451,10 +490,6 @@ svg.mini .frame{stroke-width:14}
         <button type="button" id="zReset" aria-label="Reset zoom">100%</button>
         <button type="button" id="zIn" aria-label="Zoom in">+</button>
       </span>
-    </div>
-    <div class="custompal card" id="customPal" hidden>
-      <div class="cp-h">Custom map colours <span>Pick a colour for each activity</span> <button type="button" class="mini" id="cpReset">Start from current theme</button></div>
-      <div class="cp-grid" id="cpGrid"></div>
     </div>
   </div>
 
@@ -469,7 +504,7 @@ svg.mini .frame{stroke-width:14}
       <section class="card panel">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
           <h2>Activities</h2>
-          <button type="button" class="btn" id="editBtn">Edit list</button>
+          <span style="display:flex;gap:6px"><button type="button" class="btn" id="wtBtn">Weightage</button><button type="button" class="btn" id="editBtn">Edit list</button></span>
         </div>
         <div class="sub-h">Percent is villas done out of <span id="outOf">0</span>. Tick an activity to include it in the map and overall heat.</div>
         <ul class="acts" id="actList"></ul>
@@ -569,10 +604,22 @@ function mk(done,part){var o={};ids(done).forEach(function(i){o[i]=2;});(part?id
 var NEW_ACTS=[['a16','Wiring'],['a17','Armour Cable Pulling'],['a18','Switchgear'],['a19','DB Dressing'],['a20','12U Dressing'],['a21','Light Installation'],['a22','Sanitaryware Installation'],['a23','Solar Water Heater Installation'],['a24','AC Machine Installation'],['a25','Isolator Installation'],['a26','Booster Pump Installation']];
 function addActs(p){
   if(!p||!p.acts)return false;
+  if(!p.acts27){
+    p.acts27=1;
+    if(!p.acts.some(function(a){return a.id==='a27';})){var k=-1;p.acts.forEach(function(a,i){if(a.id==='a15')k=i;});p.acts.splice(k<0?p.acts.length:k+1,0,{id:'a27',name:'CAT6 Wiring',on:true,st:{}});}
+    p.acts26=p.acts26||0;
+    var again=addActs(p);return true;
+  }
   var fx=false;p.acts.forEach(function(a){if(a.id==='a25'&&a.name==='Isolatore Installation'){a.name='Isolator Installation';fx=true;}});
-  if(p.acts26)return fx;
+  if(p.acts26)return add28(p)||fx;
   NEW_ACTS.forEach(function(x){if(!p.acts.some(function(a){return a.id===x[0];}))p.acts.push({id:x[0],name:x[1],on:true,st:{}});});
-  p.acts26=1;return true;
+  p.acts26=1;add28(p);return true;
+}
+function add28(p){
+  if(p.acts28)return false;p.acts28=1;
+  if(!p.acts.some(function(a){return a.id==='a28';})){var k=-1;p.acts.forEach(function(a,i){if(a.id==='a21')k=i;});p.acts.splice(k<0?p.acts.length:k,0,{id:'a28',name:'Switch Socket Installation',on:true,st:{}});}
+  if(!p.acts.some(function(a){return a.id==='a29';}))p.acts.push({id:'a29',name:'Earthing, T&C',on:true,st:{}});
+  return true;
 }
 function sampleActs(){
   return [
@@ -590,7 +637,8 @@ function sampleActs(){
     {id:'a12',name:'HVAC H/L',on:true,st:{}},
     {id:'a13',name:'Floor Piping Works - EL',on:true,st:{}},
     {id:'a14',name:'Roof Combo Clearance',on:true,st:{}},
-    {id:'a15',name:'External Works',on:true,st:{}}
+    {id:'a15',name:'External Works',on:true,st:{}},
+    {id:'a27',name:'CAT6 Wiring',on:true,st:{}}
   ].concat(NEW_ACTS.map(function(x){return {id:x[0],name:x[1],on:true,st:{}};}));
 }
 /* villa counts per block, editable. Shared out by plan area inside four groups whose totals follow from the
@@ -689,7 +737,7 @@ function partVillas(a){var s=0;BLOCKS.forEach(function(b){if(stOf(a,b.id)===1)s+
 function inc(){return S.acts.filter(function(a){return a.on;});}
 function heat(bid){var l=inc();if(!l.length)return 0;var s=0;l.forEach(function(a){s+=stOf(a,bid)/2;});return s/l.length;}
 function pct(n,d){return d?Math.round(n/d*100):0;}
-var STN=['Not started','Partial','Done'];
+var STN=['Not started','Ongoing','Done'];
 function curAct(){
   var a=S.acts.filter(function(x){return x.id===S.cur;})[0];
   if(!a)S.cur='all';
@@ -733,7 +781,15 @@ function actStats(a){var tv=totalVillas(),d=doneVillas(a),p=partVillas(a);return
 function overallAll(){var t=0;S.acts.forEach(function(a){t+=actStats(a).pc;});return S.acts.length?Math.round(t/S.acts.length):0;}
 function summaryCounts(){var c={done:0,prog:0,none:0};S.acts.forEach(function(a){var t=actStats(a);if(t.full)c.done++;else if(t.d>0||t.p>0)c.prog++;else c.none++;});return c;}
 function reportPages(){return 1+Math.ceil(S.acts.length/4);}
-function overallAvg(){var l=inc(),tv=totalVillas(),sum=0;l.forEach(function(a){sum+=pct(doneVillas(a),tv);});return l.length?Math.round(sum/l.length):0;}
+function wOf(a){var w=parseFloat(a&&a.w);return isFinite(w)&&w>=0?w:1;}
+function wSum(l){var t=0;l.forEach(function(a){t+=wOf(a);});return t;}
+function overallAvg(){
+  var l=inc(),tv=totalVillas(),sum=0,ws=wSum(l);
+  if(!l.length)return 0;
+  if(ws<=0){l.forEach(function(a){sum+=pct(doneVillas(a),tv);});return Math.round(sum/l.length);}
+  l.forEach(function(a){sum+=wOf(a)*(tv?doneVillas(a)/tv*100:0);});
+  return Math.round(sum/ws);
+}
 
 /* ---------- map ---------- */
 function poly(pts){return pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1);}).join(' ');}
@@ -771,12 +827,23 @@ function drawMap(svg,mode,a){
   var h=[],i,list=inc(),mini=svg.classList.contains('mini');
   h.push('<defs>');
   S.acts.forEach(function(x,k){h.push('<pattern id="hp'+k+'" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="22" height="22" fill="var(--surface)"/><rect width="11" height="22" fill="'+col(x)+'"/></pattern>');});
-  if(mode==='all'||mode==='edit')BLOCKS.forEach(function(b){h.push('<clipPath id="cp-'+b.id+'"><polygon points="'+poly(b.poly)+'"/></clipPath>');});
+  var rz=mode==='one'&&isRiser(a);
+  if(rz)subList(a).forEach(function(r,k){h.push('<pattern id="hr'+k+'" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="22" height="22" fill="var(--surface)"/><rect width="11" height="22" fill="'+r[2]+'"/></pattern>');});
+  if(mode==='all'||mode==='edit'||rz)BLOCKS.forEach(function(b){h.push('<clipPath id="cp-'+b.id+'"><polygon points="'+poly(b.poly)+'"/></clipPath>');});
   h.push('</defs>');
   if(IMG)h.push('<image href="'+IMG+'" x="'+VB[0]+'" y="'+VB[1]+'" width="'+VB[2]+'" height="'+VB[3]+'" preserveAspectRatio="none" opacity="'+IMGOP+'" pointer-events="none"/>');
   BLOCKS.forEach(function(b){
     h.push('<g data-b="'+b.id+'">');
-    h.push('<polygon class="blk" data-b="'+b.id+'" style="fill:'+(mode==='one'&&a?fillFor(a,stOf(a,b.id)):'var(--surface)')+'" points="'+poly(b.poly)+'"/>');
+    h.push('<polygon class="blk" data-b="'+b.id+'" style="fill:'+(mode==='one'&&a&&!rz?fillFor(a,stOf(a,b.id)):'var(--surface)')+'" points="'+poly(b.poly)+'"/>');
+    if(rz){
+      h.push('<g clip-path="url(#cp-'+b.id+')" pointer-events="none">');
+      subList(a).forEach(function(r,k){
+        var v=a.sub[r[0]][b.id]||0;if(!v)return;
+        var u0=k===0?-6:k/subList(a).length,u1=k===subList(a).length-1?7:(k+1)/subList(a).length;
+        h.push('<polygon style="fill:'+(v===2?r[2]:'url(#hr'+k+')')+'" points="'+poly([b.pt(u0,-6),b.pt(u1,-6),b.pt(u1,7),b.pt(u0,7)])+'"/>');
+      });
+      h.push('</g><polygon class="oln" points="'+poly(b.poly)+'"/>');
+    }
     if(mode==='all'){
       var n=list.length;
       if(n){
@@ -821,7 +888,7 @@ function drawMap(svg,mode,a){
   }else if(S.labels||mini){
     BLOCKS.forEach(function(b){
       var fs=Math.min(30,0.88*b.len/(b.name.length*0.6));
-      var wt=(mode==='one'&&a&&stOf(a,b.id)===2&&LUMDARK(a));
+      var wt=(mode==='one'&&a&&!isRiser(a)&&stOf(a,b.id)===2&&LUMDARK(a));
       h.push('<text class="lbl'+(wt?' lbl-w':'')+'" style="font-size:'+fs.toFixed(1)+'px;stroke-width:'+(fs*0.3).toFixed(1)+'px;font-weight:700" transform="translate('+b.lc[0]+' '+b.lc[1]+') rotate('+b.ang+')">'+esc(b.name)+'</text>');
     });
   }
@@ -836,6 +903,7 @@ function sheetList(){
 }
 function buildSheets(){
   if(S.mode==='mat'){buildMatSheets();return;}
+  if(S.mode==='cust'){buildCust();return;}
   var list=sheetList(),n=S.acts.length,h='';
   list.forEach(function(sp){
     var id=sp.act?sp.act.id:'';
@@ -870,29 +938,30 @@ function fillReport(el){
     var c=summaryCounts();
     h+='<div class="kfig">'+top5().map(function(t){return '<div class="kbox" style="border-top:3px solid '+col(t.a)+'">'+icoSvg(t.a)+'<b>'+t.st.pc+'%</b><span><strong>'+(t.i+1)+'. '+esc(t.a.name)+'</strong><br>'+t.st.d+' / '+tv+' villas done</span></div>';}).join('')+'</div>';
     h+='<div class="tiny" style="margin:.6cqw 0 0;color:var(--muted)">Top 5 activities by progress</div>';
-    h+='<div class="tabwrap"><table class="sumtab"><thead><tr><th>No.</th><th>Activity</th><th class="r">Completed</th><th class="r">Partial</th><th class="r">Not started</th><th>Progress</th></tr></thead><tbody>';
+    h+='<div class="tabwrap"><table class="sumtab"><thead><tr><th>No.</th><th>Activity</th><th class="r">Completed</th><th class="r">Ongoing</th><th class="r">Not started</th><th>Progress</th></tr></thead><tbody>';
     S.acts.forEach(function(a,i){
       var st=actStats(a);
       h+='<tr><td>'+(i+1)+'</td><td>'+(S.icons?icoSvg(a):'<i class="dot" style="background:'+col(a)+'"></i>')+esc(a.name)+'</td><td class="r">'+st.d+'</td><td class="r">'+st.p+'</td><td class="r">'+st.n+'</td><td><span class="pg">'+tbar(st,a)+'<b>'+st.pc+'%</b></span></td></tr>';
     });
     h+='</tbody><tfoot><tr><td></td><td></td><td class="r" colspan="3">'+tv+' villas in '+BLOCKS.length+' blocks</td><td></td></tr></tfoot></table></div>';
-    h+='<p class="pnote">Progress is villas completed out of '+tv+'. Partial villas are shown separately and are not counted as completed.</p>';
+    h+='<p class="pnote">Progress is villas completed out of '+tv+'. Ongoing villas are shown separately and are not counted as completed.</p>';
   }else{
     var acts=S.acts.slice((page-1)*4,page*4);
     h+='<div class="figgrid">';
     acts.forEach(function(a){
       var st=actStats(a);
-      h+='<figure class="fig"><figcaption class="fig-h"><b>'+icoSvg(a)+(cidx(a)+1)+'. '+esc(a.name)+'</b><span>'+st.d+' / '+tv+' Villas Done ('+st.pc+'%)'+(st.p?' · '+st.p+' partial':'')+'</span></figcaption>'+
+      h+='<figure class="fig"><figcaption class="fig-h"><b>'+icoSvg(a)+(cidx(a)+1)+'. '+esc(a.name)+'</b><span>'+st.d+' / '+tv+' Villas Done ('+st.pc+'%)'+(st.p?' · '+st.p+' ongoing':'')+'</span></figcaption>'+
         '<svg class="mapsvg mini" data-act="'+a.id+'" viewBox="'+VB.join(' ')+'" style="aspect-ratio:'+VB[2]+'/'+VB[3]+'" role="img" aria-label="Map for '+esc(a.name)+'"></svg>'+tbar(st,a)+
-        '<div class="fig-n">Completed '+st.d+' | Partial '+st.p+' | Not started '+st.n+' villas</div></figure>';
+        '<div class="fig-n">Completed '+st.d+' | Ongoing '+st.p+' | Not started '+st.n+' villas</div></figure>';
     });
-    h+='</div><div class="pleg"><span class="key"><i class="sw s2" style="background:var(--ink)"></i>Solid colour = completed</span><span class="key"><i class="sw s1" style="background:repeating-linear-gradient(135deg,var(--ink) 0 3px,#fff 3px 6px)"></i>Striped = partial</span><span class="key"><i class="sw s0"></i>White = not started</span></div>';
+    h+='</div><div class="pleg"><span class="key"><i class="sw s2" style="background:var(--ink)"></i>Solid colour = completed</span><span class="key"><i class="sw s1" style="background:repeating-linear-gradient(135deg,var(--ink) 0 3px,#fff 3px 6px)"></i>Striped = ongoing</span><span class="key"><i class="sw s0"></i>White = not started</span></div>';
   }
   body.innerHTML=h;
 }
 function renderMap(){
   eachSheet(function(el,mode,a){
     if(mode==='mat'){fillMat(el);return;}
+    if(mode==='cust'){fillCust(el);return;}
     if(mode==='report'){
       fillReport(el);
       Array.prototype.forEach.call(el.querySelectorAll('svg.mini'),function(sv){
@@ -912,16 +981,16 @@ function headText(mode,a,page){
     else{sub='No activity';prog='Add an activity in the list';}
   }else if(mode==='report'){
     var nA=S.acts.length;
-    if(!page){sub='Summary of all activities';prog='';}
+    if(!page){sub='Summary of all activities';prog=l.length?'Overall progress '+overallAvg()+'% (weighted)':'';}
     else{sub='Activity progress maps';prog='Activities '+((page-1)*4+1)+' to '+Math.min(page*4,nA)+' of '+nA;}
   }else if(mode==='edit'){
     sub='Villas per block';prog=tv+' villas in '+BLOCKS.length+' blocks'+(PROJ.builtin&&tv!==TOTAL?' (drawings show '+TOTAL+')':'');
   }else{
-    sub='All activities';prog=l.length?overallAvg()+'% average across '+l.length+' activities':'Tick at least one activity';
+    sub='All activities';prog=l.length?overallAvg()+'% weighted progress across '+l.length+' activities':'Tick at least one activity';
   }
   return {sub:sub,prog:prog};
 }
-function renderHead(){eachSheet(function(el,mode,a){if(mode==='mat')return;var t=headText(mode,a,parseInt(el.getAttribute('data-page'),10)||0);var sb=el.querySelector('.sh-sub');sb.textContent=t.sub;if(mode==='one'&&a&&S.icons)sb.insertAdjacentHTML('afterbegin',icoSvg(a));el.querySelector('.sh-prog').textContent=t.prog;});}
+function renderHead(){eachSheet(function(el,mode,a){if(mode==='mat'||mode==='cust')return;var t=headText(mode,a,parseInt(el.getAttribute('data-page'),10)||0);var sb=el.querySelector('.sh-sub');sb.textContent=t.sub;if(mode==='one'&&a&&S.icons)sb.insertAdjacentHTML('afterbegin',icoSvg(a));el.querySelector('.sh-prog').textContent=t.prog;});}
 function chip(a,i,tv){
   var d=doneVillas(a),p=partVillas(a);
   return '<button type="button" class="chip'+(a.on?'':' off')+'" data-pick="'+a.id+'" title="Show only '+esc(a.name)+'">'+(S.icons?icoSvg(a):'<i class="dot" style="background:'+col(a)+'"></i>')+'<span class="t">'+(i+1)+'. '+esc(a.name)+'</span><b>'+pct(d,tv)+'%</b>'+
@@ -944,18 +1013,23 @@ function legendFor(mode,a){
     hint='Click any block on the map, or a TH in the list, and type its number of villas.';
   }else if(mode==='one'){
     var d=a?doneVillas(a):0,p=a?partVillas(a):0;
-    h='<div class="keys"><span class="key"><i class="sw s2" style="background:'+(a?col(a):'var(--c1)')+'"></i>Completed · '+d+' villas</span><span class="key"><i class="sw s1" style="background:'+(a?'repeating-linear-gradient(135deg,'+col(a)+' 0 3px,#fff 3px 6px)':'')+'"></i>Partially completed · '+p+' villas</span><span class="key"><i class="sw s0"></i>Not started · '+(tv-d-p)+' villas</span></div>';
-    if(S.paint)hint='Tap a block to cycle: not started, done, partial.';
+    h='<div class="keys"><span class="key"><i class="sw s2" style="background:'+(a?col(a):'var(--c1)')+'"></i>Completed · '+d+' villas</span><span class="key"><i class="sw s1" style="background:'+(a?'repeating-linear-gradient(135deg,'+col(a)+' 0 3px,#fff 3px 6px)':'')+'"></i>Ongoing · '+p+' villas</span><span class="key"><i class="sw s0"></i>Not started · '+(tv-d-p)+' villas</span></div>';
+    if(isRiser(a)){
+      h='<div class="keys">'+subList(a).map(function(r){var dn=0;BLOCKS.forEach(function(b){if((a.sub[r[0]][b.id]||0)===2)dn+=S.villas[b.id]||0;});return '<span class="key"><i class="sw" style="background:'+r[2]+'"></i>'+esc(r[1])+' \u00b7 '+dn+' villas</span>';}).join('')+'</div>'+
+        '<div class="keys"><span class="key"><i class="sw" style="background:#9aa0b8"></i>Solid = completed</span><span class="key"><i class="sw" style="background:repeating-linear-gradient(135deg,#9aa0b8 0 3px,#fff 3px 6px)"></i>Striped = ongoing</span><span class="key"><i class="sw s0"></i>Blank = not started</span></div>';
+      hint='Each block is split into strips, one for each system: '+subList(a).map(function(r){return r[1];}).join(', ')+'.';
+    }
+    if(S.paint)hint='Tap a block to cycle: not started, done, ongoing.';
   }else{
     h+='<div class="chips">'+S.acts.map(function(x,i){return chip(x,i,tv);}).join('')+'</div>';
-    h+='<div class="keys"><span class="key"><i class="sw s2"></i>Solid colour = completed</span><span class="key"><i class="sw s1"></i>Striped = partial</span><span class="key"><i class="sw sg"></i>Grey = not started</span></div>';
+    h+='<div class="keys"><span class="key"><i class="sw s2"></i>Solid colour = completed</span><span class="key"><i class="sw s1"></i>Striped = ongoing</span><span class="key"><i class="sw sg"></i>Grey = not started</span></div>';
     hint='Each block holds one cell per activity, in the numbered order of the list. Percent is villas completed out of '+tv+'. Tap an activity to jump to its own map.';
   }
   return {h:h,hint:hint};
 }
 function renderLegend(){
   var hint='';
-  eachSheet(function(el,mode,a){if(mode==='mat'){hint='Pick a status above a map, then click blocks to colour them. Click a block that already has that status to clear it.';return;}var r=legendFor(mode,a),lg=el.querySelector('.legend');if(lg)lg.innerHTML=r.h;if(r.hint)hint=r.hint;});
+  eachSheet(function(el,mode,a){if(mode==='cust'){hint='Pick a legend item above a map, then click blocks to colour them. Click a coloured block again to clear it. Use Edit this map below the page to change headings and the legend.';return;}if(mode==='mat'){hint='Pick a status above a map, then click blocks to colour them. Click a block that already has that status to clear it.';return;}var r=legendFor(mode,a),lg=el.querySelector('.legend');if(lg)lg.innerHTML=r.h;if(r.hint)hint=r.hint;});
   $('hint').textContent=hint;$('hint').hidden=!hint;
 }
 
@@ -977,17 +1051,63 @@ function matLab(k,v){
 }
 function matCol(k,v){return !v?MATC[0]:(k==='ipt'?(v===1?'#2e9d4f':MONC[v%12]):MATC[v]);}
 function matBrushes(k){if(k!=='ipt')return [1,2,3];var m=monIdx();return [1,m,m+1,m+2];}
+var RSUB=[['ws','WS (PPR)','#2f7de1'],['dr','DR (UPVC)','#7b4fd1'],['hd','HVAC - Ducting','#2e9d5b'],['hc','HVAC - Copper piping','#c8742f']];
+var ESUB=[['el','Electrical','#e8a317'],['pl','Plumbing','#2f7de1']];
+var SUBDEF={a9:RSUB};
+function subList(a){return (a&&SUBDEF[a.id])||[];}
+function isRiser(a){return !!(a&&a.sub&&SUBDEF[a.id]);}
+function riserSync(a){
+  if(!a||!a.sub)return;
+  var ids={};subList(a).forEach(function(r){var m=a.sub[r[0]]||(a.sub[r[0]]={});Object.keys(m).forEach(function(b){ids[b]=1;});});
+  Object.keys(a.st).forEach(function(b){ids[b]=1;});
+  a.st={};
+  Object.keys(ids).forEach(function(b){
+    var n2=0,n1=0;subList(a).forEach(function(r){var v=a.sub[r[0]][b]||0;if(v===2)n2++;if(v>0)n1++;});
+    if(n2===subList(a).length)a.st[b]=2;else if(n1>0)a.st[b]=1;
+  });
+}
+function riserSet(a,bid,key,v){
+  subList(a).forEach(function(r){if(key==='all'||key===r[0]){if(v)a.sub[r[0]][bid]=v;else delete a.sub[r[0]][bid];}});
+  riserSync(a);
+}
+function riserInit(p){
+  if(!p||!p.acts)return false;
+  var ch=false;
+  p.acts.forEach(function(a){
+    if(!SUBDEF[a.id]&&a.sub){delete a.sub;ch=true;return;}
+    if(!SUBDEF[a.id]||a.sub)return;
+    a.sub={};SUBDEF[a.id].forEach(function(r){var m={};Object.keys(a.st||{}).forEach(function(b){if(a.st[b])m[b]=a.st[b];});a.sub[r[0]]=m;});ch=true;
+  });
+  return ch;
+}
 var RISER=[['a9-ws','Riser Works - WS (PPR)'],['a9-dr','Riser Works - DR (UPVC)'],['a9-hd','Riser Works - HVAC Ducts'],['a9-hc','Riser Works - HVAC Copper pipes']];
-function matKey(k,w){return (k==='ipt'&&String(w).indexOf('a9-')===0)?'a9':w;}
+var MEL=['a1','a5','a6','a7','a8'];
+function matKey(k,w){
+  if(k!=='ipt')return w;
+  w=String(w);
+  if(w.indexOf('a9-')===0)return 'a9';
+  var m=w.match(/^(a\d+)-(el|pl)$/);return m?m[1]:w;
+}
+function matMigrate(p){
+  if(!p||!p.mat||!p.mat.mat||p.matEP)return false;
+  p.matEP=1;
+  MEL.forEach(function(w){var o=p.mat.mat[w];if(!o||!Object.keys(o).length)return;
+    ['el','pl'].forEach(function(x){if(!p.mat.mat[w+'-'+x])p.mat.mat[w+'-'+x]=JSON.parse(JSON.stringify(o));});
+    delete p.mat.mat[w];});
+  return true;
+}
 function matWorks(){
   var out=[],hasA1=S.acts.some(function(x){return x.id==='a1';}),a2=S.acts.filter(function(x){return x.id==='a2';})[0];
   S.acts.forEach(function(a){
     if(a.id==='a2'&&hasA1)return;
+    if(a.id==='a4')return;
     var nm=a.name;
-    if(a.id==='a1'&&a2){var c=function(t){return String(t).replace(/\s*works?\s*$/i,'').trim();};nm=c(a.name)+' & '+c(a2.name)+' works';}
+    if(a.id==='a1'&&a2){var c=function(t){return String(t).replace(/\s*works?\s*$/i,'').trim();};nm='Tiebeam & Underground';}
     if(a.id==='a9'){RISER.forEach(function(r){out.push({id:r[0],name:r[1]});});return;}
+    if(MEL.indexOf(a.id)>=0){out.push({id:a.id,name:nm,ep:true});return;}
     out.push({id:a.id,name:nm});
   });
+  out.push({id:'mhc',name:'Manhole Cover'});
   return out;
 }
 function mget(k,w,b){w=matKey(k,w);var m=PROJ&&PROJ.mat,v=(m&&m[k]&&m[k][w]&&m[k][w][b])||0;if(k==='ipt'&&v<1000&&v!==1)return 0;return v;}
@@ -997,6 +1117,11 @@ function mset(k,w,b,v){
   if(!PROJ.mat[k])PROJ.mat[k]={};
   var o=PROJ.mat[k][w]||(PROJ.mat[k][w]={});
   if(v)o[b]=v;else delete o[b];
+}
+var EPS=[['el','Electrical','E'],['pl','Plumbing','P']];
+function isEP(w){return MEL.indexOf(String(w))>=0;}
+function epStrips(b){
+  return EPS.map(function(r,i){var u0=i===0?-6:0.5,u1=i===EPS.length-1?7:0.5;if(i===0)u1=0.5;return {r:r,q:[b.pt(u0,-6),b.pt(u1,-6),b.pt(u1,7),b.pt(u0,7)],c:b.pt(i===0?0.1:0.9,0.5)};});
 }
 function matVals(c){return Object.keys(c).map(Number).filter(function(v){return v>0;}).sort(function(a,b){return a-b;});}
 function matCounts(k,w){
@@ -1010,8 +1135,9 @@ function buildMatSheets(){
       var br=S.mb[k],chips='';
       matBrushes(k).forEach(function(v){chips+='<button type="button" data-mb="'+k+'|'+v+'" aria-pressed="'+(br===v)+'"><i class="msw" style="background:'+matCol(k,v)+'"></i>'+esc(matLab(k,v))+'</button>';});
       chips+='<button type="button" data-mb="'+k+'|0" aria-pressed="'+(br===0)+'"><i class="msw"></i>Clear</button>';
-      chips+='<button type="button" data-mfill="'+k+'" title="Apply the selected status to every block">All blocks</button>';
-      cols+='<div class="mcol" data-k="'+k+'"><div class="mhead"><h4>'+esc(MATK[k].title)+'</h4><div class="mtools">'+chips+'</div></div>'+
+      if(k==='mat'&&w.ep)EPS.forEach(function(r){chips+='<button type="button" data-mfill="mat|'+r[0]+'" title="Apply the selected status to every block, '+r[1]+' only">All '+r[1]+'</button>';});
+      else chips+='<button type="button" data-mfill="'+k+'" title="Apply the selected status to every block">All blocks</button>';
+      cols+='<div class="mcol" data-k="'+k+'"><div class="mhead"><h4>'+esc(MATK[k].title)+(k==='mat'&&w.ep?' <small style="font-weight:400;color:var(--muted);text-transform:none;letter-spacing:0;font-size:.8em">E = Electrical, P = Plumbing</small>':'')+'</h4><div class="mtools">'+chips+'</div></div>'+
         '<div class="scroll"><svg class="matsvg mapsvg" viewBox="'+VB.join(' ')+'" role="img" aria-label="'+esc(w.name)+' '+esc(MATK[k].title)+'"></svg></div><div class="mleg"></div></div>';
     });
     h+='<section class="card sheet matsheet" id="sheet-mat-'+w.id+'" data-mode="mat" data-act="'+w.id+'" aria-label="Material orders: '+esc(w.name)+'">'+
@@ -1022,11 +1148,22 @@ function buildMatSheets(){
   $('sheets').innerHTML=h||'<div class="card" style="padding:18px">No works yet.</div>';
 }
 function drawMatSvg(svg,k,w){
-  var h=[];
+  var h=[],ep=k==='mat'&&isEP(w);
+  if(ep)h.push('<defs>'+BLOCKS.map(function(b){return '<clipPath id="cm-'+b.id+'"><polygon points="'+poly(b.poly)+'"/></clipPath>';}).join('')+'</defs>');
   if(IMG)h.push('<image href="'+IMG+'" x="'+VB[0]+'" y="'+VB[1]+'" width="'+VB[2]+'" height="'+VB[3]+'" preserveAspectRatio="none" opacity="'+IMGOP+'" pointer-events="none"/>');
   BLOCKS.forEach(function(b){
+    if(ep){
+      h.push('<polygon style="fill:#fff" points="'+poly(b.poly)+'" pointer-events="none"/><g clip-path="url(#cm-'+b.id+')">');
+      epStrips(b).forEach(function(t){var v=mget('mat',w+'-'+t.r[0],b.id);h.push('<polygon class="blk estrip" data-b="'+b.id+'" data-sub="'+t.r[0]+'" style="fill:'+matCol('mat',v)+';fill-opacity:'+(v?0.9:1)+'" points="'+poly(t.q)+'"/>');});
+      h.push('</g><polygon class="oln" points="'+poly(b.poly)+'"/>');
+      return;
+    }
     var v=mget(k,w,b.id);
     h.push('<polygon class="blk" data-b="'+b.id+'" style="fill:'+matCol(k,v)+';fill-opacity:'+(v?0.9:1)+'" points="'+poly(b.poly)+'"/>');
+  });
+  if(ep)BLOCKS.forEach(function(b){
+    var sz=Math.max(7,Math.min(b.wid*0.36,b.len*0.07,26));
+    epStrips(b).forEach(function(t){h.push('<text class="lbl" style="font-size:'+sz.toFixed(1)+'px;stroke-width:'+(sz*0.25).toFixed(1)+'px;font-weight:700;fill:#5d6482" transform="translate('+t.c[0].toFixed(1)+' '+t.c[1].toFixed(1)+') rotate('+b.ang+')">'+t.r[2]+'</text>');});
   });
   BLOCKS.forEach(function(b){
     var fs=Math.min(30,0.88*b.len/(b.name.length*0.6));
@@ -1040,13 +1177,19 @@ function fillMat(el){
     var k=col.getAttribute('data-k');
     drawMatSvg(col.querySelector('svg'),k,w);
     var c=matCounts(k,w),lg='';
+    if(k==='mat'&&isEP(w)){
+      var ce=matCounts('mat',w+'-el'),cp=matCounts('mat',w+'-pl');
+      [1,2,3].forEach(function(v){lg+='<span class="key"><i class="sw" style="background:'+matCol('mat',v)+'"></i>'+esc(matLab('mat',v))+' · E '+ce[v]+'/P '+cp[v]+'</span>';});
+      lg+='<span class="key"><i class="sw"></i>Not marked · E '+ce[0]+'/P '+cp[0]+'</span>';
+      c=ce;sp[3]=cp;
+    }else{
     matVals(c).forEach(function(v){lg+='<span class="key"><i class="sw" style="background:'+matCol(k,v)+'"></i>'+esc(matLab(k,v))+' · '+c[v]+'</span>';});
-    lg+='<span class="key"><i class="sw"></i>Not marked · '+c[0]+'</span>';
+    lg+='<span class="key"><i class="sw"></i>Not marked · '+c[0]+'</span>';}
     col.querySelector('.mleg').innerHTML=lg;
     Array.prototype.forEach.call(col.querySelectorAll('[data-mb]'),function(b){b.setAttribute('aria-pressed',String(S.mb[k]===parseInt(b.getAttribute('data-mb').split('|')[1],10)));});
-    sp[k==='ipt'?0:1]=c;sp[k==='ipt'?2:3]=nb-c[0];
+    sp[k==='ipt'?0:1]=c;if(k==='ipt')sp[2]=nb-c[0];
   });
-  el.querySelector('.sh-prog').textContent='IPT done '+sp[0][1]+' / '+nb+' blocks · Materials ordered '+sp[1][3]+' / '+nb+' blocks';
+  el.querySelector('.sh-prog').textContent='';
 }
 function matClick(e){
   var t=e.target.closest('[data-mb]');
@@ -1054,22 +1197,248 @@ function matClick(e){
   t=e.target.closest('[data-mfill]');
   if(t){
     if(!CAN)return;
-    var k=t.getAttribute('data-mfill'),w=t.closest('.matsheet').getAttribute('data-act');
+    var k=t.getAttribute('data-mfill'),w=t.closest('.matsheet').getAttribute('data-act'),kp=k.split('|');
+    if(kp[1]){k=kp[0];w=w+'-'+kp[1];}
     BLOCKS.forEach(function(b){mset(k,w,b.id,S.mb[k]);});
     save();refreshData();return;
   }
   var bl=e.target.closest('svg [data-b]');if(!bl||!CAN)return;
   var col=bl.closest('.mcol'),kk=col.getAttribute('data-k'),ww=bl.closest('.matsheet').getAttribute('data-act'),bid=bl.getAttribute('data-b');
+  if(bl.hasAttribute('data-sub'))ww=ww+'-'+bl.getAttribute('data-sub');
   mset(kk,ww,bid,mget(kk,ww,bid)===S.mb[kk]?0:S.mb[kk]);
   save();refreshData();
 }
+
+/* ---------- custom maps: progress-type or material-order-type maps with own headings and legend ---------- */
+var CPRE={
+  progress:{n:'Progress map',t:'Progress status',leg:[['Completed','#2e9e5b'],['Ongoing','#dc9b0d'],['Not started','#c9cde0']]},
+  material:{n:'Material order map',t:'Material status',leg:[['Pending to order','#e0574b'],['Ongoing order','#f2b134'],['Ordered','#3fa564']]},
+  blank:{n:'Custom map',t:'Map',leg:[['Item 1','#2f7de1']]}
+};
+S.cb={};S.cc=null;S.copen={};S.cdel=null;S.cnT='progress';S.cnP='1';
+var LC=0;
+function cmList(){return (PROJ&&PROJ.cm)||[];}
+function cmGet(id){return cmList().filter(function(m){return m.id===id;})[0]||null;}
+function cmPanel(t,leg){return {title:t,leg:leg.map(function(r){return {id:'l'+Date.now().toString(36)+(LC++),label:r[0],color:r[1]};}),cells:{}};}
+function cmAdd(type,np){
+  if(!PROJ.cm)PROJ.cm=[];
+  var pre=CPRE[type]||CPRE.blank,m={id:'c'+Date.now().toString(36)+(LC++),title:pre.n+' '+(PROJ.cm.length+1),panels:[]};
+  for(var i=0;i<np;i++)m.panels.push(cmPanel(i?pre.t+' 2':pre.t,pre.leg));
+  PROJ.cm.push(m);S.copen[m.id]=1;return m;
+}
+function cmBrush(m,pi){
+  var k=m.id+'|'+pi,v=S.cb[k],pn=m.panels[pi];
+  if(v==='')return '';
+  if(v&&pn.leg.some(function(l){return l.id===v;}))return v;
+  return pn.leg.length?pn.leg[0].id:'';
+}
+function cmColMap(pn){var c={};pn.leg.forEach(function(l){c[l.id]=l.color;});return c;}
+function cmEditor(m,i,n){
+  var h='<details class="card cedit" data-cm="'+m.id+'"'+(S.copen[m.id]?' open':'')+'><summary>Edit this map: headings, legend, maps</summary><div class="vtp">'+
+    '<label class="cf">Page heading <input type="text" data-cf="title" value="'+esc(m.title)+'"></label>';
+  m.panels.forEach(function(pn,pi){
+    h+='<div class="cpan"><label class="cf">Map '+(pi+1)+' heading <input type="text" data-cf="ptitle" data-pi="'+pi+'" value="'+esc(pn.title)+'"></label>';
+    pn.leg.forEach(function(l,li){
+      h+='<div class="vtr"><input type="color" data-cf="lcol" data-pi="'+pi+'" data-li="'+li+'" value="'+esc(l.color)+'" aria-label="Legend colour"><input type="text" data-cf="llab" data-pi="'+pi+'" data-li="'+li+'" value="'+esc(l.label)+'" aria-label="Legend text"><button type="button" class="mini" data-cact="ldel" data-pi="'+pi+'" data-li="'+li+'">Remove</button></div>';
+    });
+    h+='<div class="crow"><button type="button" class="mini" data-cact="ladd" data-pi="'+pi+'">+ Add legend item</button><button type="button" class="mini" data-cact="pclear" data-pi="'+pi+'">Clear this map</button></div></div>';
+  });
+  h+='<div class="crow">'+(m.panels.length<2?'<button type="button" class="mini" data-cact="padd">+ Add second map</button>':'<button type="button" class="mini" data-cact="pdel">Remove second map</button>')+
+    (i>0?'<button type="button" class="mini" data-cact="up">Move up</button>':'')+(i<n-1?'<button type="button" class="mini" data-cact="down">Move down</button>':'')+
+    '<button type="button" class="mini" data-cact="dup">Duplicate</button><button type="button" class="mini cdanger" data-cact="del">Delete this map</button></div></div></details>';
+  return h;
+}
+function buildCust(){
+  [].forEach.call(document.querySelectorAll('.cedit'),function(d){S.copen[d.getAttribute('data-cm')]=d.open;});
+  var list=cmList(),n=list.length,h='';
+  if(CAN)h+='<div class="card cnew"><div class="vtadd" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:10px 12px"><b>New custom map</b>'+
+    '<select id="cnType" class="sel" aria-label="Map type"><option value="progress"'+(S.cnT==='progress'?' selected':'')+'>Progress type</option><option value="material"'+(S.cnT==='material'?' selected':'')+'>Material order type</option><option value="blank"'+(S.cnT==='blank'?' selected':'')+'>Blank (my own legend)</option></select>'+
+    '<select id="cnPan" class="sel" aria-label="Number of maps"><option value="1"'+(S.cnP==='1'?' selected':'')+'>1 map</option><option value="2"'+(S.cnP==='2'?' selected':'')+'>2 maps side by side</option></select>'+
+    '<button type="button" class="mini" data-cnew>Add map</button><span class="note">Headings and legend text and colours are editable after adding.</span></div></div>';
+  if(!n)h+='<div class="card" style="padding:18px">No custom maps yet.'+(CAN?' Choose a type above and press Add map.':'')+'</div>';
+  list.forEach(function(m,i){
+    var cols='';
+    m.panels.forEach(function(pn,pi){
+      cols+='<div class="mcol" data-pi="'+pi+'"><div class="mhead"><h4></h4><div class="mtools"></div></div><div class="scroll"><svg class="matsvg mapsvg" viewBox="'+VB.join(' ')+'" role="img" aria-label="'+esc(m.title)+'"></svg></div><div class="mleg"></div></div>';
+    });
+    h+='<div class="custwrap"><section class="card sheet matsheet custsheet'+(m.panels.length<2?' one':'')+'" id="sheet-cm-'+m.id+'" data-mode="cust" data-cm="'+m.id+'" aria-label="Custom map: '+esc(m.title)+'">'+
+      '<div class="sh-head"><div class="sh-title">'+esc(PROJ.name)+'</div><div class="sh-sub"></div><div class="sh-prog"></div></div>'+
+      '<div class="mbody">'+cols+'</div>'+
+      '<div class="sfoot">'+footHtml()+'<span>'+esc(ASOF)+'  |  <b>Page '+(i+1)+' of '+n+'</b></span></div></section>'+(CAN?cmEditor(m,i,n):'')+'</div>';
+  });
+  $('sheets').innerHTML=h;swDeco($('sheets'));
+}
+function drawCustSvg(svg,pn){
+  var h=[],col=cmColMap(pn);
+  if(IMG)h.push('<image href="'+IMG+'" x="'+VB[0]+'" y="'+VB[1]+'" width="'+VB[2]+'" height="'+VB[3]+'" preserveAspectRatio="none" opacity="'+IMGOP+'" pointer-events="none"/>');
+  BLOCKS.forEach(function(b){var c=col[pn.cells[b.id]];h.push('<polygon class="blk" data-b="'+b.id+'" style="fill:'+(c||'#ffffff')+';fill-opacity:'+(c?0.9:1)+'" points="'+poly(b.poly)+'"/>');});
+  BLOCKS.forEach(function(b){
+    var fs=Math.min(30,0.88*b.len/(b.name.length*0.6));
+    h.push('<text class="lbl" style="font-size:'+fs.toFixed(1)+'px;stroke-width:'+(fs*0.3).toFixed(1)+'px;font-weight:700" transform="translate('+b.lc[0]+' '+b.lc[1]+') rotate('+b.ang+')">'+esc(b.name)+'</text>');
+  });
+  svg.innerHTML=h.join('');
+}
+function cmCounts(pn){
+  var c={},none=0;pn.leg.forEach(function(l){c[l.id]=0;});
+  BLOCKS.forEach(function(b){var v=pn.cells[b.id];if(v&&c[v]!==undefined)c[v]++;else none++;});
+  c['']=none;return c;
+}
+function fillCust(el){
+  var m=cmGet(el.getAttribute('data-cm'));if(!m)return;
+  el.querySelector('.sh-sub').textContent=(cmList().indexOf(m)+1)+'. '+(m.title||'Untitled');
+  el.querySelector('.sh-prog').textContent='';
+  [].forEach.call(el.querySelectorAll('.mcol'),function(col){
+    var pi=parseInt(col.getAttribute('data-pi'),10),pn=m.panels[pi];if(!pn)return;
+    col.querySelector('h4').textContent=pn.title||'';
+    var br=cmBrush(m,pi),chips='',lg='',c=cmCounts(pn);
+    pn.leg.forEach(function(l){
+      chips+='<button type="button" data-cb="'+pi+'|'+l.id+'" aria-pressed="'+(br===l.id)+'"><i class="msw" style="background:'+esc(l.color)+'"></i>'+esc(l.label)+'</button>';
+      lg+='<span class="key"><i class="sw" style="background:'+esc(l.color)+'"></i>'+esc(l.label)+' · '+c[l.id]+'</span>';
+    });
+    chips+='<button type="button" data-cb="'+pi+'|" aria-pressed="'+(br==='')+'"><i class="msw"></i>Clear</button><button type="button" data-cfill="'+pi+'" title="Apply the selected legend item to every block">All blocks</button>';
+    lg+='<span class="key"><i class="sw"></i>Not marked · '+c['']+'</span>';
+    col.querySelector('.mtools').innerHTML=chips;
+    col.querySelector('.mleg').innerHTML=lg;
+    drawCustSvg(col.querySelector('svg'),pn);
+  });
+}
+function custRebuild(){
+  var y=window.scrollY;buildCust();renderMap();renderLegend();window.scrollTo(0,y);
+}
+function custClick(e){
+  var w=e.target.closest('[data-cm]');if(w)S.cc=w.getAttribute('data-cm');
+  var t=e.target.closest('[data-cnew]');
+  if(t){
+    if(!CAN)return;
+    var ty=$('cnType'),np=$('cnPan');S.cnT=ty?ty.value:'progress';S.cnP=np?np.value:'1';
+    var m=cmAdd(S.cnT,parseInt(S.cnP,10)||1);S.cc=m.id;save();custRebuild();
+    var el=document.getElementById('sheet-cm-'+m.id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return;
+  }
+  var m0=S.cc?cmGet(S.cc):null;
+  t=e.target.closest('[data-cb]');
+  if(t&&m0){var p=t.getAttribute('data-cb').split('|');S.cb[m0.id+'|'+p[0]]=p[1];fillCust(document.getElementById('sheet-cm-'+m0.id));return;}
+  t=e.target.closest('[data-cfill]');
+  if(t&&m0){
+    if(!CAN)return;
+    var pi=parseInt(t.getAttribute('data-cfill'),10),pn=m0.panels[pi],br=cmBrush(m0,pi);
+    pn.cells={};if(br)BLOCKS.forEach(function(b){pn.cells[b.id]=br;});
+    save();fillCust(document.getElementById('sheet-cm-'+m0.id));return;
+  }
+  t=e.target.closest('[data-cact]');
+  if(t&&m0){
+    if(!CAN)return;
+    var a=t.getAttribute('data-cact'),pi2=parseInt(t.getAttribute('data-pi'),10),li=parseInt(t.getAttribute('data-li'),10),L=PROJ.cm,ix=L.indexOf(m0);
+    if(a==='del'){
+      if(S.cdel!==m0.id){S.cdel=m0.id;t.textContent='Click again to delete';setTimeout(function(){S.cdel=null;if(t.isConnected)t.textContent='Delete this map';},3000);return;}
+      L.splice(ix,1);S.cdel=null;S.cc=null;
+    }else if(a==='ldel'){var gone=m0.panels[pi2].leg.splice(li,1)[0];if(gone)Object.keys(m0.panels[pi2].cells).forEach(function(b){if(m0.panels[pi2].cells[b]===gone.id)delete m0.panels[pi2].cells[b];});}
+    else if(a==='ladd'){var pc=SW10[m0.panels[pi2].leg.length%SW10.length];m0.panels[pi2].leg.push({id:'l'+Date.now().toString(36)+(LC++),label:'New item',color:pc});}
+    else if(a==='pclear'){m0.panels[pi2].cells={};}
+    else if(a==='padd'){var src=m0.panels[0];m0.panels.push({title:(src.title||'Map')+' 2',leg:src.leg.map(function(l){return {id:'l'+Date.now().toString(36)+(LC++),label:l.label,color:l.color};}),cells:{}});}
+    else if(a==='pdel'){m0.panels.pop();}
+    else if(a==='up'&&ix>0){L.splice(ix-1,0,L.splice(ix,1)[0]);}
+    else if(a==='down'&&ix<L.length-1){L.splice(ix+1,0,L.splice(ix,1)[0]);}
+    else if(a==='dup'){var cp=JSON.parse(JSON.stringify(m0));cp.id='c'+Date.now().toString(36)+(LC++);cp.title=m0.title+' (copy)';L.splice(ix+1,0,cp);S.copen[cp.id]=1;}
+    save();custRebuild();return;
+  }
+  var bl=e.target.closest('svg [data-b]');if(!bl||!CAN||!m0)return;
+  var col=bl.closest('.mcol'),pi3=parseInt(col.getAttribute('data-pi'),10),pn3=m0.panels[pi3],bid=bl.getAttribute('data-b'),br3=cmBrush(m0,pi3);
+  if(!br3||pn3.cells[bid]===br3)delete pn3.cells[bid];else pn3.cells[bid]=br3;
+  save();fillCust(document.getElementById('sheet-cm-'+m0.id));
+}
+$('sheets').addEventListener('input',function(e){
+  if(S.mode!=='cust'||!CAN)return;
+  var t=e.target,f=t.getAttribute&&t.getAttribute('data-cf');if(!f)return;
+  var d=t.closest('[data-cm]'),m=d&&cmGet(d.getAttribute('data-cm'));if(!m)return;
+  var pi=parseInt(t.getAttribute('data-pi'),10),li=parseInt(t.getAttribute('data-li'),10);
+  if(f==='title')m.title=t.value;
+  else if(f==='ptitle'&&m.panels[pi])m.panels[pi].title=t.value;
+  else if(f==='llab'&&m.panels[pi]&&m.panels[pi].leg[li])m.panels[pi].leg[li].label=t.value;
+  else if(f==='lcol'&&m.panels[pi]&&m.panels[pi].leg[li])m.panels[pi].leg[li].color=t.value;
+  save();fillCust(document.getElementById('sheet-cm-'+m.id));
+});
+function pdfCustMap(doc,P,s,pn){
+  var INK=[20,23,43],col=cmColMap(pn);
+  try{doc.setLineJoin('round');}catch(e){}
+  if(IMG&&P){var ip=P([VB[0],VB[1]]);try{doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:IMGOP}));doc.addImage(IMG,'JPEG',ip[0],ip[1],VB[2]*s,VB[3]*s,'mapbg');doc.restoreGraphicsState();}catch(e){}}
+  BLOCKS.forEach(function(b){
+    var c=col[pn.cells[b.id]],rgb=c?hx(c):[255,255,255];
+    doc.setFillColor(rgb[0],rgb[1],rgb[2]);polyPath(doc,b.poly.map(P),'F');
+    doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3);polyPath(doc,b.poly.map(P),'S');
+  });
+  BLOCKS.forEach(function(b){
+    var c=P(b.lc),fsU=Math.min(30,0.88*b.len/(b.name.length*0.6));
+    putLabel(doc,b.name,c[0],c[1],b.ang,Math.max(3,fsU*s/0.3528),true,INK);
+  });
+}
+function drawCustPage(doc,spec,pn,pc){
+  var W=297,H=210,INK=[20,23,43],LINE=[205,210,228],m=spec.map,np=m.panels.length;
+  doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.35);doc.rect(7,7,W-14,H-14);
+  var subU=(spec.num+'. '+(m.title||'Untitled')).toUpperCase(),nm=String(PROJ.name).toUpperCase();
+  T(doc,nm,W/2,19.8,25,'title',INK,'center',0.45);
+  var sw0=Tw(doc,subU,15.5,'sub')+0.5*subU.length,half=Math.max(41.5,sw0/2+3);
+  doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3);doc.line(W/2-half,23,W/2+half,23);
+  T(doc,subU,W/2,29.2,15.5,'sub',INK,'center',0.5);
+  doc.setLineWidth(0.25);doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.line(7,39.4,W-7,39.4);
+  doc.setDrawColor(INK[0],INK[1],INK[2]);doc.line(7,191,W-7,191);
+  if(np>1){doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.line(W/2,39.4,W/2,191);}
+  m.panels.forEach(function(p,pi){
+    var x0=np>1?(pi?W/2+1.5:9):9,x1=np>1?(pi?W-9:W/2-1.5):W-9,pw=x1-x0,my=50,mh=122,s=Math.min(pw/VB[2],mh/VB[3]),ox=x0+(pw-VB[2]*s)/2,oy=my+(mh-VB[3]*s)/2;
+    function P(q){return [ox+(q[0]-VB[0])*s,oy+(q[1]-VB[1])*s];}
+    T(doc,String(p.title||'').toUpperCase(),(x0+x1)/2,46,10.5,'sub',INK,'center',0.4);
+    pdfCustMap(doc,P,s,p);
+    var c=cmCounts(p),yy=180,fs=6.4,items=p.leg.map(function(l){return {col:l.color,lab:l.label+' · '+c[l.id]};}).concat([{col:null,lab:'Not marked · '+c['']}]);
+    function tot(){var t=0;items.forEach(function(it){it.ww=Tw(doc,it.lab,fs,'reg')+5.4;t+=it.ww+2;});return t-2;}
+    while(tot()>pw&&fs>4.4)fs-=0.2;
+    var xx=x0+(pw-tot())/2;
+    items.forEach(function(it){
+      var rgb=it.col?hx(it.col):[255,255,255];doc.setFillColor(rgb[0],rgb[1],rgb[2]);doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.18);rrect(doc,xx,yy-2.3,3.8,2.6,0.4,'FD');
+      T(doc,it.lab,xx+4.8,yy,fs,'reg',INK);xx+=it.ww+2;
+    });
+  });
+  var d0=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  footerP(doc,191,['desc','owner','consultant','contractor'],'Status as of '+d0,'Page '+pn+' of '+pc,W);
+}
+
+/* ---------- activity weightage ---------- */
+function wtRender(){
+  var ws=wSum(S.acts),h='<div class="wtr h"><span>Activity</span><span style="text-align:right">Weight</span><span style="text-align:right">Share</span><span style="text-align:right">Done</span></div>',tv=totalVillas();
+  S.acts.forEach(function(a,i){
+    var w=wOf(a),sh=ws>0?w/ws*100:0;
+    h+='<div class="wtr" data-wa="'+esc(a.id)+'"><span>'+(i+1)+'. '+esc(a.name)+'</span><input type="number" min="0" step="any" inputmode="decimal" value="'+w+'" data-wi'+(CAN?'':' disabled')+' aria-label="Weight of '+esc(a.name)+'"><span class="sh">'+sh.toFixed(1)+'%</span><span class="pc2">'+pct(doneVillas(a),tv)+'%</span></div>';
+  });
+  $('wtList').innerHTML=h;wtTotal();
+}
+function wtTotal(){
+  var ws=wSum(S.acts);
+  $('wtTot').textContent='Total weight '+(Math.round(ws*100)/100)+' \u00b7 Overall progress '+overallAvg()+'%';
+}
+function wtShares(){
+  var ws=wSum(S.acts);
+  Array.prototype.forEach.call($('wtList').querySelectorAll('.wtr[data-wa]'),function(r){
+    var a=S.acts.filter(function(x){return x.id===r.getAttribute('data-wa');})[0];
+    if(a)r.querySelector('.sh').textContent=(ws>0?wOf(a)/ws*100:0).toFixed(1)+'%';
+  });
+  wtTotal();
+}
+$('wtBtn').onclick=function(){wtRender();$('wtModal').hidden=false;};
+$('wtClose').onclick=function(){$('wtModal').hidden=true;};
+$('wtModal').addEventListener('click',function(e){if(e.target===this)this.hidden=true;});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('wtModal').hidden)$('wtModal').hidden=true;});
+$('wtList').addEventListener('input',function(e){
+  if(!CAN||!e.target.hasAttribute('data-wi'))return;
+  var id=e.target.closest('.wtr').getAttribute('data-wa'),v=parseFloat(e.target.value);
+  S.acts.forEach(function(a){if(a.id===id)a.w=isFinite(v)&&v>=0?v:0;});
+  save();wtShares();renderKpis();renderHead();
+});
+$('wtEqual').onclick=function(){if(!CAN)return;S.acts.forEach(function(a){delete a.w;});save();wtRender();renderKpis();renderHead();};
 /* ---------- side panels ---------- */
 function renderKpis(){
   var l=inc(),full=0,none=0;
   $('appTitle').textContent=PROJ.name;$('kicker').textContent='MEP progress map · '+totalVillas()+' villas · '+BLOCKS.length+' blocks';$('outOf').textContent=totalVillas();
   BLOCKS.forEach(function(b){var hv=heat(b.id);if(l.length&&hv===1)full++;if(l.length&&hv===0)none++;});
   $('kpis').innerHTML=
-    '<div class="kpi"><b>'+(l.length?overallAvg():0)+'%</b><span>overall, '+l.length+' activities</span></div>'+
+    '<div class="kpi"><b>'+(l.length?overallAvg():0)+'%</b><span>overall (weighted), '+l.length+' activities</span></div>'+
     '<div class="kpi"><b>'+full+'<small style="font-size:16px;color:var(--muted)"> / '+BLOCKS.length+'</small></b><span>blocks done in every activity</span></div>'+
     '<div class="kpi"><b>'+none+'</b><span>blocks not started anywhere</span></div>';
 }
@@ -1091,7 +1460,7 @@ function renderActs(){
     h+='<button type="button" class="nm" data-pick="'+a.id+'">'+(i+1)+'. '+esc(a.name)+'</button>';
     h+='<span class="pc">'+pct(d,tv)+'%</span>';
     h+='<div class="bar" aria-hidden="true"><i style="width:'+(tv?d/tv*100:0).toFixed(1)+'%;background:'+col(a)+'"></i><i style="width:'+(tv?p/tv*100:0).toFixed(1)+'%;background:repeating-linear-gradient(135deg,'+col(a)+' 0 3px,transparent 3px 6px)"></i></div>';
-    h+='<div class="tiny"><label class="chk"><input type="checkbox" data-on="'+a.id+'"'+(a.on?' checked':'')+'> Show</label> · '+d+' / '+tv+' villas'+(p?' · '+p+' partial':'')+'</div>';
+    h+='<div class="tiny"><label class="chk"><input type="checkbox" data-on="'+a.id+'"'+(a.on?' checked':'')+'> Show</label> · '+d+' / '+tv+' villas'+(p?' · '+p+' ongoing':'')+'</div>';
     if(S.edit){
       h+='<div class="edrow"><input type="text" data-ren="'+a.id+'" value="'+esc(a.name)+'" aria-label="Rename activity '+(i+1)+'">'+
          '<button type="button" class="mini" data-up="'+a.id+'" aria-label="Move up"'+(i===0?' disabled':'')+'>Up</button>'+
@@ -1125,6 +1494,15 @@ function renderBlock(){
   h+='<div class="sub-h">Overall for this block: '+Math.round(heat(b.id)*100)+'%</div>';
   S.acts.forEach(function(a,i){
     var s=stOf(a,b.id);
+    if(isRiser(a)){
+      subList(a).forEach(function(r){
+        var sv=a.sub[r[0]][b.id]||0;
+        h+='<div class="brow'+(S.hl===a.id?' hl':'')+'"><span class="nm"><i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+r[2]+';margin-right:6px"></i>'+(a.id==='a9'?'Riser - ':esc(a.name)+' - ')+esc(r[1])+'</span><span class="three" role="group" aria-label="Riser '+esc(r[1])+' status">';
+        for(var k2=0;k2<3;k2++)h+='<button type="button" class="b'+k2+'" data-set="'+a.id+'~'+r[0]+'|'+k2+'" aria-pressed="'+(sv===k2)+'">'+STN[k2]+'</button>';
+        h+='</span></div>';
+      });
+      return;
+    }
     h+='<div class="brow'+(S.hl===a.id?' hl':'')+'"><span class="nm"><i style="display:inline-block;width:10px;height:10px;border-radius:2px;background:'+col(a)+';margin-right:6px"></i>'+esc(a.name)+'</span><span class="three" role="group" aria-label="'+esc(a.name)+' status">';
     for(var k=0;k<3;k++)h+='<button type="button" class="b'+k+'" data-set="'+a.id+'|'+k+'" aria-pressed="'+(s===k)+'">'+STN[k]+'</button>';
     h+='</span></div>';
@@ -1135,7 +1513,8 @@ function renderToolbar(){
   $('vMaps').setAttribute('aria-pressed',S.mode==='maps');
   $('vReport').setAttribute('aria-pressed',S.mode==='report');
   $('vMat').setAttribute('aria-pressed',S.mode==='mat');
-  $('zoomWrap').hidden=S.mode==='report'||S.mode==='mat';
+  $('vCust').setAttribute('aria-pressed',S.mode==='cust');
+  $('zoomWrap').hidden=S.mode==='report'||S.mode==='mat'||S.mode==='cust';
   $('vEdit').setAttribute('aria-pressed',S.mode==='edit');
   var sel=$('actSel');sel.hidden=S.mode!=='maps';
   if(S.mode==='maps'){
@@ -1150,7 +1529,7 @@ function refreshData(){renderHead();renderMap();renderLegend();renderKpis();rend
 /* ---------- events ---------- */
 function setMode(m){S.mode=m;if(m==='maps')curAct();renderAll();}
 function goToMap(id){
-  if(S.mode==='mat'){var wk=(id==='a2'&&S.acts.some(function(x){return x.id==='a1';}))?'a1':id,me=document.getElementById('sheet-mat-'+wk)||document.getElementById('sheet-mat-'+wk+'-ws');if(me)me.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  if(S.mode==='mat'){var wk=(id==='a2'&&S.acts.some(function(x){return x.id==='a1';}))?'a1':id,me=document.getElementById('sheet-mat-'+wk)||document.getElementById('sheet-mat-'+wk+'-ws')||document.getElementById('sheet-mat-'+wk+'-el');if(me)me.scrollIntoView({behavior:'smooth',block:'start'});return;}
   S.cur=id;if(id==='all'&&!S.showAll){S.showAll=true;S.mode='x';}
   if(S.mode!=='maps'){S.mode='maps';renderAll();}else{renderActs();var sl=$('actSel');if(sl)sl.value=id;}
   var el=document.getElementById('sheet-'+id);
@@ -1160,6 +1539,7 @@ $('vEdit').onclick=function(){if(CAN)setMode('edit');};
 $('vMaps').onclick=function(){setMode('maps');};
 $('vReport').onclick=function(){setMode('report');};
 $('vMat').onclick=function(){setMode('mat');};
+$('vCust').onclick=function(){setMode('cust');};
 $('actSel').onchange=function(){goToMap(this.value);};
 
 
@@ -1224,13 +1604,14 @@ sheets.addEventListener('click',function(e){
   var r=e.target.closest('[data-row]');
   if(r){var first=ORDER.filter(function(b){return b.row===r.getAttribute('data-row');})[0];if(first)openEditor(first.id);return;}
   if(S.mode==='mat'){matClick(e);return;}
+  if(S.mode==='cust'){custClick(e);return;}
   var pk=e.target.closest('[data-pick]');
   if(pk){goToMap(pk.getAttribute('data-pick'));return;}
   var t=e.target.closest('svg [data-b]');if(!t)return;
   var bid=t.getAttribute('data-b'),aid=t.getAttribute('data-a');
   if(S.mode==='edit'){openEditor(bid);return;}
   if(S.mode==='maps'&&S.paint&&!aid&&CAN){
-    var a=sheetAct(t);if(a){var s0=stOf(a,bid);a.st[bid]=s0===0?2:(s0===2?1:0);save();}
+    var a=sheetAct(t);if(a){var s0=stOf(a,bid),s1=s0===0?2:(s0===2?1:0);if(isRiser(a))riserSet(a,bid,'all',s1);else a.st[bid]=s1;save();}
     S.sel=bid;refreshData();return;
   }
   if(S.mode==='maps'&&!aid){var sa=sheetAct(t);if(sa){S.sel=bid;S.hl=null;refreshData();openStatus(sa,bid);spJust=true;return;}}
@@ -1239,12 +1620,15 @@ sheets.addEventListener('click',function(e){
 sheets.addEventListener('pointermove',function(e){
   var t=e.target.closest('svg [data-b]');
   if(!t){tip.hidden=true;return;}
+  if(S.mode==='cust'){var cm0=cmGet((t.closest('[data-cm]')||{getAttribute:function(){return '';}}).getAttribute('data-cm')),cb0=BYID[t.getAttribute('data-b')],cpi=parseInt(t.closest('.mcol').getAttribute('data-pi'),10),cl0=cm0&&cm0.panels[cpi]?cmColMap(cm0.panels[cpi]):{},cid=cm0&&cm0.panels[cpi]?cm0.panels[cpi].cells[cb0.id]:null,cl1=cm0&&cm0.panels[cpi]?cm0.panels[cpi].leg.filter(function(l){return l.id===cid;})[0]:null;
+    tip.style.whiteSpace='pre-line';tip.textContent=cb0.name+' \u00b7 '+(S.villas[cb0.id]||0)+' villas\n'+(cl1?cl1.label:'Not marked');tip.hidden=false;
+    tip.style.left=Math.min(e.clientX+14,window.innerWidth-tip.offsetWidth-8)+'px';tip.style.top=Math.min(e.clientY+14,window.innerHeight-tip.offsetHeight-8)+'px';return;}
   if(S.mode==='mat'){var mc=t.closest('.mcol'),mk=mc&&mc.getAttribute('data-k'),mw=t.closest('.matsheet').getAttribute('data-act'),mb=BYID[t.getAttribute('data-b')];
-    tip.style.whiteSpace='pre-line';tip.textContent=mb.name+' \u00b7 '+(S.villas[mb.id]||0)+' villas\n'+MATK[mk].title+': '+matLab(mk,mget(mk,mw,mb.id));tip.hidden=false;
+    tip.style.whiteSpace='pre-line';var ms=t.getAttribute('data-sub'),mwx=ms?mw+'-'+ms:mw;tip.textContent=mb.name+' \u00b7 '+(S.villas[mb.id]||0)+' villas\n'+(ms?(ms==='el'?'Electrical':'Plumbing')+' material':MATK[mk].title)+': '+matLab(mk,mget(mk,mwx,mb.id));tip.hidden=false;
     tip.style.left=Math.min(e.clientX+14,window.innerWidth-tip.offsetWidth-8)+'px';tip.style.top=Math.min(e.clientY+14,window.innerHeight-tip.offsetHeight-8)+'px';return;}
   var b=BYID[t.getAttribute('data-b')],aid=t.getAttribute('data-a'),txt=b.name+' · '+(S.villas[b.id]||0)+' villas';
   if(aid){var a=S.acts.filter(function(x){return x.id===aid;})[0];if(a)txt=b.name+'\n'+a.name+': '+STN[stOf(a,b.id)];}
-  else if(S.mode==='maps'||S.mode==='report'){var c=sheetAct(t);if(c)txt=b.name+'\n'+c.name+': '+STN[stOf(c,b.id)];}
+  else if(S.mode==='maps'||S.mode==='report'){var c=sheetAct(t);if(c)txt=isRiser(c)?b.name+'\n'+subList(c).map(function(r){return r[1]+': '+STN[c.sub[r[0]][b.id]||0];}).join('\n'):b.name+'\n'+c.name+': '+STN[stOf(c,b.id)];}
   tip.style.whiteSpace='pre-line';tip.textContent=txt;tip.hidden=false;
   var x=e.clientX+14,y=e.clientY+14;
   tip.style.left=Math.min(x,window.innerWidth-tip.offsetWidth-8)+'px';
@@ -1273,7 +1657,8 @@ $('blockPanel').addEventListener('click',function(e){
   if(t.hasAttribute('data-clear')){closeEditor();S.sel=null;S.hl=null;refreshData();return;}
   if(t.hasAttribute('data-set')){
     if(!CAN)return;
-    var p=t.getAttribute('data-set').split('|'),a=S.acts.filter(function(x){return x.id===p[0];})[0];
+    var p=t.getAttribute('data-set').split('|'),rk=p[0].split('~'),a=S.acts.filter(function(x){return x.id===rk[0];})[0];
+    if(a&&S.sel&&rk[1]){riserSet(a,S.sel,rk[1],parseInt(p[1],10));save();refreshData();return;}
     if(a&&S.sel){a.st[S.sel]=parseInt(p[1],10);save();refreshData();}
   }
 });
@@ -1400,7 +1785,7 @@ function rhApply(p){
   Object.keys(MX).forEach(function(b){var o={},sum=0;Object.keys(MX[b]).forEach(function(n){o[ids[n]]=MX[b][n];sum+=MX[b][n];});p.vmix[b]=o;p.villas[b]=sum;});
   p[flag]=1;return true;
 }
-function ensureVT(p){var ac=addActs(p),vv=ensureVT0(p);return ac||vv;}
+function ensureVT(p){var ac=addActs(p),ri=riserInit(p),mm=matMigrate(p),vv=ensureVT0(p);return ac||ri||mm||vv;}
 function ensureVT0(p){
   if(rhApply(p))return true;
   if(!p||p.vtypes!==undefined||!VT_DEF[p.id])return false;
@@ -1501,10 +1886,23 @@ function openEditor(bid){
 }
 
 var spCtx=null;
-var SPOPTS=[[2,'Completed'],[1,'Partially completed'],[0,'Not started']];
+var SPOPTS=[[2,'Completed'],[1,'Ongoing'],[0,'Not started']];
 function renderStatusPop(){
   if(!spCtx)return;
   var a=spCtx.a,cur=stOf(a,spCtx.bid),rgb=col(a);
+  if(isRiser(a)){
+    var rh='';
+    subList(a).concat([['all','All','#9aa0b8']]).forEach(function(r){
+      var c2=r[0]==='all'?-1:(a.sub[r[0]][spCtx.bid]||0);
+      rh+='<div class="sp-r"><span>'+esc(r[1])+'</span><span class="sp-3">';
+      SPOPTS.forEach(function(o){
+        var bg=o[0]===2?r[2]:(o[0]===1?'repeating-linear-gradient(135deg,'+r[2]+' 0 3px,#fff 3px 6px)':'#fff');
+        rh+='<button type="button" data-rk="'+r[0]+'" data-st="'+o[0]+'" aria-pressed="'+(c2===o[0])+'" title="'+esc(r[1])+': '+o[1]+'"><i style="background:'+bg+'"></i>'+o[1]+'</button>';
+      });
+      rh+='</span></div>';
+    });
+    $('spOpts').innerHTML=rh;return;
+  }
   $('spOpts').innerHTML=SPOPTS.map(function(o){
     var bg=o[0]===2?rgb:(o[0]===1?'repeating-linear-gradient(135deg,'+rgb+' 0 3px,#fff 3px 6px)':'#fff');
     return '<button type="button" data-st="'+o[0]+'" aria-pressed="'+(cur===o[0])+'"><i style="background:'+bg+'"></i>'+o[1]+'</button>';
@@ -1533,6 +1931,7 @@ $('spClose').onclick=closeStatus;
 $('spOpts').addEventListener('click',function(e){
   var bt=e.target.closest('[data-st]');if(!bt||!spCtx)return;
   var v=parseInt(bt.getAttribute('data-st'),10),a=spCtx.a,bid=spCtx.bid;
+  if(bt.hasAttribute('data-rk')){e.stopPropagation();riserSet(a,bid,bt.getAttribute('data-rk'),v);save();refreshData();renderStatusPop();return;}
   if(v===0)delete a.st[bid];else a.st[bid]=v;
   save();closeStatus();refreshData();
 });
@@ -1638,10 +2037,18 @@ function pdfMap(doc,kind,act,P,s,labels,k){
   if(IMG&&P){var ip=P([VB[0],VB[1]]);try{doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:IMGOP}));doc.addImage(IMG,'JPEG',ip[0],ip[1],VB[2]*s,VB[3]*s,'mapbg');doc.restoreGraphicsState();}catch(e){}}
   BLOCKS.forEach(function(b){
     var pts=b.poly.map(P),fill=[255,255,255],stat=0;
-    if(kind==='one'&&act){stat=stOf(act,b.id);if(stat===2)fill=actRGB(act);}
+    var rzp=kind==='one'&&isRiser(act);
+    if(kind==='one'&&act&&!rzp){stat=stOf(act,b.id);if(stat===2)fill=actRGB(act);}
     fills[b.id]=fill;
     doc.setFillColor(fill[0],fill[1],fill[2]);polyPath(doc,pts,'F');
-    if(kind==='one'&&act&&stat===1)hatch(doc,pts,actRGB(act),1.3*k,0.35*k);
+    if(kind==='one'&&act&&!rzp&&stat===1)hatch(doc,pts,actRGB(act),1.3*k,0.35*k);
+    if(rzp)subList(act).forEach(function(r,kk){
+      var v=act.sub[r[0]][b.id]||0;if(!v)return;
+      var u0=kk===0?-6:kk/subList(act).length,u1=kk===subList(act).length-1?7:(kk+1)/subList(act).length;
+      var q=clipPoly(b.poly,[b.pt(u0,-6),b.pt(u1,-6),b.pt(u1,7),b.pt(u0,7)]);if(q.length<3)return;
+      var qq=q.map(P),rgb=hx(r[2]);
+      if(v===2){doc.setFillColor(rgb[0],rgb[1],rgb[2]);polyPath(doc,qq,'F');}else hatch(doc,qq,rgb,1.3*k,0.35*k);
+    });
     if(kind==='all'&&list.length){
       var n=list.length,g=grid(b,n),du=1/g.cols,dv=1/g.rows,iu=Math.min(du*0.1,4/g.l1),iv=Math.min(dv*0.1,4/g.l2);
       for(i=0;i<n;i++){
@@ -1678,15 +2085,25 @@ function pdfMap(doc,kind,act,P,s,labels,k){
 }
 
 function pdfMatMap(doc,P,s,k,w){
-  var INK=[20,23,43];
+  var INK=[20,23,43],ep=k==='mat'&&isEP(w);
   try{doc.setLineJoin('round');}catch(e){}
   if(IMG&&P){var ip=P([VB[0],VB[1]]);try{doc.saveGraphicsState();doc.setGState(new doc.GState({opacity:IMGOP}));doc.addImage(IMG,'JPEG',ip[0],ip[1],VB[2]*s,VB[3]*s,'mapbg');doc.restoreGraphicsState();}catch(e){}}
   BLOCKS.forEach(function(b){
-    var v=mget(k,w,b.id),c=hx(matCol(k,v));
-    doc.setFillColor(c[0],c[1],c[2]);polyPath(doc,b.poly.map(P),'F');
+    if(ep){
+      doc.setFillColor(255,255,255);polyPath(doc,b.poly.map(P),'F');
+      epStrips(b).forEach(function(t){
+        var v=mget('mat',w+'-'+t.r[0],b.id);if(!v)return;
+        var q=clipPoly(b.poly,t.q);if(q.length<3)return;
+        var c=hx(matCol('mat',v));doc.setFillColor(c[0],c[1],c[2]);polyPath(doc,q.map(P),'F');
+      });
+    }else{
+      var v2=mget(k,w,b.id),c2=hx(matCol(k,v2));
+      doc.setFillColor(c2[0],c2[1],c2[2]);polyPath(doc,b.poly.map(P),'F');
+    }
     doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3);polyPath(doc,b.poly.map(P),'S');
   });
   BLOCKS.forEach(function(b){
+    if(ep){var sz=Math.max(7,Math.min(b.wid*0.36,b.len*0.07,26));epStrips(b).forEach(function(t){var cc=P(t.c);putLabel(doc,t.r[2],cc[0],cc[1],b.ang,Math.max(3,sz*s/0.3528),true,[93,100,130]);});}
     var c=P(b.lc),fsU=Math.min(30,0.88*b.len/(b.name.length*0.6));
     putLabel(doc,b.name,c[0],c[1],b.ang,Math.max(3,fsU*s/0.3528),true,INK);
   });
@@ -1699,8 +2116,7 @@ function drawMatPage(doc,spec,pn,pc){
   var sw0=Tw(doc,subU,15.5,'sub')+0.5*subU.length,half=Math.max(41.5,sw0/2+3);
   doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.3);doc.line(W/2-half,23,W/2+half,23);
   T(doc,subU,W/2,29.2,15.5,'sub',INK,'center',0.5);
-  var nb=BLOCKS.length,ci=matCounts('ipt',w.id),cm=matCounts('mat',w.id);
-  T(doc,'IPT done '+ci[1]+' / '+nb+' blocks  ·  Materials ordered '+cm[3]+' / '+nb+' blocks',W/2,35.8,11.5,'med',RED,'center');
+  var nb=BLOCKS.length,ci=matCounts('ipt',w.id),cm=matCounts('mat',w.ep?w.id+'-el':w.id),cmp=w.ep?matCounts('mat',w.id+'-pl'):null;
   doc.setLineWidth(0.25);doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.line(7,39.4,W-7,39.4);
   doc.setDrawColor(INK[0],INK[1],INK[2]);doc.line(7,191,W-7,191);
   doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.line(W/2,39.4,W/2,191);
@@ -1709,13 +2125,15 @@ function drawMatPage(doc,spec,pn,pc){
     function P(p){return [ox+(p[0]-VB[0])*s,oy+(p[1]-VB[1])*s];}
     T(doc,MATK[k].title.toUpperCase(),(x0+x1)/2,46,10.5,'sub',INK,'center',0.4);
     pdfMatMap(doc,P,s,k,w.id);
-    var c=k==='ipt'?ci:cm,xx=x0,yy=178;
-    matVals(c).concat([0]).forEach(function(v){
-      var lab=matLab(k,v)+' · '+c[v],ww=Tw(doc,lab,7.6,'reg')+9;
-      if(xx+ww>x1+0.5){xx=x0;yy+=5.6;}
-      var rgb=hx(matCol(k,v));doc.setFillColor(rgb[0],rgb[1],rgb[2]);doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.2);rrect(doc,xx,yy-2.9,6,3.8,0.5,'FD');
-      T(doc,lab,xx+8,yy,7.6,'reg',INK);xx+=ww+3;
+    var c=k==='ipt'?ci:cm,epm=k==='mat'&&w.ep,yy=180,fs=6.4,items=(epm?[1,2,3,0]:matVals(c).concat([0])).map(function(v){return {v:v,lab:matLab(k,v)+' \u00b7 '+(epm?'E '+cm[v]+'/P '+cmp[v]:c[v])};});
+    function tot(){var t=0;items.forEach(function(it){it.ww=Tw(doc,it.lab,fs,'reg')+5.4;t+=it.ww+2;});return t-2;}
+    while(tot()>pw&&fs>4.4)fs-=0.2;
+    var xx=x0+(pw-tot())/2;
+    items.forEach(function(it){
+      var rgb=hx(matCol(k,it.v));doc.setFillColor(rgb[0],rgb[1],rgb[2]);doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.18);rrect(doc,xx,yy-2.3,3.8,2.6,0.4,'FD');
+      T(doc,it.lab,xx+4.8,yy,fs,'reg',INK);xx+=it.ww+2;
     });
+    if(k==='mat'&&w.ep)T(doc,'E = Electrical, P = Plumbing: each block is split in two halves.',(x0+x1)/2,yy+4.2,5.6,'reg',MUT,'center');
   });
   var d0=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
   footerP(doc,191,['desc','owner','consultant','contractor'],'Status as of '+d0,'Page '+pn+' of '+pc,W);
@@ -1790,13 +2208,19 @@ function drawPage(doc,spec,pn,pc){
     });
     y+=1.2;
     keyRow('solid',[31,119,180],'Solid colour = completed');
-    keyRow('hatch',[31,119,180],'Striped = partial');
+    keyRow('hatch',[31,119,180],'Striped = ongoing');
     keyRow('grey',[0,0,0],'Grey = not started');
   }else if(kind==='one'&&act){
     var rgb1=actRGB(act),dd=doneVillas(act),pp=partVillas(act);
+    if(isRiser(act)){
+      subList(act).forEach(function(r){var dn=0;BLOCKS.forEach(function(b){if((act.sub[r[0]][b.id]||0)===2)dn+=S.villas[b.id]||0;});keyRow('solid',hx(r[2]),r[1]+' \u00b7 '+dn+' villas');});
+      y+=1.6;
+      keyRow('solid',[154,160,184],'Solid = completed');keyRow('hatch',[154,160,184],'Striped = ongoing');keyRow('white',[0,0,0],'Blank = not started');
+    }else{
     keyRow('solid',rgb1,'Completed · '+dd+' villas');
-    keyRow('hatch',rgb1,'Partially completed · '+pp+' villas');
+    keyRow('hatch',rgb1,'Ongoing · '+pp+' villas');
     keyRow('white',[0,0,0],'Not started · '+(tv-dd-pp)+' villas');
+    }
   }else if(kind==='edit'){
     txt('Total: '+tv+' villas',lx,y+3,8,true,INK);y+=6.5;
     var vtl=vtList(),vtt=vtTotals();
@@ -1902,7 +2326,7 @@ function drawReportPage(doc,pg,N){
     var ty=72,hdr=7.5,rh=Math.min(9.6,(276-ty-hdr-9-16)/Math.max(1,n));
     var cy=ty+4.9;
     T(doc,'NO.',12,cy,6.3,'semi',MUT,null,0.25);T(doc,'ACTIVITY',19,cy,6.3,'semi',MUT,null,0.25);
-    T(doc,'COMPLETED',107,cy,6.3,'semi',MUT,'right',0.25);T(doc,'PARTIAL',127,cy,6.3,'semi',MUT,'right',0.25);T(doc,'NOT STARTED',150,cy,6.3,'semi',MUT,'right',0.25);T(doc,'PROGRESS',154,cy,6.3,'semi',MUT,null,0.25);
+    T(doc,'COMPLETED',107,cy,6.3,'semi',MUT,'right',0.25);T(doc,'ONGOING',127,cy,6.3,'semi',MUT,'right',0.25);T(doc,'NOT STARTED',150,cy,6.3,'semi',MUT,'right',0.25);T(doc,'PROGRESS',154,cy,6.3,'semi',MUT,null,0.25);
     doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.4);doc.line(10,ty+hdr-0.4,200,ty+hdr-0.4);
     S.acts.forEach(function(a,k){
       var y0=ty+hdr+k*rh,st=actStats(a),rgb=actRGB(a),yb=y0+rh/2+1.15;
@@ -1921,30 +2345,30 @@ function drawReportPage(doc,pg,N){
     T(doc,tv+' villas in '+BLOCKS.length+' blocks',150,ye+6,7,'semi',INK,'right');
     if(doc.__fx)doc.setFont('PX400','normal');else doc.setFont('helvetica','normal');
     doc.setFontSize(6.6);doc.setTextColor(MUT[0],MUT[1],MUT[2]);
-    doc.text(doc.splitTextToSize('Progress is villas completed out of '+tv+'. Partial villas are shown separately and are not counted as completed.',190),10,ye+14);
+    doc.text(doc.splitTextToSize('Progress is villas completed out of '+tv+'. Ongoing villas are shown separately and are not counted as completed.',190),10,ye+14);
   }else{
     var cw=93,sc=Math.min(cw/VB[2],80/VB[3]),mw=VB[2]*sc,acts=S.acts.slice((page-1)*4,page*4);
     acts.forEach(function(a,k){
       var cx=10+(k%2)*(cw+4),cy=42+Math.floor(k/2)*108,st=actStats(a),rgb=actRGB(a),oy=cy+11,mh=VB[3]*sc;
       var ic=icoPdf(doc,a,cx,cy-1,5.2),tx=ic?cx+6.8:cx,ttl=((cidx(a)+1)+'. '+a.name).toUpperCase();
       var tp=Tfit(doc,ttl,cw-(tx-cx),11.5,'sub');T(doc,ttl,tx,cy+3.6,tp,'sub',INK,null,0.4);
-      T(doc,st.d+' / '+tv+' Villas Done ('+st.pc+'%)'+(st.p?'  |  '+st.p+' partial':''),cx,cy+8.4,7.8,'reg',RED);
+      T(doc,st.d+' / '+tv+' Villas Done ('+st.pc+'%)'+(st.p?'  |  '+st.p+' ongoing':''),cx,cy+8.4,7.8,'reg',RED);
       var PP=function(pt){return [cx+(pt[0]-VB[0])*sc,oy+(pt[1]-VB[1])*sc];};
       doc.setDrawColor(LINE[0],LINE[1],LINE[2]);doc.setLineWidth(0.2);rectP(doc,cx,oy,mw,mh,'S');
       pdfMap(doc,'one',a,PP,sc,true,0.5);
       barR(doc,cx,oy+mh+2.2,mw,2.2,st,rgb);
-      T(doc,'Completed '+st.d+'   |   Partial '+st.p+'   |   Not started '+st.n+' villas',cx,oy+mh+8.4,6.5,'reg',MUT);
+      T(doc,'Completed '+st.d+'   |   Ongoing '+st.p+'   |   Not started '+st.n+' villas',cx,oy+mh+8.4,6.5,'reg',MUT);
     });
     var ly=252;
     function sw(x,mode){var q=[[x,ly],[x+4,ly],[x+4,ly+2.8],[x,ly+2.8]];doc.setFillColor(mode==='solid'?80:255,mode==='solid'?88:255,mode==='solid'?120:255);polyPath(doc,q,'F');if(mode==='hatch')hatch(doc,q,[80,88,120],0.9,0.3);doc.setDrawColor(INK[0],INK[1],INK[2]);doc.setLineWidth(0.2);polyPath(doc,q,'S');}
     sw(10,'solid');T(doc,'Solid colour = completed',15.5,ly+2.2,6.5,'reg',INK);
-    sw(58,'hatch');T(doc,'Striped = partial',63.5,ly+2.2,6.5,'reg',INK);
+    sw(58,'hatch');T(doc,'Striped = ongoing',63.5,ly+2.2,6.5,'reg',INK);
     sw(98,'white');T(doc,'White = not started',103.5,ly+2.2,6.5,'reg',INK);
   }
 }
 function buildPdf(pages){
   var J=window.jspdf.jsPDF,portrait=pages[0]&&pages[0].kind==='report',doc=new J({orientation:portrait?'portrait':'landscape',unit:'mm',format:'a4',compress:true});pdfFontsInit(doc);
-  pages.forEach(function(pg,i){if(i>0)doc.addPage();if(pg.kind==='report')drawReportPage(doc,pg,pages.length);else if(pg.kind==='mat')drawMatPage(doc,pg,i+1,pages.length);else drawPage(doc,pg,i+1,pages.length);});
+  pages.forEach(function(pg,i){if(i>0)doc.addPage();if(pg.kind==='report')drawReportPage(doc,pg,pages.length);else if(pg.kind==='mat')drawMatPage(doc,pg,i+1,pages.length);else if(pg.kind==='cust')drawCustPage(doc,pg,i+1,pages.length);else drawPage(doc,pg,i+1,pages.length);});
   try{doc.setProperties({title:PROJ.name+' progress maps'});}catch(e){}
   return doc;
 }
@@ -1959,8 +2383,12 @@ function exportPdf(scope){
   if(!DL){pdfMsg('Saving files is not available in this view.');return;}
   if(!(window.jspdf&&window.jspdf.jsPDF)){pdfMsg('The PDF tool could not load. Check your connection and reload.');return;}
   var pages,name;
-  if(S.mode==='mat'&&scope!=='report'){
-    var mw=matWorks(),cw=mw.filter(function(x){return x.id===(S.cur==='a2'?'a1':(S.cur==='a9'?'a9-ws':S.cur));})[0]||mw[0];
+  if(S.mode==='cust'&&scope!=='report'){
+    var cl=cmList();if(!cl.length){pdfMsg('Add a custom map first.');return;}
+    var cur=scope==='this'?(cl.filter(function(x){return x.id===S.cc;})[0]||cl[0]):null;
+    pages=(cur?[cur]:cl).map(function(m){return {kind:'cust',map:m,num:cl.indexOf(m)+1};});name=pdfName(cur?(cur.title||'Custom')+' Map':'Custom Maps');
+  }else if(S.mode==='mat'&&scope!=='report'){
+    var mw=matWorks(),cw=mw.filter(function(x){var c=S.cur==='a2'?'a1':S.cur;return x.id===c||x.id===c+'-ws'||x.id===c+'-el';})[0]||mw[0];
     if(!mw.length){pdfMsg('Add a work first.');return;}
     if(scope==='this'){pages=[{kind:'mat',work:cw,num:mw.indexOf(cw)+1}];name=pdfName(cw.name+' Material Order Map');}
     else{pages=mw.map(function(x,i){return {kind:'mat',work:x,num:i+1};});name=pdfName('Material Order Map');}
@@ -1996,9 +2424,11 @@ function slugId(t){return String(t).toLowerCase().replace(/[^a-z0-9]+/g,'-').rep
 function projStats(p){
   var blocks=p.builtin?TAO_BLOCKS:(p.blocks||[]),tv=0,n=(p.acts||[]).length,tot=0,heat={};
   blocks.forEach(function(b){tv+=p.villas[b.id]||0;});
-  p.acts.forEach(function(a){var d=0;blocks.forEach(function(b){var st=a.st[b.id]||0;if(st===2)d+=p.villas[b.id]||0;heat[b.id]=(heat[b.id]||0)+st/2;});tot+=tv?d/tv*100:0;});
+  var ws=0;p.acts.forEach(function(a){ws+=wOf(a);});
+  p.acts.forEach(function(a){var d=0;blocks.forEach(function(b){var st=a.st[b.id]||0;if(st===2)d+=p.villas[b.id]||0;heat[b.id]=(heat[b.id]||0)+st/2;});tot+=(ws>0?wOf(a):1)*(tv?d/tv*100:0);});
+  if(ws<=0)ws=n;
   var ths={};blocks.forEach(function(b){ths[p.builtin?b.row:String(b.name).replace(/\s+B\d+$/i,'').trim().toLowerCase()]=1;});
-  return {blocks:blocks,ths:Object.keys(ths).length,tv:tv,pc:n?Math.round(tot/n):0,heat:heat,n:n};
+  return {blocks:blocks,ths:Object.keys(ths).length,tv:tv,pc:n?Math.round(tot/ws):0,heat:heat,n:n};
 }
 function renderHome(){
   var h='';
@@ -2347,9 +2777,18 @@ async function fetchImg(id,r){
   }
   return parts.join('');
 }
+var PURGE=['pmvv3sptvbc'];
+function purgeLocal(){
+  var ch=false;PURGE.forEach(function(id){
+    var p=readProj(id);if(p&&!(p.blocks&&p.blocks.length)){try{localStorage.removeItem('tmp-'+id);localStorage.removeItem('tmi-'+id);}catch(e){}ch=true;}
+    if(STORE.order.indexOf(id)>=0){STORE.order=STORE.order.filter(function(x){return x!==id;});ch=true;}
+  });
+  if(ch)writeIdx();
+}
 async function onRemote(snap){
   var remote={},ids=[],changed=[],first=SYNC.first;
-  snap.docs.forEach(function(d){var v=d.data();if(v&&typeof v.d==='string'){remote[d.id]=v;ids.push(d.id);}});
+  snap.docs.forEach(function(d){var v=d.data();if(PURGE.indexOf(d.id)>=0){if(CAN)syncDelete(d.id);return;}if(v&&typeof v.d==='string'){remote[d.id]=v;ids.push(d.id);}});
+  purgeLocal();
   /* deleted by someone else */
   Object.keys(SYNC.known).forEach(function(id){
     if(!remote[id]){
@@ -2543,6 +2982,10 @@ async function gdRestore(stamp){
 }
 $('gdBtn').onclick=function(){$('gdModal').hidden=false;gdAsk=null;gdMsg('');gdRefresh();};
 $('gdClose').onclick=function(){$('gdModal').hidden=true;};
+$('themeBtn').onclick=function(){buildCustomPal();$('themeModal').hidden=false;};
+$('thClose').onclick=function(){$('themeModal').hidden=true;};
+$('themeModal').addEventListener('click',function(e){if(e.target===this)this.hidden=true;});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('themeModal').hidden)$('themeModal').hidden=true;});
 $('gdModal').addEventListener('click',function(e){if(e.target===this)this.hidden=true;});
 $('gdSave').onclick=gdSave;
 $('gdRefresh').onclick=gdRefresh;
@@ -2557,7 +3000,7 @@ async function initDrive(){
   if(!MCP){$('gdSave').disabled=true;$('gdInfo').innerHTML+=' <b>Google Drive is not available in this view.</b>';}
 }
 
-initStore();
+initStore();purgeLocal();
 initPal();
 renderHome();
 showView('home');
