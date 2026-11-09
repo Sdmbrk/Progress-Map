@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>MEP Progress Maps</title>
+<title>Taormina Village - 01 - MEP Progress Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -337,7 +337,7 @@ svg.mini .frame{stroke-width:14}
 <div class="modal" id="gdModal" hidden>
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="gdTitle">
     <div class="pop-h"><b id="gdTitle">Google Drive backup</b><button type="button" class="mini" id="gdClose" aria-label="Close">&#10005;</button></div>
-    <div class="note" id="gdInfo">Saves a full copy of all your projects (maps, blocks, villa counts and progress) into your own Google Drive, as a file named <b>MEP-Progress-Backup-date-time.json</b>. Each save creates a new file, so you always keep earlier copies.</div>
+    <div class="note" id="gdInfo">Saves a full copy of this project (maps, blocks, villa counts and progress) into your own Google Drive, as a file named <b>MEP-Progress-taormina-Backup-date-time.json</b>. Each save creates a new file, so you always keep earlier copies.</div>
     <div class="row"><button type="button" class="btn primary" id="gdSave">Save backup to Google Drive now</button><button type="button" class="btn" id="gdRefresh">Refresh list</button></div>
     <label class="chk"><input type="checkbox" id="gdTrim"> After saving, move older backups to the Drive trash and keep the latest 5</label>
     <div class="note" id="gdMsg" aria-live="polite"></div>
@@ -395,7 +395,7 @@ svg.mini .frame{stroke-width:14}
     </div>
     <div class="row">
       <button type="button" class="btn primary" id="gdBtn">Google Drive</button>
-      <button type="button" class="btn" id="backupBtn">Back up all projects</button>
+      <button type="button" class="btn" id="backupBtn">Back up this project</button>
       <button type="button" class="btn" id="restoreBtn">Restore from backup</button>
       <input type="file" id="restoreFile" accept="application/json,.json" hidden>
     </div>
@@ -657,6 +657,7 @@ function sampleActs(){
    reported figures (266, 392, 420 of 530): R04 = 28, R01/R02/R03/R30/R31 = 110, rest of the underground-done
    area not yet slabbed = 126, slab-done area = 266. */
 function defaultVillas(){
+  if(SNAP&&SNAP.taormina&&SNAP.taormina.villas)return JSON.parse(JSON.stringify(SNAP.taormina.villas));
   var slab=sampleActs()[4].st,out={};
   var gA=ids(['R04']),gB=ids(['R01','R02','R03','R31','R30']);
   var groups=[[gA,28],[gB,110],[[],126],[[],266]];
@@ -678,15 +679,15 @@ function defaultVillas(){
 /* ---------- state ---------- */
 var KEY='taormina-mep-map-v2';
 var S={icons:false,acts:null,villas:null,mode:'maps',cur:'all',showAll:false,sel:null,hl:null,zoom:1,paint:false,numbers:false,labels:true,edit:false,confirmDel:null,pop:null,blockSort:'th'};
-var PROJ=null,STORE={v:1,order:[]},IDXK='taormina-projects-v1';
+var LOCK='taormina',LOCKNAME='Taormina Village - 01';var PROJ=null,STORE={v:1,order:[]},IDXK='taormina-projects-v1-'+LOCK;
 var TAO_META={desc:'Taormina Village-1, Townhouses Community (G+2)',owner:'Reportage Prime Properties',consultant:'IEB Architectural Design Consultancy',contractor:'Modun Gulf Building Contracting L.L.C.'};
 function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lsSet(k,v){try{localStorage.setItem(k,v);return true;}catch(e){var m=document.getElementById('homeMsg');if(m)m.textContent='Browser storage is full, so the latest change was not kept. Remove a map you no longer need, or back up and clear a project.';return false;}}
 /* Progress hardcoded as of 7 Nov 2026: restores marked progress, material orders, custom maps and tank data if a project record has lost them (never overwrites existing marks) */
-var SNAP={"asof":"2026-11-07","taormina":{"acts":[{"id":"a3","name":"Water tank installation","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03","R02-B1","R02-B2"],"one":["R01"]},{"id":"a4","name":"Water tank connection","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03"],"one":["R02-B2"]},{"id":"a2","name":"Tie beam works","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03","R02-B2"],"one":["R02-B1"]},{"id":"a1","name":"Underground works","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03"],"one":["R02-B2"]},{"id":"a5","name":"1F slab","two":["R05-B1","R05-B2","R06-B1","R06-B2","R07-B4","R07-B3","R07-B2","R07-B1","R08-B4","R08-B3","R08-B2","R08-B1","R09-B4","R09-B3","R09-B2","R09-B1","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R23","R24","R16","R18","R21","R27","R13","R14","R26","R25-B1","R25-B2","R15-B1","R15-B2","R33-B2","R10","R32-B1","R32-B2","R33-B1"],"one":[]},{"id":"a6","name":"2F slab","two":["R18","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4","R08-B3","R08-B2","R08-B1","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R21","R23","R07-B4","R07-B3","R07-B2","R07-B1","R24","R16","R15-B1","R15-B2","R14","R25-B1","R25-B2","R26","R06-B1","R06-B2","R05-B1","R05-B2","R10","R13","R27","R33-B2","R33-B1"],"one":["R32-B2"]},{"id":"a7","name":"RF slab","two":["R18","R21","R10","R22","R23","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4","R08-B3","R08-B2","R08-B1","R07-B4","R07-B3","R07-B2","R07-B1","R06-B1","R06-B2","R05-B1","R05-B2","R14","R15-B2","R15-B1","R25-B2","R25-B1","R26","R24","R16","R13","R27","R33-B2","R33-B1"],"one":[]},{"id":"a8","name":"1st Fix","two":["R18","R21","R22","R23","R24","R16","R15-B1","R15-B2","R14","R25-B1","R25-B2","R09-B4","R09-B3","R09-B2","R09-B1","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R08-B4","R08-B3","R08-B2","R08-B1","R07-B1","R07-B2","R07-B3"],"one":["R06-B1","R07-B4"]},{"id":"a9","name":"Riser Works (WS+DR+HVAC)","two":["R18","R21","R22","R23","R24","R16","R15-B1","R15-B2","R25-B1","R25-B2","R14","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4"],"one":["R08-B3","R08-B2","R08-B1","R07-B4","R07-B3","R07-B2","R07-B1","R06-B1","R06-B2"],"sub":1},{"id":"a10","name":"Drainage H/L","two":["R18","R21","R22","R23","R24","R25-B1","R25-B2","R15-B1","R15-B2","R14","R16","R17-B6","R17-B5","R17-B4","R17-B3","R17-B2","R17-B1","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4"],"one":["R08-B3"]},{"id":"a11","name":"Water Supply H/L","two":["R18","R21","R22","R23","R17-B1","R24","R15-B1","R15-B2"],"one":["R17-B2"]},{"id":"a12","name":"HVAC Duct H/L","two":[],"one":["R18"]},{"id":"a13","name":"Floor Piping Works - EL","two":["R18","R21","R22","R23","R24","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R09-B4","R09-B3","R09-B2","R09-B1","R16"],"one":[]},{"id":"a14","name":"Roof Combo Clearance","two":["R18","R21","R22","R23","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R24","R16","R15-B1","R15-B2"],"one":["R14"]},{"id":"a15","name":"External Works","two":["R18","R21","R22","R17-B1","R17-B2","R17-B3"],"one":[]},{"id":"a27","name":"CAT6 Wiring","two":["R18","R21","R22"],"one":["R23"]},{"id":"a24","name":"AC Machine Installation","two":[],"one":["R18","R17-B1"]},{"id":"a29","name":"Earthing","two":[],"one":[]},{"id":"amw3acgvo33","name":"LPG Copper Piping","two":[],"one":["R18","R21","R22"]},{"id":"amw3acoyy66","name":"LPG External Piping","two":["R18","R21","R17-B1","R17-B2","R17-B3"],"one":[]}],"cm":[{"id":"cmw38zpo50","title":"LPG COPPER PIPING","panels":[{"title":"Progress status","leg":[{"id":"lmw38zpo51","label":"Completed","color":"#2e9e5b"},{"id":"lmw38zpo52","label":"Ongoing","color":"#dc9b0d"},{"id":"lmw38zpo53","label":"Not started","color":"#c9cde0"}],"cells":{"R18":"lmw38zpo52","R21":"lmw38zpo52","R22":"lmw38zpo52"}}]},{"id":"cmw390q9u4","title":"LPG External Piping","panels":[{"title":"Progress status","leg":[{"id":"lmw390q9u5","label":"Completed","color":"#2e9e5b"},{"id":"lmw390q9u6","label":"Ongoing","color":"#dc9b0d"},{"id":"lmw390q9u7","label":"Not started","color":"#c9cde0"}],"cells":{"R18":"lmw390q9u5","R21":"lmw390q9u5","R22":"lmw390q9u5","R17-B1":"lmw390q9u5","R17-B2":"lmw390q9u5","R17-B3":"lmw390q9u5"}}]}],"names":{"R06-B1":"TH-R06 B2","R05-B1":"TH-R05 B2","R05-B2":"TH-R05 B1","R06-B2":"TH-R06 B1"}},"reportage-hills":{"mat":{"ipt":{"a5":{"H10":24322},"a6":{"H10":24322},"a9":{"H10":24322},"a3":{"H32":24322,"H33":24322,"H34":24322,"H16":24322,"H17":24322,"H20":24322,"H35":24322,"H36":24322,"H37":24322,"H19":24322,"H1":24322,"H2":24322,"H3":24322,"H4":24322,"H5":24322,"H6":24322,"H8":24322,"H9":24322,"H10":24322,"H11":24322,"H18":24322,"H38":24322,"H27":24322,"H28":24322,"H29":24322,"H30":24322,"H31":24322}},"mat":{"a5-pl":{"H8":3},"a3":{"H16":4,"H17":4,"H20":4,"H1":5,"H2":5,"H3":5,"H14":5,"H15":5,"H19":5,"H32":5,"H33":5,"H34":5,"H35":5,"H37":5,"H36":5}}},"vtypes":[{"id":"vmw0lfp6q63","name":"3BR","color":"#2f7de1","tank":{"500":1}},{"id":"vmw0lfwdo6","name":"4BR","color":"#ecae04","tank":{"600":1}},{"id":"vmw0lg5yg40","name":"5BR","color":"#38b909","tank":{"800":1}}],"vmix":{"H1":{"vmw0lfp6q63":16},"H2":{"vmw0lfp6q63":16},"H3":{"vmw0lfp6q63":16},"H4":{"vmw0lfp6q63":16},"H5":{"vmw0lfp6q63":14},"H6":{"vmw0lfp6q63":14},"H7":{"vmw0lfp6q63":14},"H8":{"vmw0lfp6q63":14},"H9":{"vmw0lfp6q63":14},"H10":{"vmw0lg5yg40":8},"H11":{"vmw0lg5yg40":4},"H12":{"vmw0lg5yg40":44},"H13":{"vmw0lfp6q63":14},"H14":{"vmw0lfp6q63":14},"H15":{"vmw0lfp6q63":14},"H16":{"vmw0lfwdo6":14},"H17":{"vmw0lfwdo6":12},"H18":{"vmw0lfp6q63":28},"H19":{"vmw0lfp6q63":24},"H20":{"vmw0lfp6q63":28},"H21":{"vmw0lfwdo6":4},"H22":{"vmw0lg5yg40":36},"H23":{"vmw0lfp6q63":44},"H24":{"vmw0lfp6q63":44},"H25":{"vmw0lfp6q63":44},"H26":{"vmw0lfp6q63":44},"H27":{"vmw0lfp6q63":28},"H28":{"vmw0lfp6q63":24},"H29":{"vmw0lfwdo6":12},"H30":{"vmw0lfwdo6":14},"H31":{"vmw0lfp6q63":28},"H32":{"vmw0lfp6q63":44},"H33":{"vmw0lfp6q63":44},"H34":{"vmw0lfp6q63":44},"H35":{"vmw0lfp6q63":44},"H36":{"vmw0lfp6q63":28},"H37":{"vmw0lfp6q63":28},"H38":{"vmw0lfwdo6":10}}},"taormina-02":{"mat":{"ipt":{"a9":{"S9":1},"a3":{"S1":24322,"S2":24322,"S12":24322,"S3":24323,"S4":24323,"S13":24323,"S14":24323,"S15":24323}},"mat":{"a3":{"S1":2,"S2":2,"S12":2,"S13":2,"S14":2,"S15":2}}},"vtypes":[{"id":"d4br","name":"4BR","color":"#f57c00","tank":{"500":1}},{"id":"d4brlux","name":"4BR-LUX","color":"#ff00c8","tank":{"600":1}},{"id":"d3brlux","name":"3BR-LUX","color":"#7aebff","tank":{"800":1}}],"vmix":{"S1":{"d4brlux":14},"S2":{"d4brlux":16},"S12":{"d4br":20},"S13":{"d4br":20},"S14":{"d3brlux":15},"S15":{"d3brlux":15},"S3":{"d4br":16},"S4":{"d4br":16},"S16":{"d4br":14},"S17":{"d4br":14},"S18":{"d4br":16},"S19":{"d4br":16},"S20":{"d4br":18},"S21":{"d4br":11},"S22":{"d4br":11},"S5":{"d4br":12},"S6":{"d4br":14},"S7":{"d4br":4},"S8":{"d4br":16},"S9":{"d4br":16},"S10":{"d4br":6},"S11":{"d4br":8}}}};
+var SNAP={"asof":"2026-11-09","taormina":{"vtypes":[{"id":"d3br","name":"3BR","color":"#2f7de1"},{"id":"d4br","name":"4BR","color":"#2e9d5b"},{"id":"d5br","name":"5BR","color":"#e8742a"},{"id":"d4brlux","name":"4BR-LUX","color":"#7b4fd1"},{"id":"d5brlux","name":"5BR-LUX","color":"#d33f6a"},{"id":"d4brstandalone","name":"4BR-STANDALONE","color":"#b8902a"}],"vmix":{"R01":{"d3br":18},"R02-B1":{"d3br":14},"R02-B2":{"d3br":12},"R03":{"d3br":14},"R04":{"d3br":18},"R05-B1":{"d3br":14},"R05-B2":{"d3br":14},"R06-B1":{"d3br":14},"R06-B2":{"d3br":14},"R07-B1":{"d4brlux":1,"d5brlux":2},"R07-B2":{"d4brlux":1,"d5brlux":2},"R07-B3":{"d4brlux":1,"d5brlux":2},"R07-B4":{"d4brlux":1,"d5brlux":2},"R08-B1":{"d4brlux":1,"d5brlux":2},"R08-B2":{"d4brlux":1,"d5brlux":2},"R08-B3":{"d4brlux":1,"d5brlux":2},"R08-B4":{"d4brlux":1,"d5brlux":2},"R09-B1":{"d4brlux":1,"d5brlux":2},"R09-B2":{"d4brlux":1,"d5brlux":2},"R09-B3":{"d5brlux":2},"R09-B4":{"d4brstandalone":1},"R10":{"d3br":20},"R11":{"d3br":18},"R12":{"d3br":10},"R13":{"d3br":14},"R14":{"d3br":18},"R15-B1":{"d4br":12},"R15-B2":{"d4br":14},"R16":{"d4brlux":1,"d5brlux":2},"R17-B1":{"d4brlux":1,"d5brlux":2},"R17-B2":{"d4brlux":1,"d5brlux":2},"R17-B3":{"d4brlux":1,"d5brlux":2},"R17-B4":{"d4brlux":1,"d5brlux":2},"R17-B5":{"d4brlux":1,"d5brlux":2},"R17-B6":{"d4brstandalone":1},"R18":{"d3br":4},"R19":{"d3br":18},"R20":{"d3br":18},"R21":{"d3br":6},"R22":{"d3br":10},"R23":{"d3br":12},"R24":{"d3br":10},"R25-B1":{"d4br":12},"R25-B2":{"d4br":14},"R26":{"d3br":14},"R27":{"d3br":6},"R28":{"d3br":8},"R29":{"d3br":18},"R30":{"d3br":18},"R31-B1":{"d3br":14},"R31-B2":{"d3br":12},"R32-B1":{"d4br":10},"R32-B2":{"d4br":14},"R33-B1":{"d4br":10},"R33-B2":{"d3br":12}},"acts":[{"id":"a3","name":"Water tank installation","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03","R02-B1","R02-B2"],"one":["R01"]},{"id":"a4","name":"Water tank connection","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03"],"one":["R02-B2"]},{"id":"a2","name":"Tie beam works","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03","R02-B2"],"one":["R02-B1"]},{"id":"a1","name":"Underground works","two":["R10","R09-B4","R09-B3","R09-B2","R09-B1","R18","R21","R19","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R20","R11","R29","R08-B4","R08-B3","R08-B2","R08-B1","R23","R12","R28","R32-B1","R32-B2","R33-B1","R33-B2","R24","R13","R25-B1","R25-B2","R27","R16","R15-B1","R15-B2","R26","R07-B4","R07-B3","R07-B2","R07-B1","R14","R06-B1","R06-B2","R05-B1","R05-B2","R04","R03"],"one":["R02-B2"]},{"id":"a5","name":"1F slab","two":["R05-B1","R05-B2","R06-B1","R06-B2","R07-B4","R07-B3","R07-B2","R07-B1","R08-B4","R08-B3","R08-B2","R08-B1","R09-B4","R09-B3","R09-B2","R09-B1","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R23","R24","R16","R18","R21","R27","R13","R14","R26","R25-B1","R25-B2","R15-B1","R15-B2","R33-B2","R10","R32-B1","R32-B2","R33-B1"],"one":[]},{"id":"a6","name":"2F slab","two":["R18","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4","R08-B3","R08-B2","R08-B1","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R22","R21","R23","R07-B4","R07-B3","R07-B2","R07-B1","R24","R16","R15-B1","R15-B2","R14","R25-B1","R25-B2","R26","R06-B1","R06-B2","R05-B1","R05-B2","R10","R13","R27","R33-B2","R33-B1"],"one":["R32-B2"]},{"id":"a7","name":"RF slab","two":["R18","R21","R10","R22","R23","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4","R08-B3","R08-B2","R08-B1","R07-B4","R07-B3","R07-B2","R07-B1","R06-B1","R06-B2","R05-B1","R05-B2","R14","R15-B2","R15-B1","R25-B2","R25-B1","R26","R24","R16","R13","R27","R33-B2","R33-B1"],"one":[]},{"id":"a8","name":"1st Fix","two":["R18","R21","R22","R23","R24","R16","R15-B1","R15-B2","R14","R25-B1","R25-B2","R09-B4","R09-B3","R09-B2","R09-B1","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R08-B4","R08-B3","R08-B2","R08-B1","R07-B1","R07-B2","R07-B3"],"one":["R06-B1","R07-B4"]},{"id":"a9","name":"Riser Works (WS+DR+HVAC)","two":["R18","R21","R22","R23","R24","R16","R15-B1","R15-B2","R25-B1","R25-B2","R14","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4"],"one":["R08-B3","R08-B2","R08-B1","R07-B4","R07-B3","R07-B2","R07-B1","R06-B1","R06-B2"],"sub":1},{"id":"a10","name":"Drainage H/L","two":["R18","R21","R22","R23","R24","R25-B1","R25-B2","R15-B1","R15-B2","R14","R16","R17-B6","R17-B5","R17-B4","R17-B3","R17-B2","R17-B1","R09-B4","R09-B3","R09-B2","R09-B1","R08-B4"],"one":["R08-B3"]},{"id":"a11","name":"Water Supply H/L","two":["R18","R21","R22","R23","R17-B1","R24","R15-B1","R15-B2"],"one":["R17-B2"]},{"id":"a12","name":"HVAC Duct H/L","two":[],"one":["R18"]},{"id":"a13","name":"Floor Piping Works - EL","two":["R18","R21","R22","R23","R24","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R09-B4","R09-B3","R09-B2","R09-B1","R16"],"one":[]},{"id":"a14","name":"Roof Combo Clearance","two":["R18","R21","R22","R23","R17-B1","R17-B2","R17-B3","R17-B4","R17-B5","R17-B6","R24","R16","R15-B1","R15-B2"],"one":["R14"]},{"id":"a15","name":"External Works","two":["R18","R21","R22","R17-B1","R17-B2","R17-B3"],"one":[]},{"id":"a27","name":"CAT6 Wiring","two":["R18","R21","R22"],"one":["R23"]},{"id":"a24","name":"AC Machine Installation","two":[],"one":["R18","R17-B1"]},{"id":"a29","name":"Earthing","two":[],"one":[]},{"id":"amw3acgvo33","name":"LPG Copper Piping","two":[],"one":["R18","R21","R22"]},{"id":"amw3acoyy66","name":"LPG External Piping","two":["R18","R21","R17-B1","R17-B2","R17-B3"],"one":[]}],"cm":[{"id":"cmw38zpo50","title":"LPG COPPER PIPING","panels":[{"title":"Progress status","leg":[{"id":"lmw38zpo51","label":"Completed","color":"#2e9e5b"},{"id":"lmw38zpo52","label":"Ongoing","color":"#dc9b0d"},{"id":"lmw38zpo53","label":"Not started","color":"#c9cde0"}],"cells":{"R18":"lmw38zpo52","R21":"lmw38zpo52","R22":"lmw38zpo52"}}]},{"id":"cmw390q9u4","title":"LPG External Piping","panels":[{"title":"Progress status","leg":[{"id":"lmw390q9u5","label":"Completed","color":"#2e9e5b"},{"id":"lmw390q9u6","label":"Ongoing","color":"#dc9b0d"},{"id":"lmw390q9u7","label":"Not started","color":"#c9cde0"}],"cells":{"R18":"lmw390q9u5","R21":"lmw390q9u5","R22":"lmw390q9u5","R17-B1":"lmw390q9u5","R17-B2":"lmw390q9u5","R17-B3":"lmw390q9u5"}}]}],"names":{"R06-B1":"TH-R06 B2","R05-B1":"TH-R05 B2","R05-B2":"TH-R05 B1","R06-B2":"TH-R06 B1"},"villas":{"R04":18,"R01":18,"R02-B1":14,"R02-B2":12,"R03":14,"R31-B2":12,"R31-B1":14,"R30":18,"R10":20,"R19":18,"R20":18,"R11":18,"R29":18,"R32-B1":10,"R32-B2":14,"R33-B1":10,"R09-B4":1,"R09-B3":2,"R18":4,"R21":6,"R09-B2":3,"R17-B1":3,"R22":10,"R09-B1":3,"R17-B2":3,"R17-B3":3,"R08-B4":3,"R23":12,"R12":10,"R17-B4":3,"R08-B3":3,"R28":8,"R17-B5":3,"R08-B2":3,"R33-B2":12,"R24":10,"R17-B6":1,"R13":14,"R08-B1":3,"R25-B1":12,"R27":6,"R25-B2":14,"R16":3,"R15-B1":12,"R26":14,"R15-B2":14,"R07-B4":3,"R07-B3":3,"R14":18,"R07-B2":3,"R07-B1":3,"R06-B1":14,"R06-B2":14,"R05-B1":14,"R05-B2":14}}};
 function applySnap(p){
-  if(!p||p.snapv||!SNAP[p.id])return false;
-  var sn=SNAP[p.id],full=!!p.fresh;p.snapv=1;
+  if(!p||p.snapv>=2||!SNAP[p.id])return false;
+  var sn=SNAP[p.id],full=!!p.fresh;p.snapv=2;
   function fill(st,two,one){two.forEach(function(b){st[b]=2;});one.forEach(function(b){st[b]=1;});}
   (sn.acts||[]).forEach(function(x){
     if(!p.acts)p.acts=[];
@@ -699,6 +700,7 @@ function applySnap(p){
       if(full||!has){a.sub={};['ws','dr','hd','hc'].forEach(function(k){a.sub[k]={};fill(a.sub[k],x.two,x.one);});}
     }
   });
+  if(sn.villas){if(!p.villas)p.villas={};Object.keys(sn.villas).forEach(function(b){if(full||p.villas[b]===undefined)p.villas[b]=sn.villas[b];});}
   if(sn.cm&&(!p.cm||!p.cm.length))p.cm=JSON.parse(JSON.stringify(sn.cm));
   if(sn.names){if(!p.names)p.names={};Object.keys(sn.names).forEach(function(b){if(!p.names[b])p.names[b]=sn.names[b];});}
   if(sn.mat){
@@ -708,6 +710,11 @@ function applySnap(p){
       Object.keys(sn.mat[k]||{}).forEach(function(w){var o=p.mat[k][w];if(!o||!Object.keys(o).length)p.mat[k][w]=JSON.parse(JSON.stringify(sn.mat[k][w]));});
     });
   }
+  if(p.id==='taormina'&&sn.vmix){
+    if(!p.vtypes)p.vtypes=[];if(!p.vmix)p.vmix={};
+    sn.vtypes.forEach(function(t){if(!p.vtypes.some(function(y){return y.id===t.id;}))p.vtypes.push(JSON.parse(JSON.stringify(t)));});
+    Object.keys(sn.vmix).forEach(function(b){var o=p.vmix[b];if(full||!o||!Object.keys(o).length)p.vmix[b]=JSON.parse(JSON.stringify(sn.vmix[b]));});
+  }else
   if(sn.vtypes&&!(p.vtypes||[]).some(function(t){return t.tank&&Object.keys(t.tank).length;})){p.vtypes=JSON.parse(JSON.stringify(sn.vtypes));p.vmix=JSON.parse(JSON.stringify(sn.vmix||{}));}
   return true;
 }
@@ -727,7 +734,7 @@ function initStore(){
   var ix=null;try{ix=JSON.parse(lsGet(IDXK)||'null');}catch(e){}
   if(ix&&Array.isArray(ix.order))STORE={v:1,order:ix.order.filter(function(id){return !!readProj(id);})};
   if(STORE.order.indexOf('taormina')>=0)lsSet('tmseed-taormina','1');
-  if(STORE.order.indexOf('taormina')<0&&!lsGet('tmseed-taormina')){
+  if(LOCK==='taormina'&&!readProj('taormina')){
     var acts=null,villas=null,legacy=null;
     try{legacy=JSON.parse(lsGet(KEY)||'null');}catch(e){}
     if(legacy&&valid(legacy)){
@@ -738,19 +745,20 @@ function initStore(){
     STORE.order.unshift('taormina');lsSet('tmseed-taormina','1');writeIdx();
   }
   /* projects that ship with the app: created once, then yours to edit or delete */
-  if(STORE.order.indexOf('taormina-02')<0&&!lsGet('tmseed-taormina-02')){
+  if(LOCK==='taormina-02'&&!readProj('taormina-02')){
     var sb=SEED_T2.map(function(x){return {id:x.id,name:x.name,poly:x.poly};}),sv={};SEED_T2.forEach(function(x){sv[x.id]=x.v;});
     writeProj({id:'taormina-02',builtin:false,name:'Taormina Village - 02',meta:{desc:'Taormina Village-2, Townhouses Community',owner:TAO_META.owner,consultant:TAO_META.consultant,contractor:TAO_META.contractor},vb:[0,0,2640,1930],imgOp:0.45,blocks:sb,acts:blankActs(),villas:sv,updated:0,fresh:true});
     STORE.order.push('taormina-02');lsSet('tmseed-taormina-02','1');writeIdx();
   }
-  if(STORE.order.indexOf('reportage-hills')<0&&!lsGet('tmseed-reportage-hills')){
+  if(LOCK==='reportage-hills'&&!readProj('reportage-hills')){
     var hb=SEED_RH.map(function(x){return {id:x.id,name:x.name,poly:x.poly};}),hv={};SEED_RH.forEach(function(x){hv[x.id]=x.v;});
     writeProj({id:'reportage-hills',builtin:false,name:'Reportage Hills',meta:{desc:'Reportage Hills, Townhouses Community',owner:'Reportage Prime Properties',consultant:'',contractor:TAO_META.contractor},vb:[0, 0, 2640, 3035],imgOp:0.45,blocks:hb,acts:blankActs(),villas:hv,updated:0,fresh:true});
     STORE.order.push('reportage-hills');lsSet('tmseed-reportage-hills','1');writeIdx();
   }
+  STORE.order=[LOCK];writeIdx();
 }
-var SEED_RH=[{"id":"H1","name":"RH-01","poly":[[950.6,2633.4],[882.8,2675.8],[1068.2,2978.8],[1135.1,2936.5]],"v":12},{"id":"H2","name":"RH-02","poly":[[738.8,2283.3],[671.1,2326.6],[855.5,2628.7],[923.3,2587.3]],"v":12},{"id":"H3","name":"RH-03","poly":[[525.2,1934.1],[458.4,1975.5],[643.8,2278.6],[710.6,2236.2],[531.8,1940.7]],"v":12},{"id":"H4","name":"RH-04","poly":[[313.4,1584.0],[246.6,1626.4],[431.1,1928.5],[498.8,1887.1]],"v":12},{"id":"H5","name":"RH-05","poly":[[124.2,1270.6],[56.5,1312.0],[219.3,1578.4],[287.1,1536.9]],"v":10},{"id":"H6","name":"RH-06","poly":[[398.1,929.9],[131.8,1090.8],[173.2,1160.5],[439.5,998.6]],"v":10},{"id":"H7","name":"RH-07","poly":[[710.6,739.8],[445.2,900.7],[486.6,970.4],[752.9,808.5]],"v":10},{"id":"H8","name":"RH-08","poly":[[1024.0,549.6],[757.6,711.5],[800.0,780.2],[1066.4,618.4]],"v":10},{"id":"H9","name":"RH-09","poly":[[1337.4,359.5],[1071.1,521.4],[1112.5,590.1],[1378.8,428.2]],"v":10},{"id":"H10","name":"RH-10","poly":[[1842.8,68.7],[1747.8,110.1],[1522.8,246.6],[1520.9,250.4],[1558.6,319.1],[1881.4,143.1],[1881.4,138.4]],"v":12},{"id":"H11","name":"RH-11","poly":[[1934.1,56.5],[1916.2,134.6],[2060.2,169.4],[2089.4,94.1]],"v":5},{"id":"H12","name":"RH-12","poly":[[2349.2,1401.4],[2175.1,1441.9],[2340.7,2147.8],[2513.9,2107.3]],"v":24},{"id":"H13","name":"RH-13","poly":[[2542.1,2208.9],[2275.8,2369.9],[2317.2,2438.6],[2583.5,2278.6]],"v":10},{"id":"H14","name":"RH-14","poly":[[2227.8,2398.1],[1961.4,2559.1],[2002.8,2627.8],[2270.1,2466.8]],"v":10},{"id":"H15","name":"RH-15","poly":[[1914.4,2587.3],[1648.0,2748.2],[1689.4,2816.9],[1956.7,2656.0]],"v":10},{"id":"H16","name":"RH-16","poly":[[1238.6,2681.4],[1241.4,2686.1],[1421.2,2755.8],[1456.0,2667.3],[1460.7,2665.4],[1523.8,2690.8],[1553.9,2615.5],[1303.5,2517.6]],"v":9},{"id":"H17","name":"RH-17","poly":[[1011.8,2402.8],[984.5,2469.6],[989.2,2479.1],[1114.4,2530.8],[1079.5,2622.1],[1195.3,2667.3],[1261.2,2500.7]],"v":9},{"id":"H18","name":"RH-18","poly":[[780.2,2012.2],[752.0,2080.9],[752.0,2087.5],[882.8,2140.2],[848.0,2231.5],[1097.4,2330.4],[1163.3,2163.8]],"v":14},{"id":"H19","name":"RH-19","poly":[[1206.6,2179.8],[1139.8,2346.4],[1389.2,2445.2],[1455.1,2278.6]],"v":9},{"id":"H20","name":"RH-20","poly":[[1432.5,2460.2],[1709.2,2570.4],[1746.8,2479.1],[1824.9,2510.1],[1855.1,2435.8],[1498.4,2294.6]],"v":13},{"id":"H21","name":"RH-21","poly":[[2176.9,2165.6],[2141.2,2255.1],[2207.1,2280.5],[2222.1,2269.2],[2243.8,2213.6],[2240.0,2191.1]],"v":3},{"id":"H22","name":"RH-22","poly":[[2064.9,1689.4],[1828.7,2288.0],[1994.4,2354.8],[2181.6,1880.5],[2178.8,1872.9],[2092.2,1838.1],[2132.7,1729.9],[2127.1,1713.9]],"v":21},{"id":"H23","name":"RH-23","poly":[[1747.8,1734.6],[1569.9,2185.4],[1571.8,2189.2],[1735.5,2253.2],[1914.4,1800.5]],"v":16},{"id":"H24","name":"RH-24","poly":[[1488.9,1632.9],[1310.1,2085.6],[1476.7,2151.5],[1654.6,1699.8]],"v":16},{"id":"H25","name":"RH-25","poly":[[1943.5,1240.5],[1936.9,1250.8],[1763.8,1692.2],[1928.5,1758.1],[1936.9,1743.1],[2108.2,1306.4]],"v":16},{"id":"H26","name":"RH-26","poly":[[1684.7,1138.8],[1681.9,1139.8],[1504.9,1589.6],[1505.9,1592.5],[1669.6,1656.5],[1673.4,1652.7],[1848.5,1206.6],[1847.5,1202.8]],"v":16},{"id":"H27","name":"RH-27","poly":[[1872.9,887.5],[1808.9,1050.4],[1810.8,1054.1],[2192.9,1202.8],[2221.2,1128.5],[2089.4,1075.8],[2123.3,983.5],[1877.6,886.6]],"v":14},{"id":"H28","name":"RH-28","poly":[[1582.1,770.8],[1516.2,937.4],[1765.6,1036.2],[1831.5,869.6]],"v":9},{"id":"H29","name":"RH-29","poly":[[1790.1,553.4],[1724.2,720.0],[1973.6,818.8],[2002.8,743.5],[1871.1,690.8],[1905.9,599.5]],"v":9},{"id":"H30","name":"RH-30","poly":[[1459.8,532.7],[1432.5,601.4],[1433.4,607.1],[1680.0,704.0],[1746.8,538.4],[1565.2,464.9],[1527.5,555.3],[1465.4,531.8]],"v":9},{"id":"H31","name":"RH-31","poly":[[1145.4,706.8],[1118.1,775.5],[1118.1,782.1],[1472.9,921.4],[1538.8,756.7],[1530.4,750.1],[1264.0,645.6],[1226.4,736.0]],"v":13},{"id":"H32","name":"RH-32","poly":[[1260.2,972.2],[1082.4,1423.1],[1087.1,1427.8],[1248.0,1490.8],[1425.9,1040.0],[1424.0,1036.2]],"v":16},{"id":"H33","name":"RH-33","poly":[[1067.3,1467.3],[1052.2,1499.3],[887.5,1919.1],[1052.2,1984.9],[1056.0,1982.1],[1232.0,1534.1],[1228.2,1530.4]],"v":16},{"id":"H34","name":"RH-34","poly":[[808.5,1365.6],[802.8,1373.2],[628.7,1816.5],[793.4,1883.3],[810.4,1846.6],[973.2,1431.5]],"v":16},{"id":"H35","name":"RH-35","poly":[[1001.4,870.6],[822.6,1323.3],[989.2,1389.2],[1167.1,937.4]],"v":16},{"id":"H36","name":"RH-36","poly":[[789.6,922.4],[785.9,925.2],[748.2,1019.3],[659.8,985.4],[656.0,987.3],[559.1,1232.9],[563.8,1237.6],[647.5,1269.6],[649.4,1280.9],[719.1,1308.2],[723.8,1305.4],[862.1,953.4],[857.4,948.7]],"v":13},{"id":"H37","name":"RH-37","poly":[[539.3,1285.6],[440.5,1535.1],[531.8,1572.7],[497.9,1660.2],[572.2,1689.4],[702.1,1359.1],[611.8,1322.4],[612.7,1313.9]],"v":12},{"id":"H38","name":"RH-38","poly":[[400.0,1153.9],[396.2,1156.7],[315.3,1362.8],[387.8,1392.9],[391.5,1390.1],[472.5,1184.0]],"v":8}];
-var SEED_T2=[{"id":"S1","name":"TH-R01","poly":[[1981.8,417.3],[1831.5,1011.7],[1936.9,1042.4],[2089.5,447.2]],"v":39},{"id":"S2","name":"TH-R02","poly":[[1825.5,1049.1],[1655.7,1724.4],[1761.9,1754.3],[1933.2,1080.5]],"v":44},{"id":"S3","name":"TH-R03","poly":[[1167.5,1697.4],[1151.8,1810.4],[1645.3,1885.1],[1661.7,1773.7]],"v":32},{"id":"S4","name":"TH-R04","poly":[[650.7,1616.7],[633.5,1729.6],[1127.8,1805.9],[1145.0,1693.0]],"v":33},{"id":"S5","name":"TH-R05","poly":[[631.3,1212.9],[516.9,1222.6],[551.3,1606.2],[665.0,1596.5]],"v":25},{"id":"S6","name":"TH-R06","poly":[[589.4,748.5],[475.8,759.0],[514.6,1199.4],[629.1,1189.7]],"v":29},{"id":"S7","name":"TH-R07","poly":[[598.4,554.8],[507.2,664.8],[593.2,738.1],[685.1,627.4]],"v":9},{"id":"S8","name":"TH-R08","poly":[[1096.4,313.3],[647.0,515.2],[692.6,619.9],[1142.0,416.5]],"v":32},{"id":"S9","name":"TH-R09","poly":[[1572.0,95.0],[1116.6,301.4],[1162.2,405.3],[1617.6,198.9]],"v":32},{"id":"S10","name":"TH-R10","poly":[[1688.7,44.9],[1652.8,152.5],[1853.9,220.6],[1889.8,112.2]],"v":14},{"id":"S11","name":"TH-R11","poly":[[1909.2,117.4],[1874.8,225.8],[2129.8,310.3],[2164.2,202.6]],"v":17},{"id":"S12","name":"TH-R12","poly":[[1770.9,352.9],[1619.1,944.4],[1726.0,976.6],[1876.3,382.9]],"v":39},{"id":"S13","name":"TH-R13","poly":[[1655.7,324.5],[1504.7,916.8],[1610.1,948.2],[1761.9,354.4]],"v":38},{"id":"S14","name":"TH-R14","poly":[[1616.1,978.8],[1461.3,1583.8],[1567.5,1615.2],[1721.6,1010.2]],"v":39},{"id":"S15","name":"TH-R15","poly":[[1501.0,950.4],[1346.9,1556.1],[1452.4,1586.8],[1607.1,982.6]],"v":39},{"id":"S16","name":"TH-R16","poly":[[1229.5,1108.2],[1123.3,1537.4],[1234.0,1564.3],[1339.4,1134.4]],"v":29},{"id":"S17","name":"TH-R17","poly":[[1114.4,1079.8],[1008.9,1509.8],[1120.3,1535.9],[1225.0,1106.0]],"v":29},{"id":"S18","name":"TH-R18","poly":[[1357.4,599.7],[1235.5,1080.5],[1340.9,1111.9],[1465.1,630.4]],"v":31},{"id":"S19","name":"TH-R19","poly":[[1245.2,572.0],[1121.1,1051.4],[1228.8,1084.3],[1350.7,602.7]],"v":31},{"id":"S20","name":"TH-R20","poly":[[1006.7,601.2],[870.6,1138.9],[977.5,1169.5],[1114.4,631.9]],"v":35},{"id":"S21","name":"TH-R21 B1","poly":[[814.5,766.5],[700.8,776.9],[735.2,1169.5],[848.9,1159.0]],"v":26},{"id":"S22","name":"TH-R21 B2","poly":[[849.7,1162.8],[736.0,1172.5],[764.4,1489.6],[878.1,1479.8]],"v":21}];
+var SEED_RH=[];
+var SEED_T2=[];
 function save(){if(!PROJ||!CAN)return;PROJ.acts=S.acts;PROJ.villas=S.villas;PROJ.updated=Date.now();delete PROJ.fresh;writeProj(PROJ);}
 var FOOTK=[['desc','Project'],['owner','Owner'],['consultant','Consultant'],['contractor','Main contractor']];
 function footHtml(){var m=PROJ.meta||{};return FOOTK.filter(function(k){return m[k[0]];}).map(function(k){return '<span><b>'+k[1]+':</b> '+esc(m[k[0]])+'</span>';}).join('');}
@@ -880,9 +888,14 @@ function tkLayout(b){
   return {nameX:-len*0.26,nameFs:nfs,boxes:boxes};
 }
 function vtQuads(b,sg){
-  var u=0,out=[];
-  sg.segs.forEach(function(x,i){
-    var u1=u+x.n/sg.tot,a=i===0?-6:u,z=(i===sg.segs.length-1&&u1>0.999)?7:u1;
+  var u=0,out=[],sgs=sg.segs;
+  /* 3-villa block of 1x 4BR-LUX + 2x 5BR-LUX: 5BR-LUX at both ends, 4BR-LUX in the centre */
+  if(sgs.length===2){
+    var l4=sgs.filter(function(x){return x.t.id==='d4brlux'&&x.n===1;})[0],l5=sgs.filter(function(x){return x.t.id==='d5brlux'&&x.n===2;})[0];
+    if(l4&&l5)sgs=[{t:l5.t,n:1},{t:l4.t,n:1},{t:l5.t,n:1}];
+  }
+  sgs.forEach(function(x,i){
+    var u1=u+x.n/sg.tot,a=i===0?-6:u,z=(i===sgs.length-1&&u1>0.999)?7:u1;
     out.push({t:x.t,q:[b.pt(a,-6),b.pt(z,-6),b.pt(z,7),b.pt(a,7)]});u=u1;
   });
   return out;
@@ -1765,8 +1778,8 @@ $('actList').addEventListener('click',function(e){
   function idx(x){for(k=0;k<S.acts.length;k++)if(S.acts[k].id===x)return k;return -1;}
   if((id=t.getAttribute('data-pick'))){goToMap(id);return;}
   if(!CAN&&(t.hasAttribute('data-up')||t.hasAttribute('data-dn')||t.hasAttribute('data-del')))return;
-  if((id=t.getAttribute('data-up'))){i=idx(id);if(i>0){var a=S.acts.splice(i,1)[0];S.acts.splice(i-1,0,a);save();renderAll();}return;}
-  if((id=t.getAttribute('data-dn'))){i=idx(id);if(i>-1&&i<S.acts.length-1){var b=S.acts.splice(i,1)[0];S.acts.splice(i+1,0,b);save();renderAll();}return;}
+  if((id=t.getAttribute('data-up'))){i=idx(id);if(i>0){var a=S.acts.splice(i,1)[0];S.acts.splice(i-1,0,a);save();pushNow();renderAll();}return;}
+  if((id=t.getAttribute('data-dn'))){i=idx(id);if(i>-1&&i<S.acts.length-1){var b=S.acts.splice(i,1)[0];S.acts.splice(i+1,0,b);save();pushNow();renderAll();}return;}
   if((id=t.getAttribute('data-del'))){
     if(S.confirmDel!==id){S.confirmDel=id;renderActs();return;}
     i=idx(id);if(i>-1)S.acts.splice(i,1);S.confirmDel=null;
@@ -1882,7 +1895,13 @@ function matDropPending(p){
   Object.keys(p.mat.mat).forEach(function(w){var o=p.mat.mat[w];if(o)Object.keys(o).forEach(function(b){if(o[b]===1)delete o[b];});});
   return true;
 }
-function ensureVT(p){var ac=addActs(p),ri=riserInit(p),mm=matMigrate(p),pd=matDropPending(p),vv=ensureVT0(p);return ac||ri||mm||pd||vv;}
+function ord1(p){
+  if(!p||!p.acts||p.ord1)return false;
+  p.ord1=1;
+  ['a4','a3'].forEach(function(id){var i=-1;p.acts.forEach(function(a,k){if(a.id===id)i=k;});if(i>0)p.acts.unshift(p.acts.splice(i,1)[0]);});
+  return true;
+}
+function ensureVT(p){var ac=addActs(p),ri=riserInit(p),mm=matMigrate(p),pd=matDropPending(p),od=ord1(p),vv=ensureVT0(p);return ac||ri||mm||pd||od||vv;}
 function ensureVT0(p){
   if(rhApply(p))return true;
   if(!p||p.vtypes!==undefined||!VT_DEF[p.id])return false;
@@ -2588,7 +2607,7 @@ function renderHome(){
       '<div class="pm"><b>'+st.pc+'%</b> average progress'+(p.updated?' · updated '+new Date(p.updated).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):'')+'</div>'+
       '<div class="pact"><button type="button" class="mini" data-setup="'+esc(id)+'">'+'Edit details & map'+'</button>'+'<button type="button" class="mini" data-psettings="'+esc(id)+'">Settings</button>'+'</div></div>';
   });
-  h+='<button type="button" class="pcard new" id="newProj"><span class="plus">+</span>New project</button>';
+  if(!LOCK)h+='<button type="button" class="pcard new" id="newProj"><span class="plus">+</span>New project</button>';
   $('pgrid').innerHTML=h;
 }
 function homeMsg(t){$('homeMsg').textContent=t||'';}
@@ -2652,7 +2671,7 @@ function restoreData(d){
   var n=0;
   if(!d||!Array.isArray(d.projects))throw 0;
   d.projects.forEach(function(p){
-    if(!p||typeof p.id!=='string'||typeof p.name!=='string'||!Array.isArray(p.acts)||!p.villas||typeof p.villas!=='object')return;
+    if(!p||typeof p.id!=='string'||p.id!==LOCK||typeof p.name!=='string'||!Array.isArray(p.acts)||!p.villas||typeof p.villas!=='object')return;
     if(!p.builtin&&!Array.isArray(p.blocks))return;
     var img=p.img;delete p.img;
     p.updated=Date.now();delete p.fresh;
@@ -2664,7 +2683,7 @@ function restoreData(d){
 $('backupBtn').onclick=function(){
   if(!DL){homeMsg('Saving files is not available in this view.');return;}
   var out=buildBackup();
-  DL.save({filename:'mep-progress-projects-backup.json',data:new Blob([JSON.stringify(out)],{type:'application/json'})}).then(function(){homeMsg('Backup saved.');},function(err){if(!err||err.code!=='declined')homeMsg('The backup could not be saved.');});
+  DL.save({filename:'mep-progress-'+LOCK+'-backup.json',data:new Blob([JSON.stringify(out)],{type:'application/json'})}).then(function(){homeMsg('Backup saved.');},function(err){if(!err||err.code!=='declined')homeMsg('The backup could not be saved.');});
 };
 $('restoreBtn').onclick=function(){$('restoreFile').click();};
 $('restoreFile').onchange=function(){if(!CAN)return;
@@ -2863,7 +2882,7 @@ $('suOp').oninput=function(){SU.p.imgOp=(+this.value)/100;suSave();};
 /* ================= sharing: shared storage, view/edit access, project links ================= */
 var SHARE_BASE='https://claude.ai/artifact/9at2DuNZTo5JuwvJNPT4ho';
 var DBH=null,CAN=true,SHARED=false,SYNC={timers:{},busy:{},again:{},sig:{},rn:{},known:{},first:true,q:Promise.resolve(),hash:null,err:false};
-function shareLink(id){return SHARE_BASE+'#p-'+id;}
+function shareLink(id){return LOCK?location.href.split('#')[0]:SHARE_BASE+'#p-'+id;}
 function shareNote(){
   if(!SHARED)return 'Sharing is not switched on in this view, so projects are only kept in this browser.';
   return 'Anyone you give the link to opens <b>this project</b> straight away. What they can do depends on the access you give them in the <b>Share</b> menu at the top of this page: <b>Viewer</b> can only look, <b>Contributor</b> or <b>Editor</b> can also change progress and edit the project. Changes appear for everyone within a few seconds.';
@@ -2875,6 +2894,7 @@ function syncPush(id){
   clearTimeout(SYNC.timers[id]);
   SYNC.timers[id]=setTimeout(function(){doPush(id);},700);
 }
+function pushNow(){if(PROJ&&DBH&&CAN){clearTimeout(SYNC.timers[PROJ.id]);doPush(PROJ.id);}}
 function syncMsg(t){var m=$('homeMsg');if(m&&t)m.textContent=t;}
 function doPush(id){
   if(SYNC.busy[id]){SYNC.again[id]=true;return Promise.resolve();}
@@ -2930,7 +2950,7 @@ function purgeLocal(){
 }
 async function onRemote(snap){
   var remote={},ids=[],changed=[],first=SYNC.first;
-  snap.docs.forEach(function(d){var v=d.data();if(PURGE.indexOf(d.id)>=0){if(CAN)syncDelete(d.id);return;}if(v&&typeof v.d==='string'){remote[d.id]=v;ids.push(d.id);}});
+  snap.docs.forEach(function(d){var v=d.data();if(PURGE.indexOf(d.id)>=0){if(CAN)syncDelete(d.id);return;}if(v&&typeof v.d==='string'&&d.id===LOCK){remote[d.id]=v;ids.push(d.id);}});
   purgeLocal();
   /* deleted by someone else */
   Object.keys(SYNC.known).forEach(function(id){
@@ -2991,6 +3011,7 @@ function routeHash(force){
   var m=/^#p-(.+)$/.exec(location.hash||'');
   if(!m){return;}
   var id=m[1];
+  if(id!==LOCK)return;
   if(!readProj(id))return;
   if(PROJ&&PROJ.id===id&&!$('appView').hidden)return;
   if(!force&&SYNC.hash===id)return;
@@ -3028,7 +3049,7 @@ async function initShare(){
 
 
 /* ================= Google Drive backup (through the viewer's own Google Drive connector) ================= */
-var GD='Google Drive',GDP='MEP-Progress-Backup-',MCP=null,gdBusy=false,gdAsk=null;
+var GD='Google Drive',GDP='MEP-Progress-'+LOCK+'-Backup-',MCP=null,gdBusy=false,gdAsk=null;
 function gdMsg(t){$('gdMsg').textContent=t||'';}
 function gdErr(e){
   var c=e&&e.code;
@@ -3047,7 +3068,7 @@ async function gdList(){
   var p=r.payload,arr=(p&&p.files)||(Array.isArray(p)?p:[]),g={};
   arr.forEach(function(f){
     if(!f||!(f.id||f.fileId))return;
-    var m=/^MEP-Progress-Backup-(\d{4}-\d\d-\d\d-\d{4,6})(?:-p(\d+)of(\d+))?\.json$/.exec(String(f.title||f.name||''));
+    var m=new RegExp('^'+GDP+'(\\d{4}-\\d\\d-\\d\\d-\\d{4,6})(?:-p(\\d+)of(\\d+))?\\.json$').exec(String(f.title||f.name||''));
     if(!m)return;
     var o=g[m[1]]||(g[m[1]]={stamp:m[1],when:'',parts:[],total:1,url:''});
     o.parts.push({id:f.id||f.fileId,n:m[2]?+m[2]:1});
@@ -3147,7 +3168,16 @@ initStore();purgeLocal();
 initPal();
 renderHome();
 showView('home');
+openProject(LOCK);
 routeHash(true);
+$('backHome').textContent='Project menu';$('suBack').textContent='Project menu';
+document.querySelector('#homeView h1').textContent='Project menu';
+$('smDanger').hidden=true;
+if(!(window.claude&&window.claude.use)){
+  /* opened as a plain file: save PDFs and backups through the browser's normal download */
+  DL={save:function(o){return new Promise(function(res,rej){try{var u=URL.createObjectURL(o.data),a=document.createElement('a');a.href=u;a.download=o.filename;document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(u);},1500);res();}catch(e){rej(e);}});}};
+  $('pdfWrap').hidden=false;syncPdfSel();
+}
 initShare();
 initDrive();
 })();
